@@ -1,14 +1,13 @@
-\documentclass[aps,prl,reprint,amsmath]{revtex4-1}
-
+\documentclass[aps,prl,reprint,amsmath,nofootinbib]{revtex4-1}
 \usepackage{hyperref}
-
 \usepackage{graphicx}
+\usepackage{subfig}
 \graphicspath{{fig/}}
 
 
 \begin{document}
 
-\title{T$_{\mathbf R}$ENTO}
+\title{Entropy production from the generalized mean of nuclear density}
 
 \author{J.\ Scott Moreland}
 \author{Jonah E.\ Bernhard}
@@ -19,18 +18,98 @@
 
 
 \begin{abstract}
-  Hello.
+   We investigate entropy deposition at mid-rapidity in pp, pA and AA systems using a generalized mean of projectile and target 
+densities $M_p(T_A,T_B)$ which describes a family of vector norms spanning a continuum of projectile/target saturation scenarios. 
+Results are presented for three well known subcases of the generalized mean, the arithmetic, geometric and harmonic forms and 
+compared against charged particle production in a wide range of collision systems. When combined with partonic density fluctuations of 
+the nucleons within each nucleus, the data is well described by a generalized mean with power $p$ close to zero. We encapsulate 
+these results in a new model for relativistic hydrodynamic initial conditions.
 \end{abstract}
-
 
 \maketitle
 
+\section{Intoduction}
 
-\section{The best section}
+The discovery of the quark-gluon plasma (QGP) at RHIC initiated a large scale effort to quantify the transport properties of 
+hot and dense nuclear matter. The success of ideal hydrodynamics in describing the collectivity observed in ultra-relativistic 
+heavy-ion collisions supports the production of a fluid-like QGP with minimal specific shear viscosity close to the proposed 
+K.S.S. bound $\eta/s \ge 1/4\pi$ \cite{constraining-ic}. 
+
+Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow from spatial 
+deformations of the produced fireball with a conversion efficiency proportional to the system's average specific shear viscosity [?]. 
+Consequently, model-to-data predictions of $\eta/s$ are beholden to the veractity of theoretical models used to calculate entropy 
+and energy deposition in the initial state.
+
+\section{Motivation}
+
+We characterize the hydrodynamic initial conditions in terms of an eikonal mapping $f(T_A,T_B)$, that converts a local transverse 
+density of partons in the projectile and target $T_A(x,y)$ and $T_B(x,y)$ into a deposition of entropy at mid-rapidity 
+\footnote{We choose entropy density as a convenience to make direct comparisons with charged particle distributions}
+\begin{equation}
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp),T_B({\bf r}_\perp)).
+\end{equation}
+It's reasonable for this mapping to respect several key properties, namely that $f(T_A,T_B)$ is smooth, monatonic and symmetric in 
+the variables $T_A$ and $T_B$. It's also reasonable to expect that it saturates in the limit $\min(T_A,T_B) \ll \max(T_A,T_B)$.
+
+Motivated by these stipulations, we consider the family of vector p-norms on the two-component thickness vector $\vec{T} = (T_A,T_B)$ 
+as a suitable ansatz for $f(T_A,T_B)$,
+\begin{equation}
+ \label{generalized mean}
+ f(T_A,T_B) \propto M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
+\end{equation}
+
+The continuous parameter $p$ in equation (\ref{generalized mean}) interpolates between the well known vector norms:
+\begin{flalign*} 
+ M_{-\infty}(T_A,T_B) &= \min(T_A,T_B) &\text{(minimum)} \\
+ M_{-1}(T_A,T_B) &= 2\,T_A T_B / (T_A + T_B) &\text{(harmonic)} \\
+ M_{0}(T_A,T_B) &= \sqrt{T_A T_B} &\text{(geometric)} \\
+ M_{1}(T_A,T_B) &= (T_A+T_B)/2 &\text{(arithmetic)} \\
+ M_{\infty}(T_A,T_B) &= \max(T_A,T_B). &\text{(maximum)}
+\end{flalign*}
+
+Increasing values of $p$ result in decreasing saturation so that the set of p-norms obey the ordering inequality, 
+\begin{equation}
+ M_{-\infty}(\vec{T}) \le M_{-1}(\vec{T}) \le M_{0}(\vec{T}) \le M_{1}(\vec{T}) \le M_{\infty}(\vec{T}).
+\end{equation}
+
+\begin{figure}[b]
+ \includegraphics[width=\linewidth]{saturation.pdf}
+ \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-\infty, -1, 0, 1, \infty\}$.}
+\end{figure}
 
 
-\cite{constraining-ic}
+\section{The Model}
+We sample nucleon coordinates in the projectile and target nuclei using the realistic nucleon configurations calculated by Alvioli 
+and Strickland [?].
 
+We follow the precription of [ref] and calculate pairwise collisions of nucleons in pp, pA and AA collisions from the proton-proton 
+overlap function,
+\begin{align}
+ T_{pp}(b) &= \int dx~dy \,T_p(x-b/2,y) \,T_p(x+b/2,y),
+\end{align}
+where $b$ denotes the proton-proton impact parameter and $T_p(x,y)$ the proton's z-integrated parton density.
+
+The probability for a pairwise collision is given by,
+\begin{equation}
+  P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
+\end{equation}
+where the exponential factor $\sigma_{gg} N_{gg}^2$ is fixed to reproduce the inelastic proton-proton cross section,
+\begin{equation}
+  \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
+\end{equation}
+
+The pair-wise collision probability is sampled independently for each pair of nucleons in the collision and target
+
+\section{Charged particle distributions}
+
+\begin{figure*}
+    \centering
+    \subfloat[label 1]{\includegraphics[width=0.333\textwidth]{pp.pdf}}
+    \subfloat[label 2]{\includegraphics[width=0.333\textwidth]{pPb.pdf}}
+    \subfloat[label 3]{\includegraphics[width=0.333\textwidth]{PbPb.pdf}}
+    \caption{2 Figures side by side}
+    \label{fig:example}
+\end{figure*}
 
 \bibliography{sources}
 
