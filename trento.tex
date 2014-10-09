@@ -37,45 +37,46 @@ K.S.S. bound $\eta/s \ge 1/4\pi$ \cite{constraining-ic}.
 
 Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow from spatial 
 deformations of the produced fireball with a conversion efficiency proportional to the system's average specific shear viscosity [?]. 
-Consequently, model-to-data predictions of $\eta/s$ are beholden to the veractity of theoretical models used to calculate entropy 
-and energy deposition in the initial state.
+Consequently, model-to-data predictions of $\eta/s$ are beholden to the veractity of theoretical models used to calculate entropy and 
+energy deposition in the initial state.
 
 \section{Motivation}
 
-We characterize the hydrodynamic initial conditions in terms of an eikonal mapping $f(T_A,T_B)$, that converts a local transverse 
-density of partons in the projectile and target $T_A(x,y)$ and $T_B(x,y)$ into a deposition of entropy at mid-rapidity 
+We characterize entropy deposition in nucleus-nucleus collisions in terms of an eikonal mapping defined over the transverse density 
+of projectile and target nucleons $T_A$ and $T_B$ separated by impact parameter ${\bf b}$,
 \footnote{We choose entropy density as a convenience to make direct comparisons with charged particle distributions}
 \begin{equation}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp),T_B({\bf r}_\perp)).
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
 \end{equation}
-It's reasonable for this mapping to respect several key properties, namely that $f(T_A,T_B)$ is smooth, monatonic and symmetric in 
-the variables $T_A$ and $T_B$. It's also reasonable to expect that it saturates in the limit $\min(T_A,T_B) \ll \max(T_A,T_B)$.
 
-Motivated by these stipulations, we consider the family of vector p-norms on the two-component thickness vector $\vec{T} = (T_A,T_B)$ 
-as a suitable ansatz for $f(T_A,T_B)$,
+It's reasonable to insist that $f$ respect several key properties, namely that $f$ is smooth, monatonic and symmetric in 
+the variables $T_A$ and $T_B$ and that it saturates in the limit $T_A \ll T_B$ and $T_B \ll T_A$.
+
+Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
+\begin{equation}
+ f(T_A, T_B) \propto M_p(T_A,T_B) 
+\end{equation}
+where the generalized mean is defined as,
 \begin{equation}
  \label{generalized mean}
- f(T_A,T_B) \propto M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
+ M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
 \end{equation}
 
-The continuous parameter $p$ in equation (\ref{generalized mean}) interpolates between the well known vector norms:
-\begin{flalign*} 
- M_{-\infty}(T_A,T_B) &= \min(T_A,T_B) &\text{(minimum)} \\
- M_{-1}(T_A,T_B) &= 2\,T_A T_B / (T_A + T_B) &\text{(harmonic)} \\
- M_{0}(T_A,T_B) &= \sqrt{T_A T_B} &\text{(geometric)} \\
- M_{1}(T_A,T_B) &= (T_A+T_B)/2 &\text{(arithmetic)} \\
- M_{\infty}(T_A,T_B) &= \max(T_A,T_B). &\text{(maximum)}
-\end{flalign*}
-
-Increasing values of $p$ result in decreasing saturation so that the set of p-norms obey the ordering inequality, 
+For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively. Increasing 
+values of $p$ result in decreasing saturation so that these subcases of the generalized mean obey the following ordering inequality, 
 \begin{equation}
- M_{-\infty}(\vec{T}) \le M_{-1}(\vec{T}) \le M_{0}(\vec{T}) \le M_{1}(\vec{T}) \le M_{\infty}(\vec{T}).
+ M_{-\infty} \le M_{-1} \le M_{0} \le M_{1} \le M_{\infty}.
 \end{equation}
-
+The dependence of the saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target $T_B$ as
+shown in figure [1].
 \begin{figure}[b]
  \includegraphics[width=\linewidth]{saturation.pdf}
  \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-\infty, -1, 0, 1, \infty\}$.}
 \end{figure}
+
+It's worth mentioning that the generalized mean is equivalent to a wounded nucleon model for $p=1$ such that $M_1(T_A,T_B) \propto T_A + T_B$. However, the
+generalized mean is a homogenous function of $T_A$ and $T_B$ and there are no terms equivalent to the density of binary collisions which scale proportional
+to the product $T_A T_B$.
 
 
 \section{The Model}
