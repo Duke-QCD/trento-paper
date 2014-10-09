@@ -42,7 +42,7 @@ energy deposition in the initial state.
 
 \section{Motivation}
 
-We characterize entropy deposition in nucleus-nucleus collisions in terms of an eikonal mapping defined over the transverse density 
+We characterize entropy deposition in nucleus-nucleus collisions in terms of an eikonal mapping defined over the transverse \emph{participant} density 
 of projectile and target nucleons $T_A$ and $T_B$ separated by impact parameter ${\bf b}$,
 \footnote{We choose entropy density as a convenience to make direct comparisons with charged particle distributions}
 \begin{equation}
@@ -54,6 +54,7 @@ the variables $T_A$ and $T_B$ and that it saturates in the limit $T_A \ll T_B$ a
 
 Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
 \begin{equation}
+ \label{generalized mean ansatz}
  f(T_A, T_B) \propto M_p(T_A,T_B) 
 \end{equation}
 where the generalized mean is defined as,
@@ -67,12 +68,20 @@ values of $p$ result in decreasing saturation so that these subcases of the gene
 \begin{equation}
  M_{-\infty} \le M_{-1} \le M_{0} \le M_{1} \le M_{\infty}.
 \end{equation}
-The dependence of the saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target $T_B$ as
-shown in figure [1].
+The dependence of the saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target $T_B$ for 
+different values of $p$ as shown in figure [1].
 \begin{figure}[b]
  \includegraphics[width=\linewidth]{saturation.pdf}
  \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-\infty, -1, 0, 1, \infty\}$.}
 \end{figure}
+
+We compare this ansatz against the commonly used wounded nucleon and binary collision parameterization referred to as the Monte-Carlo Glauber model where
+the transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions. For 
+deterministic or ``black disk'' nucleon-nucleon collisions (see reference [?]), the MC-Glauber ansatz can be cast in an analygous form to equation 
+(\ref{generalized mean ansatz}). 
+\begin{equation}
+ f(T_A,T_B) \propto (1-\alpha)\frac{T_A+T_B}{2} + \alpha \, T_A\, T_B. 
+\end{equation}
 
 It's worth mentioning that the generalized mean is equivalent to a wounded nucleon model for $p=1$ such that $M_1(T_A,T_B) \propto T_A + T_B$. However, the
 generalized mean is a homogenous function of $T_A$ and $T_B$ and there are no terms equivalent to the density of binary collisions which scale proportional
