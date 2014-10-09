@@ -75,17 +75,21 @@ different values of $p$ as shown in figure [1].
  \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-\infty, -1, 0, 1, \infty\}$.}
 \end{figure}
 
-We compare this ansatz against the commonly used wounded nucleon and binary collision parameterization referred to as the Monte-Carlo Glauber model where
-the transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions. For 
-deterministic or ``black disk'' nucleon-nucleon collisions (see reference [?]), the MC-Glauber ansatz can be cast in an analygous form to equation 
+It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
+is set proportional to a linear combination of the local density of participant and pair-wise collisions. For deterministic or black disk nucleon collisions 
+(see reference [?]), this popular Glauber ansatz can be cast in the form \footnote{Technically the name Glauber is a misnomer, as both the generalized mean and 
+two component model rely on an underlying Glauber description of participant nucleons, but the binary collision and wounded nucleon description has become synonymous
+with the Glauber name}
 (\ref{generalized mean ansatz}). 
 \begin{equation}
- f(T_A,T_B) \propto (1-\alpha)\frac{T_A+T_B}{2} + \alpha \, T_A\, T_B. 
+ f(T_A,T_B) \propto (1-\alpha)\frac{T_A+T_B}{2} + \alpha \, \sigma^{inel}_{NN} T_A\, T_B. 
 \end{equation}
+Both the generalized mean and Glauber ansatz are equivalent to the arithmetic mean for $p=1$ and $\alpha=0$. That is however, where the simularities end. 
 
-It's worth mentioning that the generalized mean is equivalent to a wounded nucleon model for $p=1$ such that $M_1(T_A,T_B) \propto T_A + T_B$. However, the
-generalized mean is a homogenous function of $T_A$ and $T_B$ and there are no terms equivalent to the density of binary collisions which scale proportional
-to the product $T_A T_B$.
+The generalized mean is a homogenous function of $T_A$ and $T_B$ while the Glauber model contains a binary collision term proportional to $T_A T_B$. This Glauber
+binary collision term is typically tuned to fit the centrality dependence of the charged particle multiplicity as it rises non-linearly with centrality.
+
+An interesting consequence of the non-homogeneity introduced by the existence of a binary collision term is manifest in central U-U collisions.
 
 
 \section{The Model}
