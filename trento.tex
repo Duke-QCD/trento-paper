@@ -33,7 +33,7 @@ these results in a new model for relativistic hydrodynamic initial conditions.
 The discovery of the quark-gluon plasma (QGP) at RHIC initiated a large scale effort to quantify the transport properties of 
 hot and dense nuclear matter. The success of ideal hydrodynamics in describing the collectivity observed in ultra-relativistic 
 heavy-ion collisions supports the production of a fluid-like QGP with minimal specific shear viscosity close to the proposed 
-K.S.S. bound $\eta/s \ge 1/4\pi$ \cite{constraining-ic}. 
+K.S.S. bound $\eta/s \ge 1/4\pi$ \cite{KSS}. 
 
 Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow from spatial 
 deformations of the produced fireball with a conversion efficiency proportional to the system's average specific shear viscosity [?]. 
@@ -67,10 +67,10 @@ to obey the following ordering inequality,
 \end{equation}
 In this sense, the continuous parameter $p$ characterizes the dependence of entropy deposition on the projectile-target thickness asymmetry, or equivalently the 
 degree of collision saturation. This saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target 
-$T_B$ for different values of $p$ as shown in figure [1].
+$T_B$ for different values of $p$ as shown in figure \ref{saturation}.
 \begin{figure}[b]
  \includegraphics[width=\linewidth]{saturation.pdf}
- \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-1, 0, 1\}$.}
+ \caption{\label{saturation} Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-1, 0, 1\}$.}
 \end{figure}
 
 It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
@@ -98,49 +98,48 @@ collisions produce more charged particles. This multiplicity ordering of tip-to-
 body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
 a curious knee shaped structure in the centrality dependent elliptic flow data. 
 
-Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions. This suggests that 
-non-linearities in the symmetric component of equation (\ref{ansatz}) are small and that the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
+Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions \cite{UU-STAR}. It has been
+suggested by the authors in [?] suggested that the existence of hot spots in the produced fireball may wash out the structure of the knee, the analysis model with a higher degree of fluctuations,
+
+This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
 is a reasonable approximation.
+
+\cite{constraining-ic}
 
 \section{The Model}
 
 For simplicity, we refer to the generalized mean of projectile and target thicknesses hereafter as the \emph{reduced thickness} of projectile nucleus $A$ and 
 target nucleus $B$,
 \begin{equation}
+ \label{reduced}
  T_R(p;x,y) \equiv \left( \frac{T_A({\bf x}+{\bf b}/2,y)^p + T_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
 \end{equation}
-noting that the units of $T_R$ are also that of a nuclear thickness function. In this language, we fix the transverse density of deposited entropy according to
-\begin{equation}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
-\end{equation}
-where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ the reduced thickness function. The entire procedure thus amounts to calculating the projectile and target 
-nuclear thickness functions $T_A$ and $T_B$ and evaluating expressions (?) and (?).
+noting that the units of $T_R$ are also that of a nuclear thickness function. 
 
-The nuclear thickness function is typically defined as the z-integrated nuclear density for a nucleus moving along the z-axis. For a Monte-Carlo nucleus with $N$ nucleons, the 
-thickness function $T_N$ can be calculated by summing the thickness contribution from each nucleon located at coordinate $(x_i,y_i)$ with transverse parton density $T_p(x,y)$,
+We employ a slightly modified definition of the participant thickness function which we denote $\tilde{T}$ in which each participant nucleon contributes with random 
+weight $\gamma_i$ sampled from a two parameter Gamma distribution $\Gamma(\mu,k)$ with mean $\mu=1$ and shape parameter $k$. For a Monte-Carlo distribution of nucleon 
+positions, this amounts to summing the fluctuated thickness functions of each participant nucleon $T_p(x,y)$,
 \begin{equation}
-  T_N(x,y) = \sum\limits_{i=1}^{N} T_n(x-x_i,y-y_i).
+ \label{fluctuated thickness}
+ T(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
 \end{equation}
 
-We employ a slightly modified definition for the nuclear thickness function where we only sum over the density of \emph{participant} nucleons which each
-contribute with a random weight $\gamma_i$ sampled from a two parameter Gamma distribution $\Gamma(\mu,k)$ with mean $\mu=1$ and width parameter $k$,
-\begin{equation}
- \tilde{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
-\end{equation}
-
-These additional weights incorporate event-by-event fluctuations in the density of partons sampled in each nucleon-nucleon collisions. Our choice of
+These additional weights incorporate event-by-event fluctuations in the density of partons sampled in each nucleon-nucleon collision. The choice of
 a Gamma distribution reflects a long history of fitting proton-proton multiplicity distributions using a Negative Binomial distribution which arrises naturally 
 from a Gamma-Poisson mixture.
 
-For the average transverse parton density $t(x,y)$ we use a Gaussian, although we stress that this is by no means a detailed or even faithful description of a nucleon.
-Consequently, we only expect our predictions to be robust for properties insensitive to details of the nucleonic substructure. Trying to predict, for example the 
-eccentricity harmonics of deposited entropy in a proton-proton collision would be meaningless. 
+For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
+\begin{equation}
+ T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right) 
+\end{equation}
+although we stress that this is a rather crude description of the nucleon. Consequently, we restrict our attention to properties of the collision that are insensitive to details 
+of the nucleonic substructure.
 
-The transverse nucleon coordinates $(x_i,y_i)$ in equation (?) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
-these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference [?] which incorporate short- 
+The transverse nucleon coordinates $(x_i,y_i)$ in equation (\ref{fluctuated thickness}) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
+these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference \cite{nucleon-correlations} which incorporate short- 
 and long-range nucleon-nucleon correlations guided by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei.
 
-Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference [?]. In this prescription, the 
+Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. In this prescription, the 
 probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
 \begin{equation}
   P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
@@ -149,15 +148,23 @@ where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
 \begin{equation}
  T_{pp}(b) = \int dx~dy \,f(x-b/2,y) \,f(x+b/2,y).
 \end{equation}
-The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total inelastic proton-proton cross-section,
+The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total 
+inelastic proton-proton cross-section,
 \begin{equation}
   \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
 \end{equation}
 The pair-wise collision probability in equation (?) is then sampled independently for each pair of projectile and target nucleons to isolate those nucleons which 
 participate in at least one collision. 
 
-Once the fluctuated particpant thickness functions are defined using equation (?),
-These participant nucleons define our nuclear thickness functions via equation (?) and subsequently the transverse entropy profile via equation (?).
+In this language, we fix the transverse density of deposited entropy according to
+\begin{equation}
+ \label{entropy deposition}
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
+\end{equation}
+where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ the reduced thickness function. The entire procedure thus amounts to calculating the participant 
+thickness functions $T_A$ and $T_B$ in combination with expressions (\ref{reduced}) and (\ref{entropy deposition}) with only one additional caveat.
+
+
 
 \section{Results}
 
@@ -173,8 +180,6 @@ These participant nucleons define our nuclear thickness functions via equation (
 
 \section{Summary}
 
-
 \bibliography{sources}
-
 
 \end{document}
