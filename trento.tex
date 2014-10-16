@@ -42,10 +42,12 @@ energy deposition in the initial state.
 
 \section{Motivation}
 
-We characterize entropy deposition in nucleus-nucleus collisions in terms of an eikonal mapping defined over the transverse \emph{participant} density 
-of projectile and target nucleons $T_A$ and $T_B$ separated by impact parameter ${\bf b}$,
-\footnote{We choose entropy density as a convenience to make direct comparisons with charged particle distributions}
+We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and target nucleus with atomic mass number $B$ characterized 
+by collision impact parameter ${\bf b}$ in the transverse plane. Let $T_A$ and $T_B$ denote the transverse density of participant matter, i.e.\ partons, 
+in each nucleus as measured by the collapse of projectile and target wavefunctions. We consider the existence of an eikonal mapping $f(T_A,T_B)$ that 
+characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
 \begin{equation}
+  \label{ansatz}
   \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
 \end{equation}
 
@@ -55,68 +57,111 @@ the variables $T_A$ and $T_B$ and that it saturates in the limit $T_A \ll T_B$ a
 Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
 \begin{equation}
  \label{generalized mean ansatz}
- f(T_A, T_B) \propto M_p(T_A,T_B) 
-\end{equation}
-where the generalized mean is defined as,
-\begin{equation}
- \label{generalized mean}
- M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
+ f(T_A, T_B) \propto M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
 \end{equation}
 
-For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively. Increasing 
-values of $p$ result in decreasing saturation so that these subcases of the generalized mean obey the following ordering inequality, 
+For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively which can be shown
+to obey the following ordering inequality, 
 \begin{equation}
  M_{-\infty} \le M_{-1} \le M_{0} \le M_{1} \le M_{\infty}.
 \end{equation}
-The dependence of the saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target $T_B$ for 
-different values of $p$ as shown in figure [1].
+In this sense, the continuous parameter $p$ characterizes the dependence of entropy deposition on the projectile-target thickness asymmetry, or equivalently the 
+degree of collision saturation. This saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target 
+$T_B$ for different values of $p$ as shown in figure [1].
 \begin{figure}[b]
  \includegraphics[width=\linewidth]{saturation.pdf}
- \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-\infty, -1, 0, 1, \infty\}$.}
+ \caption{Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-1, 0, 1\}$.}
 \end{figure}
 
 It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
-is set proportional to a linear combination of the local density of participant and pair-wise collisions. For deterministic or black disk nucleon collisions 
-(see reference [?]), this popular Glauber ansatz can be cast in the form \footnote{Technically the name Glauber is a misnomer, as both the generalized mean and 
-two component model rely on an underlying Glauber description of participant nucleons, but the binary collision and wounded nucleon description has become synonymous
-with the Glauber name}
-(\ref{generalized mean ansatz}). 
+is set proportional to a linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
- f(T_A,T_B) \propto (1-\alpha)\frac{T_A+T_B}{2} + \alpha \, \sigma^{inel}_{NN} T_A\, T_B. 
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}) 
 \end{equation}
-Both the generalized mean and Glauber ansatz are equivalent to the arithmetic mean for $p=1$ and $\alpha=0$. That is however, where the simularities end. 
+where the wounded nucleon and binary collision densities scale with the participant thicknesses $T_A$ and $T_B$ as,
+\begin{eqnarray}
+ \cr \mbox{WN}(T_A,T_B) &\propto& T_A + T_B \\
+ \label{binary collisions}
+ \mbox{BC}(T_A,T_B) &\propto& T_A\,T_B.
+\end{eqnarray}
 
-The generalized mean is a homogenous function of $T_A$ and $T_B$ while the Glauber model contains a binary collision term proportional to $T_A T_B$. This Glauber
-binary collision term is typically tuned to fit the centrality dependence of the charged particle multiplicity as it rises non-linearly with centrality.
+It's worth noting that the $p=1$ generalized mean is simply a wounded nucleon model. This is however, where the simularities between the generalized
+mean and the two-component ansatz end. While the generalized mean is strictly linear in symmetric collisions $T_A=T_B$, binary collision contributions to the 
+two-component model introduce terms that are quadratic in $T$.
 
-An interesting consequence of the non-homogeneity introduced by the existence of a binary collision term is manifest in central U-U collisions.
+An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
+axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 
+where the Uranium symmetry axis is alligned with the beam axis and body-on-body collisions where the Uranium symmetry axis is perpendicular to the beam axis. 
 
+Tip-to-tip configurations generate more binary collisions than body-on-body configurations and consequently, binary collision scaling would predict that these 
+collisions produce more charged particles. This multiplicity ordering of tip-to-tip and body-on-body configurations creates a surplus of highly elliptic 
+body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
+a curious knee shaped structure in the centrality dependent elliptic flow data. 
+
+Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions. This suggests that 
+non-linearities in the symmetric component of equation (\ref{ansatz}) are small and that the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
+is a reasonable approximation.
 
 \section{The Model}
-We sample nucleon coordinates in the projectile and target nuclei using the realistic nucleon configurations calculated by Alvioli 
-and Strickland [?].
 
-We follow the precription of [ref] and calculate pairwise collisions of nucleons in pp, pA and AA collisions from the proton-proton 
-overlap function,
-\begin{align}
- T_{pp}(b) &= \int dx~dy \,T_p(x-b/2,y) \,T_p(x+b/2,y),
-\end{align}
-where $b$ denotes the proton-proton impact parameter and $T_p(x,y)$ the proton's z-integrated parton density.
+For simplicity, we refer to the generalized mean of projectile and target thicknesses hereafter as the \emph{reduced thickness} of projectile nucleus $A$ and 
+target nucleus $B$,
+\begin{equation}
+ T_R(p;x,y) \equiv \left( \frac{T_A({\bf x}+{\bf b}/2,y)^p + T_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
+\end{equation}
+noting that the units of $T_R$ are also that of a nuclear thickness function. In this language, we fix the transverse density of deposited entropy according to
+\begin{equation}
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
+\end{equation}
+where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ the reduced thickness function. The entire procedure thus amounts to calculating the projectile and target 
+nuclear thickness functions $T_A$ and $T_B$ and evaluating expressions (?) and (?).
 
-The probability for a pairwise collision is given by,
+The nuclear thickness function is typically defined as the z-integrated nuclear density for a nucleus moving along the z-axis. For a Monte-Carlo nucleus with $N$ nucleons, the 
+thickness function $T_N$ can be calculated by summing the thickness contribution from each nucleon located at coordinate $(x_i,y_i)$ with transverse parton density $T_p(x,y)$,
+\begin{equation}
+  T_N(x,y) = \sum\limits_{i=1}^{N} T_n(x-x_i,y-y_i).
+\end{equation}
+
+We employ a slightly modified definition for the nuclear thickness function where we only sum over the density of \emph{participant} nucleons which each
+contribute with a random weight $\gamma_i$ sampled from a two parameter Gamma distribution $\Gamma(\mu,k)$ with mean $\mu=1$ and width parameter $k$,
+\begin{equation}
+ \tilde{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
+\end{equation}
+
+These additional weights incorporate event-by-event fluctuations in the density of partons sampled in each nucleon-nucleon collisions. Our choice of
+a Gamma distribution reflects a long history of fitting proton-proton multiplicity distributions using a Negative Binomial distribution which arrises naturally 
+from a Gamma-Poisson mixture.
+
+For the average transverse parton density $t(x,y)$ we use a Gaussian, although we stress that this is by no means a detailed or even faithful description of a nucleon.
+Consequently, we only expect our predictions to be robust for properties insensitive to details of the nucleonic substructure. Trying to predict, for example the 
+eccentricity harmonics of deposited entropy in a proton-proton collision would be meaningless. 
+
+The transverse nucleon coordinates $(x_i,y_i)$ in equation (?) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
+these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference [?] which incorporate short- 
+and long-range nucleon-nucleon correlations guided by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei.
+
+Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference [?]. In this prescription, the 
+probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
 \begin{equation}
   P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
 \end{equation}
-where the exponential factor $\sigma_{gg} N_{gg}^2$ is fixed to reproduce the inelastic proton-proton cross section,
+where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
+\begin{equation}
+ T_{pp}(b) = \int dx~dy \,f(x-b/2,y) \,f(x+b/2,y).
+\end{equation}
+The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total inelastic proton-proton cross-section,
 \begin{equation}
   \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
 \end{equation}
+The pair-wise collision probability in equation (?) is then sampled independently for each pair of projectile and target nucleons to isolate those nucleons which 
+participate in at least one collision. 
 
-The pair-wise collision probability is sampled independently for each pair of nucleons in the collision and target
+Once the fluctuated particpant thickness functions are defined using equation (?),
+These participant nucleons define our nuclear thickness functions via equation (?) and subsequently the transverse entropy profile via equation (?).
 
-\section{Charged particle distributions}
+\section{Results}
 
-\begin{figure*}
+\begin{figure*}[h!]
     \centering
     \subfloat[label 1]{\includegraphics[width=0.333\textwidth]{pp.pdf}}
     \subfloat[label 2]{\includegraphics[width=0.333\textwidth]{pPb.pdf}}
@@ -124,6 +169,10 @@ The pair-wise collision probability is sampled independently for each pair of nu
     \caption{2 Figures side by side}
     \label{fig:example}
 \end{figure*}
+
+
+\section{Summary}
+
 
 \bibliography{sources}
 
