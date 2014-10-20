@@ -89,20 +89,20 @@ It's worth noting that the $p=1$ generalized mean is simply a wounded nucleon mo
 mean and the two-component ansatz end. While the generalized mean is strictly linear in symmetric collisions $T_A=T_B$, binary collision contributions to the 
 two-component model introduce terms that are quadratic in $T$.
 
-An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
-axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 
-where the Uranium symmetry axis is alligned with the beam axis and body-on-body collisions where the Uranium symmetry axis is perpendicular to the beam axis. 
+%An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
+%axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 
+%where the Uranium symmetry axis is alligned with the beam axis and body-on-body collisions where the Uranium symmetry axis is perpendicular to the beam axis. 
 
-Tip-to-tip configurations generate more binary collisions than body-on-body configurations and consequently, binary collision scaling would predict that these 
-collisions produce more charged particles. This multiplicity ordering of tip-to-tip and body-on-body configurations creates a surplus of highly elliptic 
-body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
-a curious knee shaped structure in the centrality dependent elliptic flow data. 
+%Tip-to-tip configurations generate more binary collisions than body-on-body configurations and consequently, binary collision scaling would predict that these 
+%collisions produce more charged particles. This multiplicity ordering of tip-to-tip and body-on-body configurations creates a surplus of highly elliptic 
+%body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
+%a curious knee shaped structure in the centrality dependent elliptic flow data. 
 
-Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions \cite{UU-STAR}. It has been
-suggested by the authors in [?] suggested that the existence of hot spots in the produced fireball may wash out the structure of the knee, the analysis model with a higher degree of fluctuations,
+%Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions \cite{UU-STAR}. It has been
+%suggested by the authors in [?] suggested that the existence of hot spots in the produced fireball may wash out the structure of the knee, the analysis model with a higher degree of fluctuations,
 
-This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
-is a reasonable approximation.
+%This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
+%is a reasonable approximation.
 
 \cite{constraining-ic}
 
@@ -116,7 +116,7 @@ target nucleus $B$,
 \end{equation}
 noting that the units of $T_R$ are also that of a nuclear thickness function. 
 
-We employ a slightly modified definition of the participant thickness function which we denote $\tilde{T}$ in which each participant nucleon contributes with random 
+We employ a slightly modified definition of the participant thickness function in which each participant nucleon contributes with random 
 weight $\gamma_i$ sampled from a two parameter Gamma distribution $\Gamma(\mu,k)$ with mean $\mu=1$ and shape parameter $k$. For a Monte-Carlo distribution of nucleon 
 positions, this amounts to summing the fluctuated thickness functions of each participant nucleon $T_p(x,y)$,
 \begin{equation}
@@ -130,6 +130,7 @@ from a Gamma-Poisson mixture.
 
 For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
 \begin{equation}
+ \label{thickness def}
  T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right) 
 \end{equation}
 although we stress that this is a rather crude description of the nucleon. Consequently, we restrict our attention to properties of the collision that are insensitive to details 
@@ -142,6 +143,7 @@ and long-range nucleon-nucleon correlations guided by the findings of realistic 
 Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. In this prescription, the 
 probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
 \begin{equation}
+  \label{coll prob}
   P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
 \end{equation}
 where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
@@ -153,10 +155,10 @@ inelastic proton-proton cross-section,
 \begin{equation}
   \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
 \end{equation}
-The pair-wise collision probability in equation (?) is then sampled independently for each pair of projectile and target nucleons to isolate those nucleons which 
-participate in at least one collision. 
+The pair-wise collision probability in equation (\ref{coll prob}) is then sampled independently for each pair of projectile and target nucleons to determine the participant nucleons 
+which contribute to the summation in equation (\ref{thickness def}).
 
-In this language, we fix the transverse density of deposited entropy according to
+The transverse entropy density at mid-rapidity is then fixed according to the generalized mean of fluctuated nuclear thickness reduced thickness of fluctuated 
 \begin{equation}
  \label{entropy deposition}
  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
