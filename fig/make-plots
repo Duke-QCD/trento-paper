@@ -25,6 +25,7 @@ plt.rcParams.update({
     'xtick.labelsize': textiny,
     'ytick.labelsize': textiny,
     'lines.linewidth': .8,
+    'patch.linewidth': .8,
     'axes.linewidth': .5,
     'text.color': offblack,
     'axes.edgecolor': offblack,
@@ -94,5 +95,60 @@ def load_from_cache(fn, unpack=False, usecols=None):
         return arr
 
 
+experiment = 'ALICE'
+
+
+@plotfn
+def multdist():
+    systems = 'pp', 'pPb', 'PbPb'
+    normalizations = .19, .17, .15
+    xticks = range(0, 50, 10), range(0, 200, 50), range(0, 3500, 500)
+    fig, axes = plt.subplots(ncols=len(systems),
+                             figsize=(textwidth, textwidth*aspect/2))
+
+    ax = axes[0]
+    system = systems[0]
+
+    for ax, system, norm, xtick in zip(axes, systems, normalizations, xticks):
+        ax.set_yscale('log')
+
+        if ax.is_first_col():
+            x, y, stat, sys = load_from_cache(
+                'data/exp/{}-{}-multdist'.format(experiment, system),
+                usecols=(0, 3, 4, 6)
+            )[1:].T
+            ax.errorbar(x, y, yerr=stat, fmt='',
+                        color='.3', capsize=1.2, label=experiment, zorder=10)
+            ax.fill_between(x, y+sys, y-sys, color='.5', alpha=.2, zorder=0)
+
+            ax.set_xlim(xmax=50)
+            ax.set_ylim(.5*y.min())
+
+            ax.set_ylabel('Probability')
+        else:
+            xmin, xmax, x, y = load_from_cache(
+                'data/exp/{}-{}-multdist'.format(experiment, system),
+                usecols=range(4), unpack=True
+            )
+            ax.plot(x, y/(xmax-xmin), color='.3')
+
+        mult = load_from_cache(
+            'data/trento/{}-m0-k0.6-w0.6'.format(system),
+            usecols=(3,)
+        )
+        ax.hist(norm*mult, bins=30, normed=True,
+                color='SkyBlue', edgecolor='white', zorder=-1)
+
+        ax.set_xticks(xtick)
+        ax.set_yticks([])
+        ax.set_xlabel(r'$dN_\mathrm{ch}/d\eta$')
+        ax.set_title(system)
+
+        cleanup(ax)
+
+    plt.tight_layout(pad=0, w_pad=.4)
+
+
 if __name__ == "__main__":
     saturation()
+    multdist()
