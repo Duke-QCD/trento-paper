@@ -85,5 +85,14 @@ def saturation():
     plt.tight_layout(pad=0)
 
 
+def load_from_cache(fn, unpack=False, usecols=None):
+    try:
+        return np.load(fn + '.npy')
+    except FileNotFoundError:
+        arr = np.loadtxt(fn + '.dat', unpack=unpack, usecols=usecols)
+        np.save(fn + '.npy', arr)
+        return arr
+
+
 if __name__ == "__main__":
     saturation()
