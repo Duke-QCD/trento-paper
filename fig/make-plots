@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# coding: -*- coding: utf-8 -*-
+
+from __future__ import division, print_function
+
+import functools
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+aspect = 1/1.618
+resolution = 72.27
+columnwidth = 246/resolution
+textwidth = 510/resolution
+textiny, texsmall, texnormal = 8., 9.25, 10.
+offblack = '#262626'
+
+plt.rcdefaults()
+plt.rcParams.update({
+    'font.family': ['CMU Serif'],
+    'font.size': texsmall,
+    'legend.fontsize': texsmall,
+    'axes.labelsize': texsmall,
+    'xtick.labelsize': textiny,
+    'ytick.labelsize': textiny,
+    'lines.linewidth': .8,
+    'axes.linewidth': .5,
+    'text.color': offblack,
+    'axes.edgecolor': offblack,
+    'axes.labelcolor': offblack,
+    'xtick.color': offblack,
+    'ytick.color': offblack,
+    'legend.numpoints': 1,
+    'legend.scatterpoints': 1,
+    'legend.frameon': False,
+})
+
+
+def plotfn(f):
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        print(f.__name__)
+        f(*args, **kwargs)
+        plt.savefig('{}.pdf'.format(f.__name__))
+        plt.close()
+    return wrapper
+
+
+def cleanup(ax=None):
+    if ax is None:
+        ax = plt.gca()
+    for spine in 'top', 'right':
+        ax.spines[spine].set_visible(False)
+    for ax_name in 'xaxis', 'yaxis':
+        getattr(ax, ax_name).set_ticks_position('none')
+
+
+@plotfn
+def saturation():
+    plt.figure(figsize=(columnwidth, columnwidth*aspect))
+
+    A = np.linspace(0, 5, 1000)
+    B = np.ones_like(A)
+
+    means = (
+        ((A+B)/2, 1, 'Arithmetic'),
+        (np.sqrt(A*B), 0, 'Geometric'),
+        (2*A*B/(A+B), -1, 'Harmonic')
+    )
+
+    plt.rc('axes', color_cycle=('#4c72b0', '#55a868', '#c44e52'))
+
+    for M, p, name in means:
+        plt.plot(A, M, label='{} ($p = {}$)'.format(name, p))
+
+    plt.xlabel('$T_B$')
+    plt.ylabel('$M_p(T_A, T_B)$')
+    plt.xticks(range(6))
+    plt.yticks(range(4))
+    plt.legend(loc='best')
+
+    cleanup()
+    plt.tight_layout(pad=0)
+
+
+if __name__ == "__main__":
+    saturation()
