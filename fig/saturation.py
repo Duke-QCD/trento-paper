@@ -8,7 +8,7 @@ import numpy as np
 import math
 import sys
 
-fig = plt.figure(figsize=(9, 9), dpi=100)
+fig = plt.figure(figsize=(9, 6), dpi=100)
 plt.rc('text',color="0.3")
 
 A = np.linspace(0,5,1000)
@@ -31,4 +31,5 @@ plt.annotate('$T_A$ = 1', xy=(0.05, 0.9), xycoords='axes fraction',fontsize=25, 
 
 plt.legend(loc='lower right',fontsize=20, frameon=False, shadow=True)
 plt.xlim([0,5.0])
+plt.savefig("saturation.pdf")
 plt.show()

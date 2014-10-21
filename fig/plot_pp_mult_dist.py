@@ -10,7 +10,7 @@ fig = plt.figure(figsize=(5.5, 9), dpi=100)
 # plot trento results
 ###########################################################################
 seed, impact, npart, mult, ecc2, ecc3, area = np.loadtxt(sys.argv[1],unpack=True)
-factor = 0.19
+factor = 25.0
 mult = np.asarray([i for i in (factor*mult).astype(int) if i >= 1])
 bins = np.linspace(0.5,60.5,61)
 plt.hist(mult,bins,normed=True,label="Trento pp 2.36 TeV",histtype='step',color='violet',linewidth=1.5)
@@ -41,11 +41,12 @@ plt.legend(loc='lower left',fontsize=15,frameon=False)
 # plot properties
 ##############################################
 print "factor:",factor
-plt.yscale('log')
+#plt.yscale('log')
 plt.xlim([0.0,55.0])
 plt.ylim([0.0001,0.1])
 plt.xlabel("$dNch/d\eta$",fontsize=15)
 plt.ylabel("P($dNch/d\eta$)",fontsize=15)
 plt.annotate('PRELIMINARY', xy=(0.5, 0.92), xycoords='axes fraction',fontsize=20,color='gray')
 plt.title("pp Nch Distribution")
+plt.savefig("pp.pdf")
 plt.show();

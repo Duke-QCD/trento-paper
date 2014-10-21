@@ -12,8 +12,8 @@ fig = plt.figure(figsize=(5.5, 9), dpi=100)
 
 # plot Trento results
 ######################################################################################
-seed, impact, npart, mult, ecc2, ecc3 = np.loadtxt(sys.argv[1],unpack=True,skiprows=1)
-factor = 17.8
+seed, impact, npart, mult, ecc2, ecc3, area = np.loadtxt(sys.argv[1],unpack=True,skiprows=1)
+factor = 0.157
 mult = np.asarray([i for i in (factor*mult) if i >= 19.82]) 
 bins = np.linspace(19.82,3334.0,100)
 plt.hist(mult,bins,normed=True,color='cyan',histtype='step',label="Trento: Pb-Pb @ 2.76 TeV",linewidth=1.5)
@@ -45,4 +45,5 @@ plt.xlabel("$N_{ch}$",fontsize=15)
 plt.ylabel("P($N_{ch}$)",fontsize=15)
 plt.annotate('PRELIMINARY', xy=(0.5, 0.92), xycoords='axes fraction',fontsize=20,color='gray')
 plt.yscale('log')
+plt.savefig("PbPb.pdf")
 plt.show()

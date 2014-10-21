@@ -43,21 +43,27 @@ energy deposition in the initial state.
 \section{Motivation}
 
 We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and target nucleus with atomic mass number $B$ characterized 
-by collision impact parameter ${\bf b}$ in the transverse plane. Let $T_A$ and $T_B$ denote the transverse density of participant matter, i.e.\ partons, 
-in each nucleus as measured by the collapse of projectile and target wavefunctions. We consider the existence of an eikonal mapping $f(T_A,T_B)$ that 
-characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
+by collision impact parameter ${\bf b}$ in the transverse plane $\vec{r}_\perp = \vec{x} \times \vec{y}$. The density of nuclear matter in the rest frame of each 
+nucleus is described by the relevant un-perturbed multi-body nuclear wavefunction $\Psi_N$, where $\Psi_N$ is often characterized by the beam-integrated 
+nuclear thickness function,
 \begin{equation}
-  \label{ansatz}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
+ T(x,y) = \int dz\, \left|\Psi_N(x,y,z) \right|^2. 
 \end{equation}
 
-It's reasonable to insist that $f$ respect several key properties, namely that $f$ is smooth, monatonic and symmetric in 
-the variables $T_A$ and $T_B$ and that it saturates in the limit $T_A \ll T_B$ and $T_B \ll T_A$.
+Let $\mathcal{T}_A$ and $\mathcal{T}_B$ denote a sampled transverse density of \emph{participant} nucleons as determined by the collapse of wavefunctions $\Psi_A$ and
+$\Psi_B$ in a given nucleus-nucleus collision. We consider the existence of an eikonal mapping $f(\mathcal{T}_A,\mathcal{T}_B)$ that characterizes entropy deposition at mid-rapidity as 
+a function of $\mathcal{T}_A$ and $\mathcal{T}_B$,
+\begin{equation}
+  \label{ansatz}
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(\mathcal{T}_A({\bf r}_\perp + {\bf b}/2),\,\mathcal{T}_B({\bf r}_\perp - {\bf b}/2)).
+\end{equation}
 
-Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
+It's reasonable to insist that $f$ respect several key properties, namely that $f$ is smooth, monatonic and symmetric in the variables $\mathcal{T}_A$ and 
+$\mathcal{T}_B$ and that it saturates in the limit $\mathcal{T}_A \ll \mathcal{T}_B$ and $\mathcal{T}_B \ll \mathcal{T}_A$. Motivated by these stipulations, 
+we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
 \begin{equation}
  \label{generalized mean ansatz}
- f(T_A, T_B) \propto M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
+ f(\mathcal{T}_A, \mathcal{T}_B) \propto M_p(\mathcal{T}_A,\mathcal{T}_B) = \left( \frac{\mathcal{T}_A^p + \mathcal{T}_B^p}{2} \right)^{1/p}.
 \end{equation}
 
 For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively which can be shown
@@ -65,13 +71,84 @@ to obey the following ordering inequality,
 \begin{equation}
  M_{-\infty} \le M_{-1} \le M_{0} \le M_{1} \le M_{\infty}.
 \end{equation}
-In this sense, the continuous parameter $p$ characterizes the dependence of entropy deposition on the projectile-target thickness asymmetry, or equivalently the 
-degree of collision saturation. This saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target 
+In this sense, the continuous parameter $p$ characterizes the dependence of entropy deposition on the projectile-target participant density asymmetry, or equivalently 
+the degree of collision saturation. This saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target 
 $T_B$ for different values of $p$ as shown in figure \ref{saturation}.
 \begin{figure}[b]
  \includegraphics[width=\linewidth]{saturation.pdf}
  \caption{\label{saturation} Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-1, 0, 1\}$.}
 \end{figure}
+
+\section{The Model}
+
+For simplicity, we refer to the generalized mean of participant projectile and target thicknesses hereafter as the \emph{reduced thickness} of projectile 
+nucleus $A$ and target nucleus $B$,
+\begin{equation}
+ \label{reduced}
+ \mathcal{T}_R(p;x,y) \equiv \left( \frac{\mathcal{T}_A({\bf x}+{\bf b}/2,y)^p + \mathcal{T}_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
+\end{equation}
+noting that the units of $T_R$ are also that of a nuclear thickness function. 
+
+The participant nuclear thickness functions $\mathcal{T}_A$ and $\mathcal{T}_B$ are calculated from an underlying Glauber model of independent nucleon-nucleon 
+collisions with additional fluctuations $\gamma_i$ in the transverse density $T_p$ contributed by each participant nucleon,
+\begin{equation}
+ \label{thickness def}
+ \mathcal{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
+\end{equation}
+
+The weights $\gamma_i$ are sampled from a two parameter Gamma distribution with mean $\mu=1$ and shape parameter $k$. These weights incorporate event-by-event 
+fluctuations in the density of partons sampled in each nucleon-nucleon collision. The choice of a Gamma distribution reflects a long history of fitting proton-proton 
+multiplicity distributions using a negative binomial distribution which arises naturally from a Gamma-Poisson mixture.
+
+For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
+\begin{equation}
+ T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right) 
+\end{equation}
+although we stress that this is a rather crude description of the nucleon and consequently restrict our attention to properties of the collision that are 
+insensitive to details of the nucleonic substructure.
+
+Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. In this prescription, the 
+probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
+\begin{equation}
+  \label{coll prob}
+  P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
+\end{equation}
+where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
+\begin{equation}
+ T_{pp}(b) = \int dx~dy \,T_p(x-b/2,y) \,T_p(x+b/2,y).
+\end{equation}
+The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total 
+inelastic proton-proton cross-section,
+\begin{equation}
+  \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
+\end{equation}
+The pair-wise collision probability in equation (\ref{coll prob}) is then sampled independently for each pair of projectile and target nucleons to determine the participant nucleons 
+which contribute to the summation in equation (\ref{thickness def}).
+
+We finally fix the density of deposited entropy at mid-rapidity using expressions (\ref{generalized mean ansatz}) and (\ref{reduced}),
+\begin{equation}
+ \label{entropy deposition}
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
+\end{equation}
+where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ is the reduced thickness function.
+
+\section{Charged particle distributions}
+
+Equation (\ref{entropy deposition}) represents, in principle, a generalized mapping from local projectile and target densities $\mathcal{T}_A ({\bf r}_\perp)$ and 
+$\mathcal{T}_B({\bf r}_\perp)$ to a local deposition of entropy $dS({\bf r}_\perp)/dy$. For fixed beam energy, we require that all free parameters in the model: 
+the generalized mean power $p$, the Gaussian nucleon width $B$, the Gamma distribution shape parameter $k$ and the energy dependent normalization factor 
+$\zeta(\sqrt{s})$ remain fixed. Thus for fixed beam energy $\sqrt{s}$, it is instructive to compare predictions of the model against a wide range of collision systems to see if some subset of 
+parameters describe the data consistently.
+
+Projectile and target species enter the model through 
+
+
+The transverse nucleon coordinates $(x_i,y_i)$ in equation (\ref{fluctuated thickness}) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
+these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference \cite{nucleon-correlations} which incorporate short- 
+and long-range nucleon-nucleon correlations guided by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei.
+
+
+\section{Comparison to a wounded nucleon and binary collision mixture}
 
 It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
 is set proportional to a linear combination of the local density of participant and pair-wise collisions,
@@ -103,72 +180,6 @@ two-component model introduce terms that are quadratic in $T$.
 
 %This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
 %is a reasonable approximation.
-
-\cite{constraining-ic}
-
-\section{The Model}
-
-For simplicity, we refer to the generalized mean of projectile and target thicknesses hereafter as the \emph{reduced thickness} of projectile nucleus $A$ and 
-target nucleus $B$,
-\begin{equation}
- \label{reduced}
- T_R(p;x,y) \equiv \left( \frac{T_A({\bf x}+{\bf b}/2,y)^p + T_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
-\end{equation}
-noting that the units of $T_R$ are also that of a nuclear thickness function. 
-
-We employ a slightly modified definition of the participant thickness function in which each participant nucleon contributes with random 
-weight $\gamma_i$ sampled from a two parameter Gamma distribution $\Gamma(\mu,k)$ with mean $\mu=1$ and shape parameter $k$. For a Monte-Carlo distribution of nucleon 
-positions, this amounts to summing the fluctuated thickness functions of each participant nucleon $T_p(x,y)$,
-\begin{equation}
- \label{fluctuated thickness}
- T(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
-\end{equation}
-
-These additional weights incorporate event-by-event fluctuations in the density of partons sampled in each nucleon-nucleon collision. The choice of
-a Gamma distribution reflects a long history of fitting proton-proton multiplicity distributions using a Negative Binomial distribution which arrises naturally 
-from a Gamma-Poisson mixture.
-
-For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
-\begin{equation}
- \label{thickness def}
- T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right) 
-\end{equation}
-although we stress that this is a rather crude description of the nucleon. Consequently, we restrict our attention to properties of the collision that are insensitive to details 
-of the nucleonic substructure.
-
-The transverse nucleon coordinates $(x_i,y_i)$ in equation (\ref{fluctuated thickness}) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
-these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference \cite{nucleon-correlations} which incorporate short- 
-and long-range nucleon-nucleon correlations guided by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei.
-
-Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. In this prescription, the 
-probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
-\begin{equation}
-  \label{coll prob}
-  P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
-\end{equation}
-where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
-\begin{equation}
- T_{pp}(b) = \int dx~dy \,f(x-b/2,y) \,f(x+b/2,y).
-\end{equation}
-The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total 
-inelastic proton-proton cross-section,
-\begin{equation}
-  \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
-\end{equation}
-The pair-wise collision probability in equation (\ref{coll prob}) is then sampled independently for each pair of projectile and target nucleons to determine the participant nucleons 
-which contribute to the summation in equation (\ref{thickness def}).
-
-The transverse entropy density at mid-rapidity is then fixed according to the generalized mean of fluctuated nuclear thickness reduced thickness of fluctuated 
-\begin{equation}
- \label{entropy deposition}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
-\end{equation}
-where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ the reduced thickness function. The entire procedure thus amounts to calculating the participant 
-thickness functions $T_A$ and $T_B$ in combination with expressions (\ref{reduced}) and (\ref{entropy deposition}) with only one additional caveat.
-
-
-
-\section{Results}
 
 \begin{figure*}[h!]
     \centering
