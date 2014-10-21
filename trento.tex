@@ -1,7 +1,6 @@
 \documentclass[aps,prl,reprint,amsmath,nofootinbib]{revtex4-1}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{subfig}
 \graphicspath{{fig/}}
 
 
@@ -75,8 +74,8 @@ In this sense, the continuous parameter $p$ characterizes the dependence of entr
 the degree of collision saturation. This saturation on $p$ is best visualized by fixing the thickness of the projectile $T_A$ and varying the thickness of the target 
 $T_B$ for different values of $p$ as shown in figure \ref{saturation}.
 \begin{figure}[b]
- \includegraphics[width=\linewidth]{saturation.pdf}
- \caption{\label{saturation} Saturation in the generalized mean $M_p(1,T_B)$ for special forms $p=\{-1, 0, 1\}$.}
+ \includegraphics{saturation}
+ \caption{\label{saturation} Saturation in the generalized mean $M_p(a, 1)$ for special forms $p=\{-1, 0, 1\}$.}
 \end{figure}
 
 \section{The Model}
@@ -150,15 +149,11 @@ production at mid-rapidity is calculated from equation (\ref{particle production
 \end{equation}
 where the normalization factor $\kappa'_n$ is scaled to match the average charged particle multiplicity in the pseudo-rapidity interval $|\eta| < 1$.
 \begin{figure*}[ht]
-    \centering
-    \subfloat[label 1]{\includegraphics[width=0.33\textwidth]{pp.pdf}}
-    \subfloat[label 2]{\includegraphics[width=0.33\textwidth]{pPb.pdf}}
-    \subfloat[label 3]{\includegraphics[width=0.33\textwidth]{PbPb.pdf}}
-    \caption{p-p, p-Pb and Pb-Pb multiplicity distributions}
-    \label{fig:mult}
+    \includegraphics{multdist}
+    \caption{\label{fig:multdist}Multiplicity distributions.}
 \end{figure*}
 
-In figure \ref{fig:mult} we illustrate the model performance against the ALICE data using a geometric mean $p=0$ with a fluctuation parameter $k=0.8$ tuned 
+In figure \ref{fig:multdist} we illustrate the model performance against the ALICE data using a geometric mean $p=0$ with a fluctuation parameter $k=0.8$ tuned 
 to fit the p-p multiplicity distribution and a squared nucleon width fixed at the rather standard value $B=0.36$ $\mbox{fm}^2$. 
 
 The normalization factor $\kappa'_n$ is allowed to vary with each collision system to account for slight differences in the beam energy and kinematic cuts of 
