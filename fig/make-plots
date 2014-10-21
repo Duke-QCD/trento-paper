@@ -34,6 +34,7 @@ plt.rcParams.update({
     'legend.numpoints': 1,
     'legend.scatterpoints': 1,
     'legend.frameon': False,
+    'pdf.fonttype': 42
 })
 
 
@@ -74,8 +75,8 @@ def saturation():
     for M, p, name in means:
         plt.plot(A, M, label='{} ($p = {}$)'.format(name, p))
 
-    plt.xlabel('$T_B$')
-    plt.ylabel('$M_p(T_A, T_B)$')
+    plt.xlabel('$a$')
+    plt.ylabel('$M_p(a, 1)$')
     plt.xticks(range(6))
     plt.yticks(range(4))
     plt.legend(loc='best')
