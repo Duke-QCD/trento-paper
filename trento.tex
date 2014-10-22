@@ -134,19 +134,39 @@ where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor
 
 \section{Charged particle distributions}
 
-Equation (\ref{entropy deposition}) represents, in principle, a generalized mapping from local projectile and target densities $\mathcal{T}_A ({\bf r}_\perp)$ and 
-$\mathcal{T}_B({\bf r}_\perp)$ to a local deposition of entropy $dS({\bf r}_\perp)/dy$. For fixed beam energy, we require that all free parameters in the model: 
+The aforementioned procedure represents, in principle, a single energy-dependent mapping from arbitrary projectile and target densities $T_A ({\bf r}_\perp)$ and 
+$T_B({\bf r}_\perp)$ to a local deposition of entropy $dS({\bf r}_\perp)/dy$. For fixed beam energy, we thus require that all free parameters of the model: 
 the generalized mean power $p$, the Gaussian nucleon width $B$, the Gamma distribution shape parameter $k$ and the energy dependent normalization factor 
-$\zeta(\sqrt{s})$ remain fixed. Thus for fixed beam energy $\sqrt{s}$, it is instructive to compare predictions of the model against a wide range of collision systems to see if some subset of 
-parameters describe the data consistently.
+$\zeta(\sqrt{s})$ remain fixed. 
 
-Projectile and target species enter the model through 
+It is thus instructive to compare predictions of the model at fixed (or close as possible) beam energy for a wide range of collision systems to see if 
+some subset of parameters describe the data consistently. We start by applying the model to LHC energies where the eikonal approximation is a safe assumption.
 
+We generate proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating short- and long-range correlations guided 
+by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei \cite{nucleon-correlations}. 
 
-The transverse nucleon coordinates $(x_i,y_i)$ in equation (\ref{fluctuated thickness}) are sampled in the cms frame of the projectile and target nuclei for the systems of interest. We generate
-these coordinates for lead nuclei using the realistic nucleon configurations calculated by Alvioli, Drescher and Strikman in reference \cite{nucleon-correlations} which incorporate short- 
-and long-range nucleon-nucleon correlations guided by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei.
+Entropy deposition at mid-rapidity $dS/dy |_{y=0}$ is calculated by integrating equation (\ref{entropy deposition}) over the transverse plane for each minimum-bias
+event. We then identify this entropy deposition with charged particle production in an interval about mid-rapidity to compare with experimentally measured
+charged particle distributions. 
 
+It has been shown in reference [?,?] that the initial entropy is a close proxy for charged particle multiplicity. In the comparisons that follow, we omit 
+corrections from viscous entropy production in the hydrodynamic evolution which act as small corrections to the unknown normalization factor $\zeta(\sqrt{s})$.
+
+In figure [2] we show results for the charged particle multiplicity distributions of p-p, p-Pb and Pb-Pb collisions in the pseudo-rapidity interval $|\eta|<1$ for three
+values of the generalized mean $p=\{-1,0,1\}$. We tune the value of the fluctuation shape parameter $k$ to fit the p-p multiplicity distribution (shown on the plot) and 
+fix the squared Gaussian nucleon width using the rather standard value $B=0.36$ $\mbox{fm}^2$. 
+
+While the normalization factor should be constant at fixed beam energy, 
+we allow our normalization factor to vary to account for slighly differences in the beam energy and kinematic cuts of each experiment. The values of the normalization
+factor and fluctuation parameter used to generate the plots are included in the figure.
+\begin{figure*}[t]
+    \centering
+    \subfloat[label 1]{\includegraphics[width=0.333\textwidth]{pp.pdf}}
+    \subfloat[label 2]{\includegraphics[width=0.333\textwidth]{pPb.pdf}}
+    \subfloat[label 3]{\includegraphics[width=0.333\textwidth]{PbPb.pdf}}
+    \caption{2 Figures side by side}
+    \label{fig:example}
+\end{figure*}
 
 \section{Comparison to a wounded nucleon and binary collision mixture}
 
@@ -180,15 +200,6 @@ two-component model introduce terms that are quadratic in $T$.
 
 %This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
 %is a reasonable approximation.
-
-\begin{figure*}[h!]
-    \centering
-    \subfloat[label 1]{\includegraphics[width=0.333\textwidth]{pp.pdf}}
-    \subfloat[label 2]{\includegraphics[width=0.333\textwidth]{pPb.pdf}}
-    \subfloat[label 3]{\includegraphics[width=0.333\textwidth]{PbPb.pdf}}
-    \caption{2 Figures side by side}
-    \label{fig:example}
-\end{figure*}
 
 
 \section{Summary}
