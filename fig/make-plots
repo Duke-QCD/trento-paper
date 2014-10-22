@@ -7,6 +7,7 @@ import functools
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as tick
 
 
 aspect = 1/1.618
@@ -89,7 +90,7 @@ def saturation():
 def load_from_cache(fn, unpack=False, usecols=None):
     try:
         return np.load(fn + '.npy')
-    except FileNotFoundError:
+    except IOError:
         arr = np.loadtxt(fn + '.dat', unpack=unpack, usecols=usecols)
         np.save(fn + '.npy', arr)
         return arr
@@ -102,29 +103,29 @@ experiment = 'ALICE'
 def multdist():
     systems = 'pp', 'pPb', 'PbPb'
     normalizations = .19, .17, .15
-    xticks = range(0, 50, 10), range(0, 200, 50), range(0, 3500, 500)
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, textwidth*aspect/2))
 
     ax = axes[0]
     system = systems[0]
 
-    for ax, system, norm, xtick in zip(axes, systems, normalizations, xticks):
+    for ax, system, norm in zip(axes, systems, normalizations):
         ax.set_yscale('log')
 
-        if ax.is_first_col():
+        if system == 'pp':
             x, y, stat, sys = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
                 usecols=(0, 3, 4, 6)
             )[1:].T
-            ax.errorbar(x, y, yerr=stat, fmt='',
-                        color='.3', capsize=1.2, label=experiment, zorder=10)
-            ax.fill_between(x, y+sys, y-sys, color='.5', alpha=.2, zorder=0)
+            ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
+                        markeredgewidth=0, capsize=0, elinewidth=.5,
+                        color='.3', label=experiment, zorder=10)
+            ax.fill_between(x, y+sys, y-sys,
+                            facecolor='.3', edgecolor='none', alpha=.3,
+                            zorder=0)
 
-            ax.set_xlim(xmax=50)
-            ax.set_ylim(.5*y.min())
-
-            ax.set_ylabel('Probability')
+            ax.set_xlim(xmax=55)
+            ax.set_ylim(ymin=.4*y.min())
         else:
             xmin, xmax, x, y = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
@@ -139,14 +140,16 @@ def multdist():
         ax.hist(norm*mult, bins=30, normed=True,
                 color='SkyBlue', edgecolor='white', zorder=-1)
 
-        ax.set_xticks(xtick)
-        ax.set_yticks([])
+        ax.xaxis.set_major_locator(tick.MaxNLocator(4, prune='upper'))
+        ax.yaxis.set_major_locator(
+            tick.LogLocator(base=10 if system == 'pp' else 100)
+        )
         ax.set_xlabel(r'$dN_\mathrm{ch}/d\eta$')
         ax.set_title(system)
 
         cleanup(ax)
 
-    plt.tight_layout(pad=0, w_pad=.4)
+    plt.tight_layout(pad=0, w_pad=.1)
 
 
 if __name__ == "__main__":
