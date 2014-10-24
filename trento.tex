@@ -125,66 +125,62 @@ inelastic proton-proton cross-section,
 The pair-wise collision probability in equation (\ref{coll prob}) is then sampled independently for each pair of projectile and target nucleons to determine the participant nucleons 
 which contribute to the summation in equation (\ref{thickness def}).
 
-We finally fix the density of deposited entropy at mid-rapidity using expressions (\ref{generalized mean ansatz}) and (\ref{reduced}),
+We finally fix the density of deposited entropy at mid-rapidity according to,
 \begin{equation}
  \label{entropy deposition}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \zeta(\sqrt{s})\, T_R(p;{\bf r}_\perp)
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \kappa_s(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
 \end{equation}
-where $\zeta(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $T_R(x,y)$ is the reduced thickness function.
+where $\kappa_s(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $\mathcal{T}_R(x,y)$ is the reduced thickness function.
+
+Equivalently, it's been shown that the initial entropy is a close proxy for charged particle multiplicity up to viscous entropy corrections [?]. We can 
+recast equation (\ref{entropy deposition}) in terms of the charged particle production as,
+\begin{equation}
+ \label{particle production}
+ \frac{dN_{ch}({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \approx \kappa_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
+\end{equation}
+which allows us to make a direct comparison with experimentally measured charged particle distributions.
 
 \section{Charged particle distributions}
 
-The aforementioned procedure represents, in principle, a single energy-dependent mapping from arbitrary projectile and target densities $T_A ({\bf r}_\perp)$ and 
-$T_B({\bf r}_\perp)$ to a local deposition of entropy $dS({\bf r}_\perp)/dy$. For fixed beam energy, we thus require that all free parameters of the model: 
-the generalized mean power $p$, the Gaussian nucleon width $B$, the Gamma distribution shape parameter $k$ and the energy dependent normalization factor 
-$\zeta(\sqrt{s})$ remain fixed. 
-
-It is thus instructive to compare predictions of the model at fixed (or close as possible) beam energy for a wide range of collision systems to see if 
-some subset of parameters describe the data consistently. We start by applying the model to LHC energies where the eikonal approximation is a safe assumption.
-
-We generate proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating short- and long-range correlations guided 
-by the findings of realistic calculations of one- and two-body densities in medium-heavy nuclei \cite{nucleon-correlations}. 
-
-Entropy deposition at mid-rapidity $dS/dy |_{y=0}$ is calculated by integrating equation (\ref{entropy deposition}) over the transverse plane for each minimum-bias
-event. We then identify this entropy deposition with charged particle production in an interval about mid-rapidity to compare with experimentally measured
-charged particle distributions. 
-
-It has been shown in reference [?,?] that the initial entropy is a close proxy for charged particle multiplicity. In the comparisons that follow, we omit 
-corrections from viscous entropy production in the hydrodynamic evolution which act as small corrections to the unknown normalization factor $\zeta(\sqrt{s})$.
-
-In figure [2] we show results for the charged particle multiplicity distributions of p-p, p-Pb and Pb-Pb collisions in the pseudo-rapidity interval $|\eta|<1$ for three
-values of the generalized mean $p=\{-1,0,1\}$. We tune the value of the fluctuation shape parameter $k$ to fit the p-p multiplicity distribution (shown on the plot) and 
-fix the squared Gaussian nucleon width using the rather standard value $B=0.36$ $\mbox{fm}^2$. 
-
-While the normalization factor should be constant at fixed beam energy, 
-we allow our normalization factor to vary to account for slighly differences in the beam energy and kinematic cuts of each experiment. The values of the normalization
-factor and fluctuation parameter used to generate the plots are included in the figure.
-\begin{figure*}[t]
+We show results for proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating short- and long-range 
+correlations \cite{nucleon-correlations}. For each collision system we generate $10^6$ minimum bias events satisfying $N_{part} > 0$. Charged particle
+production at mid-rapidity is calculated from equation (\ref{particle production}) according to, 
+\begin{equation}
+ N_{ch}(|\eta|<1) = \kappa'_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
+\end{equation}
+where the normalization factor $\kappa'_n$ is scaled to match the average charged particle multiplicity in the pseudo-rapidity interval $|\eta| < 1$.
+\begin{figure*}[ht]
     \centering
-    \subfloat[label 1]{\includegraphics[width=0.333\textwidth]{pp.pdf}}
-    \subfloat[label 2]{\includegraphics[width=0.333\textwidth]{pPb.pdf}}
-    \subfloat[label 3]{\includegraphics[width=0.333\textwidth]{PbPb.pdf}}
-    \caption{2 Figures side by side}
-    \label{fig:example}
+    \subfloat[label 1]{\includegraphics[width=0.33\textwidth]{pp.pdf}}
+    \subfloat[label 2]{\includegraphics[width=0.33\textwidth]{pPb.pdf}}
+    \subfloat[label 3]{\includegraphics[width=0.33\textwidth]{PbPb.pdf}}
+    \caption{p-p, p-Pb and Pb-Pb multiplicity distributions}
+    \label{fig:mult}
 \end{figure*}
+
+In figure \ref{fig:mult} we illustrate the model performance against the ALICE data using a geometric mean $p=0$ with a fluctuation parameter $k=0.8$ tuned 
+to fit the p-p multiplicity distribution and a squared nucleon width fixed at the rather standard value $B=0.36$ $\mbox{fm}^2$. 
+
+The normalization factor $\kappa'_n$ is allowed to vary with each collision system to account for slight differences in the beam energy and kinematic cuts of 
+each experiment. The values of the normalization factor and all other model parameters are indicated on the figure.
+
+These parameters do an excellent job capturing the shape of the charged particle distributions with discrepancies in the normalization factor $\kappa'_n$ of
+order $\mathcal{O}(20\%)$. It's possible that these discrepancies reflect a sub-optimal choice of model parameters or the absence of subtle physical effects, 
+i.e. shadowing of the participant thickness functions $\mathcal{T}_A$ and $\mathcal{T}_B$. We leave these details to a future investigation.
+
 
 \section{Comparison to a wounded nucleon and binary collision mixture}
 
 It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
 is set proportional to a linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}) 
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}). 
 \end{equation}
-where the wounded nucleon and binary collision densities scale with the participant thicknesses $T_A$ and $T_B$ as,
-\begin{eqnarray}
- \cr \mbox{WN}(T_A,T_B) &\propto& T_A + T_B \\
- \label{binary collisions}
- \mbox{BC}(T_A,T_B) &\propto& T_A\,T_B.
-\end{eqnarray}
-
-It's worth noting that the $p=1$ generalized mean is simply a wounded nucleon model. This is however, where the simularities between the generalized
-mean and the two-component ansatz end. While the generalized mean is strictly linear in symmetric collisions $T_A=T_B$, binary collision contributions to the 
-two-component model introduce terms that are quadratic in $T$.
+To make the connection with the generalized mean as close as possible, we use the following implementation of a fluctuated Glauber model,
+\begin{equation}
+ \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} + \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
+\end{equation}
+where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant and $\gamma_i$ is sampled from a Gamma distribution as before.
 
 %An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
 %axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 

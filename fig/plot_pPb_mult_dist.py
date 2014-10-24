@@ -8,12 +8,12 @@ from scipy import integrate
 from scipy.integrate import quad
 
 #define plot size in inches (width, height) & resolution(DPI)
-fig = plt.figure(figsize=(5.5, 9), dpi=100)
+fig = plt.figure(figsize=(6, 6), dpi=100)
 
 # plot Trento results
 ######################################################################################
 seed, impact, npart, mult, ecc2, ecc3, area = np.loadtxt(sys.argv[1],unpack=True,skiprows=1)
-factor = 0.17
+factor = 18.5
 mult = np.asarray([i for i in (factor*mult).astype(int) if i >= 12])
 bins = np.linspace(12,180,169)
 plt.hist(mult,bins,normed=True,color='cyan',histtype='step',label="Trento: pPb @ 5.02 TeV",linewidth=1.5)

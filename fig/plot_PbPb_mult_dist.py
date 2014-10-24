@@ -8,14 +8,14 @@ from scipy import integrate
 from scipy.integrate import quad
 
 #define plot size in inches (width, height) & resolution(DPI)
-fig = plt.figure(figsize=(5.5, 9), dpi=100)
+fig = plt.figure(figsize=(6, 6), dpi=100)
 
 # plot Trento results
 ######################################################################################
 seed, impact, npart, mult, ecc2, ecc3, area = np.loadtxt(sys.argv[1],unpack=True,skiprows=1)
 factor = 0.157
 mult = np.asarray([i for i in (factor*mult) if i >= 19.82]) 
-bins = np.linspace(19.82,3334.0,100)
+bins = np.linspace(19.82,3500.0,100)
 plt.hist(mult,bins,normed=True,color='cyan',histtype='step',label="Trento: Pb-Pb @ 2.76 TeV",linewidth=1.5)
 print "Trento:",mult.mean()
 
@@ -29,7 +29,7 @@ heights = prob/widths
 nvec = np.linspace(19.82,3334,200)
 fn = interp1d(navg, heights, kind='cubic')
 norm = integrate.quad(fn, 19.82, 3334)[0]
-plt.plot(nvec,fn(nvec)/norm,'r-')
+#plt.plot(nvec,fn(nvec)/norm,'r-')
 mean = integrate.quad(lambda x: x*fn(x)/norm, 19.82, 3334.)[0]
 plt.errorbar(navg,heights/norm,xerr=0.06*navg,yerr=0.01*heights,fmt='o',label="ALICE: Pb-Pb @ 2.76 TeV")
 print "ALICE:",mean
