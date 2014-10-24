@@ -23,16 +23,21 @@ plt.rcParams.update({
     'font.size': texsmall,
     'legend.fontsize': texsmall,
     'axes.labelsize': texsmall,
+    'axes.titlesize': texsmall,
     'xtick.labelsize': textiny,
     'ytick.labelsize': textiny,
     'lines.linewidth': .8,
-    'patch.linewidth': .8,
+    'patch.linewidth': .4,
     'axes.linewidth': .5,
     'text.color': offblack,
     'axes.edgecolor': offblack,
     'axes.labelcolor': offblack,
     'xtick.color': offblack,
     'ytick.color': offblack,
+    'xtick.major.size': 2,
+    'ytick.major.size': 2,
+    'xtick.major.pad': 1.8,
+    'ytick.major.pad': 1.8,
     'legend.numpoints': 1,
     'legend.scatterpoints': 1,
     'legend.frameon': False,
@@ -50,18 +55,25 @@ def plotfn(f):
     return wrapper
 
 
-def cleanup(ax=None):
+def despine(ax=None):
     if ax is None:
         ax = plt.gca()
     for spine in 'top', 'right':
         ax.spines[spine].set_visible(False)
+    ax.xaxis.set_ticks_position('bottom')
+    ax.yaxis.set_ticks_position('left')
+
+
+def remove_ticks(ax=None):
+    if ax is None:
+        ax = plt.gca()
     for ax_name in 'xaxis', 'yaxis':
         getattr(ax, ax_name).set_ticks_position('none')
 
 
 @plotfn
 def saturation():
-    plt.figure(figsize=(columnwidth, columnwidth*aspect))
+    plt.figure(figsize=(columnwidth, .9*columnwidth*aspect))
 
     A = np.linspace(0, 5, 1000)
     B = np.ones_like(A)
@@ -75,15 +87,18 @@ def saturation():
     plt.rc('axes', color_cycle=('#4c72b0', '#55a868', '#c44e52'))
 
     for M, p, name in means:
-        plt.plot(A, M, label='{} ($p = {}$)'.format(name, p))
+        plt.plot(A, M, label='{}: $p = {}$'.format(name, p))
 
     plt.xlabel('$a$')
     plt.ylabel('$M_p(a, 1)$')
     plt.xticks(range(6))
     plt.yticks(range(4))
+    plt.gca().set_aspect('equal')
+    plt.ylim(0, 2.5)
     plt.legend(loc='best')
 
-    cleanup()
+    despine()
+    remove_ticks()
     plt.tight_layout(pad=0)
 
 
@@ -102,15 +117,19 @@ experiment = 'ALICE'
 @plotfn
 def multdist():
     systems = 'pp', 'pPb', 'PbPb'
-    normalizations = .19, .17, .15
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, textwidth*aspect/2))
 
     ax = axes[0]
     system = systems[0]
 
-    for ax, system, norm in zip(axes, systems, normalizations):
+    for ax, system in zip(axes, systems):
         ax.set_yscale('log')
+
+        mult = load_from_cache(
+            'data/trento/{}-m0-k0.8-w0.6'.format(system),
+            usecols=(3,)
+        )
 
         if system == 'pp':
             x, y, stat, sys = load_from_cache(
@@ -118,36 +137,50 @@ def multdist():
                 usecols=(0, 3, 4, 6)
             )[1:].T
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
-                        markeredgewidth=0, capsize=0, elinewidth=.5,
+                        markeredgewidth=0, capsize=0, elinewidth=.4,
                         color='.3', label=experiment, zorder=10)
             ax.fill_between(x, y+sys, y-sys,
-                            facecolor='.3', edgecolor='none', alpha=.3,
+                            facecolor='.3', edgecolor=offblack, alpha=.4,
                             zorder=0)
 
-            ax.set_xlim(xmax=55)
-            ax.set_ylim(ymin=.4*y.min())
+            mean = np.inner(x, y) / y.sum()
+            mult_rescaled = mean*mult/mult.mean()
+            ax.hist(mult_rescaled, bins=np.arange(np.max(mult_rescaled)+1),
+                    normed=True, histtype='stepfilled', edgecolor=offblack,
+                    alpha=.5)
+
+            ax.set_xlim(xmax=52)
+            ax.set_ylim(ymin=.45*y.min())
         else:
             xmin, xmax, x, y = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
                 usecols=range(4), unpack=True
             )
-            ax.plot(x, y/(xmax-xmin), color='.3')
+            w = xmax - xmin
+            z = y/w
+            ax.errorbar(x, z, yerr=.06*z, xerr=.035*x,
+                        fmt='o', markersize=2, markeredgewidth=0,
+                        capsize=0, elinewidth=.4, color='.3')
 
-        mult = load_from_cache(
-            'data/trento/{}-m0-k0.6-w0.6'.format(system),
-            usecols=(3,)
-        )
-        ax.hist(norm*mult, bins=30, normed=True,
-                color='SkyBlue', edgecolor='white', zorder=-1)
+            mean = 27. if system == 'pPb' else 730.
+            mult_rescaled = mean*mult/mult.mean()
+            ax.hist(mult_rescaled, bins=50, normed=True,
+                    histtype='stepfilled', edgecolor=offblack, alpha=.5)
+
+            if system == 'pPb':
+                ax.set_xlim(0, 200)
 
         ax.xaxis.set_major_locator(tick.MaxNLocator(4, prune='upper'))
         ax.yaxis.set_major_locator(
             tick.LogLocator(base=10 if system == 'pp' else 100)
         )
-        ax.set_xlabel(r'$dN_\mathrm{ch}/d\eta$')
-        ax.set_title(system)
+        ax.set_xlabel(r'$N_\mathrm{ch}$')
+        if ax.is_first_col():
+            ax.set_ylabel(r'$P(N_\mathrm{ch})$')
+        ax.set_title(system, x=.5, y=.9)
 
-        cleanup(ax)
+        despine(ax)
+        ax.minorticks_off()
 
     plt.tight_layout(pad=0, w_pad=.1)
 
