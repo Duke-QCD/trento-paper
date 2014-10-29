@@ -166,31 +166,45 @@ i.e. shadowing of the participant thickness functions $\mathcal{T}_A$ and $\math
 
 \section{Comparison to a wounded nucleon and binary collision mixture}
 
-It's illuminating to compare this ansatz against the commonly used wounded nucleon and binary collision parameterization where the transverse entropy (or energy) density 
-is set proportional to a linear combination of the local density of participant and pair-wise collisions,
+It's interesting to compare equation (\ref{entropy deposition}) against the commonly used wounded nucleon and binary collision parameterization where the 
+transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}). 
 \end{equation}
-To make the connection with the generalized mean as close as possible, we use the following implementation of a fluctuated Glauber model,
+This two-component ansatz has a variety of incarnations, and we choose the following implementation to make the connection with the generalized mean as meaningful 
+as possible,
 \begin{equation}
+ \label{glb algorithm}
  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} + \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
 \end{equation}
 where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant and $\gamma_i$ is sampled from a Gamma distribution as before.
 
-%An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
-%axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 
-%where the Uranium symmetry axis is alligned with the beam axis and body-on-body collisions where the Uranium symmetry axis is perpendicular to the beam axis. 
+One can easily check from equations (\ref{entropy deposition}) and (\ref{glb algorithm}) that both the reduced thickness function the two-component model reduce to a 
+fluctuated wounded nucleon model for $p=1$ and $\alpha=0$ respectively. This is however, where the simularities between the two models end.
 
-%Tip-to-tip configurations generate more binary collisions than body-on-body configurations and consequently, binary collision scaling would predict that these 
-%collisions produce more charged particles. This multiplicity ordering of tip-to-tip and body-on-body configurations creates a surplus of highly elliptic 
-%body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
-%a curious knee shaped structure in the centrality dependent elliptic flow data. 
+For example along the symmetry axis $T_A=T_B$ the mappings behave quite differently. The series expansion of the reduced thickness function is linear in $T$,
+\begin{equation}
+ \mathcal{T}_R(T,T) \approx C_1 T
+\end{equation}
+while the series expansion of the two-component model denoted by the mapping $\mathcal{G}(T_A,T_B)$ includes terms that are quadratic in $T$,
+\begin{equation}
+ \mathcal{G}(T,T) \approx C_1 T + C_2 T^2.
+\end{equation}
 
-%Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions \cite{UU-STAR}. It has been
-%suggested by the authors in [?] suggested that the existence of hot spots in the produced fireball may wash out the structure of the knee, the analysis model with a higher degree of fluctuations,
+An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred 
+axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions 
+where the Uranium symmetry axis is alligned with the beam axis and body-on-body collisions where the Uranium symmetry axis is perpendicular to the beam axis. 
 
-%This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
-%is a reasonable approximation.
+Tip-to-tip configurations generate more binary collisions than body-on-body configurations and consequently, binary collision scaling would predict that these 
+collisions produce more charged particles. This multiplicity ordering of tip-to-tip and body-on-body configurations creates a surplus of highly elliptic 
+body-on-body configurations just below the most central event class which is predominantly tip-to-tip. It was shown by the authors in [?] that this sorting predicts 
+a curious knee shaped structure in the centrality dependent elliptic flow data. 
+
+Recent $v_2\{2\}$ and $v_2\{4\}$ flow results from STAR found no such evidence of a knee-shaped structure in ultra-central U-U collisions \cite{UU-STAR}. It has been
+suggested by the authors in [?] suggested that the existence of hot spots in the produced fireball may wash out the structure of the knee, the analysis model with a higher degree of fluctuations,
+
+This suggests that non-linearities in the symmetric component of equation (\ref{ansatz}) are small and thus the symmetric scaling $M_p(T,T) \propto T$ employed by the generalized mean
+is a reasonable approximation.
 
 
 \section{Summary}
