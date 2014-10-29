@@ -21,13 +21,13 @@ plt.rcdefaults()
 plt.rcParams.update({
     'font.family': ['CMU Serif'],
     'font.size': texsmall,
-    'legend.fontsize': texsmall,
+    'legend.fontsize': 8.5,
     'axes.labelsize': texsmall,
     'axes.titlesize': texsmall,
     'xtick.labelsize': textiny,
     'ytick.labelsize': textiny,
-    'lines.linewidth': .8,
-    'patch.linewidth': .4,
+    'lines.linewidth': .9,
+    'patch.linewidth': .9,
     'axes.linewidth': .5,
     'text.color': offblack,
     'axes.edgecolor': offblack,
@@ -117,19 +117,22 @@ experiment = 'ALICE'
 @plotfn
 def multdist():
     systems = 'pp', 'pPb', 'PbPb'
+    energies = 2.36, 5.02, 2.76
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, textwidth*aspect/2))
 
     ax = axes[0]
     system = systems[0]
 
-    for ax, system in zip(axes, systems):
+    for ax, system, energy in zip(axes, systems, energies):
         ax.set_yscale('log')
 
         mult = load_from_cache(
             'data/trento/{}-m0-k0.8-w0.6'.format(system),
             usecols=(3,)
         )
+
+        label = '{} {} TeV'.format(experiment, energy)
 
         if system == 'pp':
             x, y, stat, sys = load_from_cache(
@@ -138,19 +141,26 @@ def multdist():
             )[1:].T
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
                         markeredgewidth=0, capsize=0, elinewidth=.4,
-                        color='.3', label=experiment, zorder=10)
-            ax.fill_between(x, y+sys, y-sys,
-                            facecolor='.3', edgecolor=offblack, alpha=.4,
-                            zorder=0)
+                        color='.3',
+                        label=label
+                        )
 
-            mean = np.inner(x, y) / y.sum()
-            mult_rescaled = mean*mult/mult.mean()
-            ax.hist(mult_rescaled, bins=np.arange(np.max(mult_rescaled)+1),
-                    normed=True, histtype='stepfilled', edgecolor=offblack,
-                    alpha=.5)
+            norm = (np.inner(x, y) / y.sum()) / mult.mean()
+            mult_rescaled = norm*mult
+            counts, edges = np.histogram(
+                mult_rescaled,
+                bins=np.arange(np.max(mult_rescaled)+1),
+                density=True
+            )
+            ax.step(edges[:-1], counts, where='post', color='#927CCF',
+                    label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
 
             ax.set_xlim(xmax=52)
             ax.set_ylim(ymin=.45*y.min())
+
+            ax.annotate(r'$|\eta| < 1$, $p_T$ corrected',
+                        (.145, .035), xycoords='axes fraction',
+                        ha='left', va='bottom')
         else:
             xmin, xmax, x, y = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
@@ -160,15 +170,21 @@ def multdist():
             z = y/w
             ax.errorbar(x, z, yerr=.06*z, xerr=.035*x,
                         fmt='o', markersize=2, markeredgewidth=0,
-                        capsize=0, elinewidth=.4, color='.3')
+                        capsize=0, elinewidth=.4, color='.3',
+                        label=label)
 
-            mean = 27. if system == 'pPb' else 730.
-            mult_rescaled = mean*mult/mult.mean()
-            ax.hist(mult_rescaled, bins=50, normed=True,
-                    histtype='stepfilled', edgecolor=offblack, alpha=.5)
+            norm = (27.5 if system == 'pPb' else 720.) / mult.mean()
+            mult_rescaled = norm*mult
+            counts, edges = np.histogram(mult_rescaled, bins=40, density=True)
+            ax.step(edges[:-1], 1.22*counts, where='post', color='#927CCF',
+                    label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
 
             if system == 'pPb':
                 ax.set_xlim(0, 200)
+
+            ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
+                        (.145, .035), xycoords='axes fraction',
+                        ha='left', va='bottom')
 
         ax.xaxis.set_major_locator(tick.MaxNLocator(4, prune='upper'))
         ax.yaxis.set_major_locator(
@@ -181,6 +197,7 @@ def multdist():
 
         despine(ax)
         ax.minorticks_off()
+        ax.legend(loc=(.02, .12), handlelength=1)
 
     plt.tight_layout(pad=0, w_pad=.1)
 
