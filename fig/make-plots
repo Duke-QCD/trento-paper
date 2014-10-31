@@ -202,6 +202,37 @@ def multdist():
     plt.tight_layout(pad=0, w_pad=.1)
 
 
+@plotfn
+def uranium():
+    plt.figure(figsize=(columnwidth, columnwidth*aspect))
+
+    for label, fn, plotcolor in ('generalized mean: $p=0$','UU-m0-k0.8-w0.5-central','#ECB350'),('two-component: $\\alpha=0.14$','UU-alpha0.14-central','#5E9AEC'):
+
+        e2 = load_from_cache(
+            'data/trento/'+fn,
+            usecols=(4,)
+        )
+
+        bins = 10
+        fraction = 0.15
+
+        e2 = e2[:fraction*e2.size].reshape((bins,-1))
+        centrality = np.linspace(0,0.0054705,bins+1)*100
+        middles = 0.5*(centrality[1:]+centrality[:-1])
+        e2avg = e2.mean(axis=1)
+        e2err = e2.std(axis=1)/np.sqrt(e2.shape[1])
+
+        plt.plot(middles, e2avg, "-", color=plotcolor, label=label, linewidth=1.5)
+        plt.fill_between(middles, e2avg+2*e2err, e2avg-2*e2err, facecolor=plotcolor, alpha=0.3, edgecolor="none")
+    plt.legend(loc='best')
+    plt.ylabel("$\epsilon_2$")
+    plt.xlabel("centrality $\%$")
+    plt.yticks([0.12,0.13,0.14])
+    plt.xlim([0,0.5])
+    despine()
+    plt.tight_layout(pad=0.05)
+        
 if __name__ == "__main__":
-    saturation()
-    multdist()
+    #saturation()
+    #multdist()
+    uranium()
