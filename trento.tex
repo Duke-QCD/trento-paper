@@ -165,6 +165,7 @@ $\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent with variations 
 It's interesting to compare equation (\ref{entropy deposition}) against the commonly used wounded nucleon and binary collision parameterization where the 
 transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
+ \label{glb ansatz}
  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}). 
 \end{equation}
 
@@ -174,26 +175,26 @@ with Gamma fluctuations $\gamma_i$ of the source nucelons given by,
  \label{glb algorithm}
  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} + \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
 \end{equation}
-where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant.
+where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant. The $N_{coll}$ binary collision term in equation (\ref{glb ansatz}) scales with the product of nuclear thickness 
+functions $N_{coll} \propto T_A T_B$ and predicts a rapid increase in charged particle production in systems for which the density of nuclear overlap is large.  
 
-In figure [\ref{fig:cdepend}] we show the centrality dependence of charged particle production calculated from the generalized mean and two-component models for different 
-values of the exponent $p$ and binary collision fraction $\alpha$. 
-%\begin{figure}[hb]
-% \includegraphics[width=\linewidth]{./fig/centrality-depend.pdf}
-% % centrality-depend.pdf: 0x0 pixel, 0dpi, nanxnan cm, bb=
-% \caption{\label{fig:cdepend} Centrality dependence charged particle production for the two-component model and generalized mean compared to ALICE PbPb data at 2.76 TeV
-% for $B=0.36\, fm^2$, $k=0.8$ $\alpha = (0.0,0.30), \delta\alpha=0.05$ and $p=(-1,1), \delta p=0.5$.}
-%\end{figure}
-We see that binary collision scaling and projectile-target attentuation provide two different explanations for the centrality dependence of charged particle production.
+In contrast with the two-component model, the proposed generalized mean ansatz exhibits no such quadratic scaling. Specifically, for an idealized system in which the density of nuclear overlap is perfectly symmetric, 
+i.e. $\mathcal{T}_A = \mathcal{T}_B$, the generalized mean and two-component models behave quite differently:
+\begin{equation}
+   \label{symmetric scaling}
+   \frac{dS}{dy} \propto
+  \begin{cases}
+   \mathcal{T} + \mathcal{C} \mathcal{T}^2 & \text{two-component,}\\
+   \mathcal{T} & \text{generalized mean}
+  \end{cases}
+\end{equation}
+where the coefficient $\mathcal{C}$ scales with the binary collision fraction $\alpha$.
 
-To differentiate between these two mechanisms, it makes sense to examine a collision system for which the predictions of attentuation and binary collision scaling are 
-maximally different.
+\section{Breakdown of binary collision scaling in UU collisions}
+Equation (\ref{symmetric scaling}) provides a unique opportunity for model to data comparison. It has been suggested that ultra-central Uranium-Uranium
 
-\section{Signals of binary collision breakdown in UU collisions}
-The prolate deformation of the Uranium nucleus admits two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping 
-- tip-to-tip collisions where the Uranium symmetry axis is alligned with the beam axis and side-on-side collisions where the Uranium 
-symmetry axis is perpendicular to the beam axis. 
-\begin{figure}
+
+\begin{figure}[H!]
  \centering
  \includegraphics{./fig/uranium.pdf}
  % uranium.pdf: 245x151 pixel, 72dpi, 8.64x5.33 cm, bb=0 0 245 151
