@@ -121,9 +121,6 @@ def multdist():
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, textwidth*aspect/2))
 
-    ax = axes[0]
-    system = systems[0]
-
     for ax, system, energy in zip(axes, systems, energies):
         ax.set_yscale('log')
 
@@ -234,18 +231,28 @@ def uranium():
 
 @plotfn
 def eccentricity():
-    plt.figure(figsize=(columnwidth, columnwidth*aspect))
+    #plt.figure(figsize=(columnwidth, columnwidth*aspect))
+    
+    systems = '$p=1$', '$p=0$', '$p=1$'
+    files =  'PbPb_m=-1.0_k=0.8_w=0.6', 'PbPb_m=0.0_k=0.8_w=0.6', 'PbPb_m=1.0_k=0.8_w=0.6'
+    colors = '#4c72b0', '#55a868', '#c44e52'
 
-    for label, fn in ('$p=-1$','PbPb_m=-1.0_k=0.8_w=0.6'),('$p=0$','PbPb_m=0.0_k=0.8_w=0.6'),('$p=1$','PbPb_m=1.0_k=0.8_w=0.6'):
+    fig, axes = plt.subplots(nrows=3, figsize=(columnwidth, columnwidth*aspect*1.5),sharex='col')
+
+    for label, fn, plotcolor in zip(systems,files,colors):
         e2, e3 = load_from_cache(
             'data/trento/eccentricity/'+fn,
             usecols=(4,5), 
             unpack=True
         )
 
-        bins = 10
+        bins = 20
         e2 = e2.reshape((bins,-1))
         e3 = e3.reshape((bins,-1))
+        print(e2.size)
+        e2rms = np.sqrt(np.mean(np.square(e2),axis=1))
+        print(e2rms.size,)
+        e3rms = np.sqrt(np.mean(np.square(e3),axis=1))
         centrality = np.linspace(0,1,bins+1)*100
         middles = 0.5*(centrality[1:]+centrality[:-1])
         e2avg = e2.mean(axis=1)
@@ -253,22 +260,34 @@ def eccentricity():
         e2err = e2.std(axis=1)/np.sqrt(e2.shape[1])
         e3err = e3.std(axis=1)/np.sqrt(e3.shape[1])
 
-        plt.plot(middles, e2avg, "-", color="blue", label=label, linewidth=0.75)
-        plt.fill_between(middles, e2avg+2*e2err, e2avg-2*e2err, facecolor="blue", alpha=0.3, edgecolor="none")
+        ax = axes[0]
+        ax.plot(middles, e2avg, "-", label=label, color=plotcolor, linewidth=1.0)
+        ax.set_yticks([0,0.2,0.4,0.6])
+        ax.set_ylim([0,0.65])
+        ax.set_ylabel(r"$\varepsilon_2$")
+        despine(ax)
 
-        plt.plot(middles, e3avg, "-", color="purple", label=label, linewidth=0.75)
-        plt.fill_between(middles, e3avg+2*e3err, e3avg-2*e3err, facecolor="purple", alpha=0.3, edgecolor="none")
+        ax = axes[1]
+        ax.plot(middles, e3avg, "-", label=label, color=plotcolor, linewidth=1.0)
+        ax.set_yticks([0,0.1,0.2,0.3])
+        ax.set_ylim([0,0.4])
+        ax.set_ylabel(r"$\varepsilon_3$")
+        despine(ax)
+
+        ax = axes[2]
+        ax.plot(middles, e2rms/(e3rms**0.6), "-", label=label, color=plotcolor, linewidth=1.0)
+        ax.set_yticks([0,0.4,0.8,1.2])
+        ax.set_ylim([0,1.4])
+        ax.set_ylabel(r"ratio")
+        despine(ax)
 
     #plt.legend(loc='best')
-    plt.ylabel("$\epsilon_2$")
     plt.xlabel("centrality $\%$")
-    plt.yticks([0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7])
     plt.xlim([0,100])
-    despine()
-    plt.tight_layout(pad=0.05)
+    plt.tight_layout(pad=0.05,)
         
 if __name__ == "__main__":
-    saturation()
-    multdist()
-    uranium()
+    #saturation()
+    #multdist()
+    #uranium()
     eccentricity()
