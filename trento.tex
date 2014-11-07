@@ -1,6 +1,7 @@
 \documentclass[aps,prl,reprint,amsmath,nofootinbib]{revtex4-1}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{placeins}
 \graphicspath{{fig/}}
 
 
@@ -39,7 +40,7 @@ deformations of the produced fireball with a conversion efficiency proportional 
 Consequently, model-to-data predictions of $\eta/s$ are beholden to the veractity of theoretical models used to calculate entropy and 
 energy deposition in the initial state.
 
-\section{Motivation}
+\section{The Model}
 
 We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and target nucleus with atomic mass number $B$ characterized 
 by collision impact parameter ${\bf b}$ in the transverse plane $\vec{r}_\perp = \vec{x} \times \vec{y}$. The density of nuclear matter in the rest frame of each 
@@ -49,20 +50,19 @@ nuclear thickness function,
  T(x,y) = \int dz\, \left|\Psi_N(x,y,z) \right|^2. 
 \end{equation}
 
-Let $\mathcal{T}_A$ and $\mathcal{T}_B$ denote a sampled transverse density of \emph{participant} nucleons as determined by the collapse of wavefunctions $\Psi_A$ and
-$\Psi_B$ in a given nucleus-nucleus collision. We consider the existence of an eikonal mapping $f(\mathcal{T}_A,\mathcal{T}_B)$ that characterizes entropy deposition at mid-rapidity as 
-a function of $\mathcal{T}_A$ and $\mathcal{T}_B$,
+Let $T_A$ and $T_B$ denote the transverse density of nucleons determined by the collapse of wavefunctions $\Psi_A$ and $\Psi_B$ in a given nucleus-nucleus 
+collision. We consider the existence of an eikonal mapping $f(T_A,T_B)$ that characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
 \begin{equation}
   \label{ansatz}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(\mathcal{T}_A({\bf r}_\perp + {\bf b}/2),\,\mathcal{T}_B({\bf r}_\perp - {\bf b}/2)).
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
 \end{equation}
 
-It's reasonable to insist that $f$ respect several key properties, namely that $f$ is smooth, monatonic and symmetric in the variables $\mathcal{T}_A$ and 
-$\mathcal{T}_B$ and that it saturates in the limit $\mathcal{T}_A \ll \mathcal{T}_B$ and $\mathcal{T}_B \ll \mathcal{T}_A$. Motivated by these stipulations, 
-we consider the family of vector p-norms known as the generalized mean as a suitable ansatz for the mapping $f$,
+It's reasonable to insist that $f$ respect several key properties, namely that $f$ is smooth, monatonic and symmetric in the variables $T_A$ and 
+$T_B$ and that it saturates in the limit $T_A \ll T_B$ and $T_B \ll T_A$. Motivated by these stipulations, we consider the family of vector p-norms 
+known as the generalized mean as a suitable ansatz for the mapping $f$,
 \begin{equation}
  \label{generalized mean ansatz}
- f(\mathcal{T}_A, \mathcal{T}_B) \propto M_p(\mathcal{T}_A,\mathcal{T}_B) = \left( \frac{\mathcal{T}_A^p + \mathcal{T}_B^p}{2} \right)^{1/p}.
+ f(T_A, T_B) \propto M_p(T_A,T_B) = \left( \frac{T_A^p + T_B^p}{2} \right)^{1/p}.
 \end{equation}
 
 For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively which can be shown
@@ -77,8 +77,6 @@ $T_B$ for different values of $p$ as shown in figure \ref{saturation}.
  \includegraphics{saturation}
  \caption{\label{saturation}Saturation in the generalized mean $M_p(a, 1)$ for special forms $p=\{-1, 0, 1\}$.}
 \end{figure}
-
-\section{The Model}
 
 For simplicity, we refer to the generalized mean of participant projectile and target thicknesses hereafter as the \emph{reduced thickness} of projectile 
 nucleus $A$ and target nucleus $B$,
@@ -106,23 +104,9 @@ For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
 although we stress that this is a rather crude description of the nucleon and consequently restrict our attention to properties of the collision that are 
 insensitive to details of the nucleonic substructure.
 
-Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. In this prescription, the 
-probability for a pairwise collision of two nucleons separated by impact parameter $b$ is given by,
-\begin{equation}
-  \label{coll prob}
-  P^{inel}_{NN}(b) = 1 - \exp \left(-\sigma_{gg} N_{gg}^2 T_{pp}(b) \right), \\[1ex]
-\end{equation}
-where $T_{pp}(b)$ denotes the proton-proton overlap function defined by,
-\begin{equation}
- T_{pp}(b) = \int dx~dy \,T_p(x-b/2,y) \,T_p(x+b/2,y).
-\end{equation}
-The exponential pre-factor $\sigma_{gg} N_{gg}^2$ representing effective glue-glue cross-section and squared gluon count respectively, is tuned to reproduce the total 
-inelastic proton-proton cross-section,
-\begin{equation}
-  \sigma^{inel}_{NN} = \int 2 \pi b \,db \, P_{NN}^{inel}(b).
-\end{equation}
-The pair-wise collision probability in equation (\ref{coll prob}) is then sampled independently for each pair of projectile and target nucleons to determine the participant nucleons 
-which contribute to the summation in equation (\ref{thickness def}).
+Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. 
+The pair-wise collision probability is then sampled independently for each pair of projectile and target nucleons to determine the 
+participant nucleons which contribute to the summation in equation (\ref{thickness def}).
 
 We finally fix the density of deposited entropy at mid-rapidity according to,
 \begin{equation}
@@ -139,7 +123,7 @@ recast equation (\ref{entropy deposition}) in terms of the charged particle prod
 \end{equation}
 which allows us to make a direct comparison with experimentally measured charged particle distributions.
 
-\section{Charged particle distributions}
+\section{Results}
 
 We show results for proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating short- and long-range 
 correlations \cite{nucleon-correlations}. For each collision system we generate $10^6$ minimum bias events satisfying $N_{part} > 0$. Charged particle
@@ -148,19 +132,32 @@ production at mid-rapidity is calculated from equation (\ref{particle production
  N_{ch}(|\eta|<1) = \kappa'_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
 \end{equation}
 where the normalization factor $\kappa'_n$ is scaled to match the average charged particle multiplicity in the pseudo-rapidity interval $|\eta| < 1$.
-\begin{figure*}[ht]
+
+In figure (\ref{fig:eccen}) we plot the Pb-Pb ellipticity and triangularity $\epsilon_2$ and $\epsilon_3$
+
+along with the correpsonding ratio $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ (right pannel). The gray band, 
+taken from reference [?], indicates the value of this ratio preferred by the LHC flow data.
+
+\begin{figure}[b]
+ \includegraphics{./fig/eccentricity.pdf}
+ % eccentricity.pdf: 245x227 pixel, 72dpi, 8.64x8.01 cm, bb=0 0 245 227
+  \caption{\label{fig:eccen} Eccentricity harmonics $\varepsilon_2$ (left) and $\varepsilon_3$ (middle) calculated using an entropy weight for powers $p=-1,0,1$ and
+  the ratio = $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ (right).}
+\end{figure}
+
+In figure \ref{fig:multdist} we illustrate charged particle predictions against the ALICE data using a geometric mean $p=0$ with a fluctuation parameter $k=0.8$ tuned 
+to fit the p-p multiplicity distribution and a squared nucleon width fixed at the rather standard value $B=0.36$ $\mbox{fm}^2$. 
+
+\begin{figure*}
     \includegraphics{multdist}
     \caption{\label{fig:multdist} Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$, fluctuation parameter $k=0.8$, squared nucleon width 
     $B=0.36~fm^2$ and normalization factor $\kappa'_n$ indicated in the legend.}
 \end{figure*}
 
-In figure \ref{fig:multdist} we illustrate the model performance against the ALICE data using a geometric mean $p=0$ with a fluctuation parameter $k=0.8$ tuned 
-to fit the p-p multiplicity distribution and a squared nucleon width fixed at the rather standard value $B=0.36$ $\mbox{fm}^2$. 
-
 The normalization factor $\kappa'_n$ indicated on the figure is tuned to match the average charged particle multiplicity in each experiment. The observed
 $\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent with variations in the collision energy and kinematic cuts.
 
-\section{Comparison to a wounded nucleon and binary collision mixture}
+\section{Comparison to wounded nucleon and binary collision mixture}
 
 It's interesting to compare equation (\ref{entropy deposition}) against the commonly used wounded nucleon and binary collision parameterization where the 
 transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions,
@@ -190,33 +187,40 @@ i.e. $\mathcal{T}_A = \mathcal{T}_B$, the generalized mean and two-component mod
 \end{equation}
 where the coefficient $\mathcal{C}$ scales with the binary collision fraction $\alpha$.
 
-\section{Breakdown of binary collision scaling in UU collisions}
+An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred
+axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions
+where the Uranium symmetry axis is alligned with the beam axis and side-on-side collisions where the Uranium symmetry axis is perpendicular to the beam axis.
+
+Binary collision scaling predicts that tip-to-tip collisions generate more charged particles than side-on-side collisions and hence should be found at slightly
+higher centralities. It was pointed out that this multiplicity ordering should imprint itself on the flow harmonics of central UU collisions due to the large 
+ellipticity expected in side-on-side collisions and small ellipticity expected in body-on-body collisions. This predicted structure was dubbed the ``knee''.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics{./fig/uranium.pdf}
+ % uranium.pdf: 245x151 pixel, 72dpi, 8.64x5.33 cm, bb=0 0 245 151
+ \caption{\label{fig:knee} Scaled TRENTO ($p=0$, $k=0.8$, $B=0.36~\mathrm{fm}^2$) and fluctuated Glauber ($\alpha=14$, $k=1.2$, $B=0.36~\mathrm{fm}^2$) ellipticities
+ compared to STAR elliptic flow data.}
+\end{figure}
+
+In figure (\ref{fig:knee}) we compare the predictions of fluctuated two-component (eq. \ref{glb algorithm}) and generalized mean prescriptions
+(eq. \ref{entropy deposition}) using $10^6$ minimum bias events in the impact parameter range $0<b<3.5 ~\mathrm{fm}$ with a $15\%$ cut to avoid 
+contamination from events $b>3.5 ~\mathrm{fm}$.
+
+We see that the generalized mean correctly reproduces the elliptic flow data in ultra-central UU collisions while the two-component fit is poor. The distinct knee structure seen
+in the fluctuated two-component model is not observed by STAR. 
+
+
+\section{Conclusion}
+
+We present a new model for relativistic heavy-ion collisions that uses a generalized mean to interpolate between different degrees of collision attentuation. Recent results from STAR UU collisions indicate that attentuation is consistent 
 
 An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred
 axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions
 where the Uranium symmetry axis is alligned with the beam axis and side-on-side collisions where the Uranium symmetry axis is perpendicular to the beam axis.
 
-Binary collision scaling in the two-component model predicts that tip-to-tip collisions generate more binary collisions than side-on-side collisions and hence produce 
-more charged particles. It has been shown that this multiplicity ordering induces a corresponding ellipticity ordering such that ultra-central U-U collisions select predominantly
-tip-to-tip configurations with small ellipticity $\epsilon_2$,
-\begin{equation}
- \epsilon_n e^{i \phi n} = -\frac{\int d^2r r^2 e^{i n \phi} w({\bf r})}{\int d^2r r^n w({\bf r})}
-\end{equation}
- 
-\begin{figure}[ht]
- \centering
- \includegraphics{./fig/uranium.pdf}
- % uranium.pdf: 245x151 pixel, 72dpi, 8.64x5.33 cm, bb=0 0 245 151
-\end{figure}
-
-\begin{figure}
- \centering
- \includegraphics{./fig/eccentricity.pdf}
- % eccentricity.pdf: 245x227 pixel, 72dpi, 8.64x8.01 cm, bb=0 0 245 227
-\end{figure}
-
-
-\section{Summary}
+Binary collision scaling predicts that tip-to-tip collisions generate more charged particles than side-on-side collisions and hence should be found at slightly
+higher centralities. It was pointed out that this multiplicity ordering should imprint itself on the flow harmonics of central UU collisions due to the large 
 
 \bibliography{sources}
 
