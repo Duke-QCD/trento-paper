@@ -149,7 +149,7 @@ def multdist():
                 bins=np.arange(np.max(mult_rescaled)+1),
                 density=True
             )
-            ax.step(edges[:-1], counts, where='post', color='#927CCF',
+            ax.step(edges[:-1], counts, where='post', color='#55a868',
                     label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
 
             ax.set_xlim(xmax=52)
@@ -173,7 +173,7 @@ def multdist():
             norm = (27.5 if system == 'pPb' else 720.) / mult.mean()
             mult_rescaled = norm*mult
             counts, edges = np.histogram(mult_rescaled, bins=40, density=True)
-            ax.step(edges[:-1], 1.22*counts, where='post', color='#927CCF',
+            ax.step(edges[:-1], 1.22*counts, where='post', color='#55a868',
                     label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
 
             if system == 'pPb':
@@ -233,7 +233,7 @@ def uranium():
 def eccentricity():
 
     systems = '$p=1$', '$p=0$', '$p=1$'
-    files =  'PbPb_m=-1.0_k=0.8_w=0.6', 'PbPb_m=0.0_k=0.8_w=0.6', 'PbPb_m=1.0_k=0.8_w=0.6'
+    files =  'PbPb_m=-1_k=0.8_w=0.6', 'PbPb_m=0_k=0.8_w=0.6', 'PbPb_m=1_k=0.8_w=0.6'
     colors = '#4c72b0', '#55a868', '#c44e52'
 
     fig, axes = plt.subplots(nrows=3, figsize=(columnwidth, columnwidth*aspect*1.5))
@@ -306,7 +306,7 @@ def eccentricity():
     plt.tight_layout(pad=0.05,)
         
 if __name__ == "__main__":
-    #saturation()
-    #multdist()
-    #uranium()
+    saturation()
+    multdist()
+    uranium()
     eccentricity()
