@@ -203,7 +203,7 @@ def multdist():
 def uranium():
     plt.figure(figsize=(columnwidth, columnwidth*aspect))
 
-    for label, fn, plotcolor in ('generalized mean: $p=0$','UU-m0-k0.8-w0.5-central','#ECB350'),('two-component: $\\alpha=0.14$','UU-alpha0.14-central','#5E9AEC'):
+    for label, fn, plotcolor in ('generalized mean: $p=0$','UU-m0-k0.8-w0.5-central','#55a868'),('two-component: $\\alpha=0.14$','UU-alpha0.14-central','orange'):
 
         e2 = load_from_cache(
             'data/trento/uranium/'+fn,
