@@ -55,20 +55,17 @@ def plotfn(f):
     return wrapper
 
 
-def despine(ax=None):
+def despine(ax=None, remove_ticks=False):
     if ax is None:
         ax = plt.gca()
     for spine in 'top', 'right':
         ax.spines[spine].set_visible(False)
-    ax.xaxis.set_ticks_position('bottom')
-    ax.yaxis.set_ticks_position('left')
-
-
-def remove_ticks(ax=None):
-    if ax is None:
-        ax = plt.gca()
-    for ax_name in 'xaxis', 'yaxis':
-        getattr(ax, ax_name).set_ticks_position('none')
+    if remove_ticks:
+        for ax_name in 'xaxis', 'yaxis':
+            getattr(ax, ax_name).set_ticks_position('none')
+    else:
+        ax.xaxis.set_ticks_position('bottom')
+        ax.yaxis.set_ticks_position('left')
 
 
 @plotfn
@@ -97,8 +94,7 @@ def saturation():
     plt.ylim(0, 2.5)
     plt.legend(loc='best')
 
-    despine()
-    remove_ticks()
+    despine(remove_ticks=True)
     plt.tight_layout(pad=0)
 
 
