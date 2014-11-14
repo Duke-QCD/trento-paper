@@ -8,7 +8,7 @@ import functools
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tick
-import scipy.optimize as optimization
+from scipy import optimize
 
 aspect = 1/1.618
 resolution = 72.27
@@ -206,134 +206,123 @@ def uranium():
     systems = 'generalized mean: $p=0$', 'two-component: $\alpha=0.14$'
     files = 'UU-m0-k0.8-w0.5-central', 'UU-alpha0.14-central'
     colors = 'blue', 'orange'
-    markertypes = '^', 'o'
+    markers = '^', 'o'
 
     def func(x, a, b):
         return a + b*x
 
-    for label, fn, plotcolor, markertype in zip(systems,files,colors,markertypes):
-
-        data = load_from_cache(
-            'data/trento/uranium/'+fn,
-            usecols=(2,3,4)
-        )
-
-        data = data[data[:,0].argsort()]
+    for label, fn, color, marker in zip(systems, files, colors, markers):
+        data = load_from_cache('data/trento/uranium/' + fn, usecols=(2, 3, 4))
+        data = data[data[:, 0].argsort()]
         N = data.shape[0]
-        cut = 0.8 # plot data from 0-1% ZDC
-        mult = data[cut*N:N,1]
-        e2 = data[cut*N:N,2]
+
+        cut = 0.8  # plot data from 0-1% ZDC
+        mult = data[cut*N:N, 1]
+        e2 = data[cut*N:N, 2]
 
         z = mult/mult.mean()
         nbins = 25
         n, _ = np.histogram(z, bins=nbins)
         middles = (_[1:] + _[:-1])/2
         v2avg = np.histogram(z, bins=nbins, weights=e2)[0]/(n+1e-8)
-        v2err = np.sqrt(np.histogram(z, bins=nbins, weights=e2*e2)[0]/(n+1e-8))/np.sqrt(n+1e-8)
+        v2err = np.sqrt(
+            np.histogram(z, bins=nbins, weights=e2*e2)[0]/(n+1e-8)
+        )/np.sqrt(n+1e-8)
 
         factor = 0.2
         middles_cut = middles[abs(1-middles[:]) < 0.1]
         v2avg_cut = v2avg[abs(1-middles[:]) < 0.1]*factor
         v2err_cut = v2err[abs(1-middles[:]) < 0.1]*factor
 
-        # optimization
-        popt, pcov = optimization.curve_fit(func, middles_cut, v2avg_cut, p0=None, sigma=v2err_cut)
-        xvec = np.linspace(0.9,1.1,1000)
-    
-        # scatter plot the data
-        plt.plot(xvec,popt[0]+popt[1]*xvec,'-',color=plotcolor)
-        plt.errorbar(middles_cut, v2avg_cut, yerr=v2err_cut, color=plotcolor, linestyle='none', marker=markertype, markeredgecolor='none',capsize=0) 
-        
+        popt, pcov = optimize.curve_fit(
+            lambda x, a, b: a + b*x, middles_cut, v2avg_cut,
+            p0=None, sigma=v2err_cut
+        )
+        xvec = np.linspace(0.9, 1.1, 1000)
 
-    plt.legend(loc='best')
-    plt.xlim([0.8,1.2])
-    plt.ylim([0.015,0.035])
-    plt.yticks([0.016,0.02,0.024,0.028,0.032])
-    plt.xlabel(r"$\mathrm{mult}/\langle \mathrm{mult} \rangle$")
-    plt.ylabel("$\epsilon_2$")
-    
-    
+        # scatter plot the data
+        plt.plot(xvec, popt[0] + popt[1]*xvec, '-', color=color)
+        plt.errorbar(middles_cut, v2avg_cut, yerr=v2err_cut, color=color,
+                     linestyle='none', marker=marker, markeredgecolor='none',
+                     capsize=0)
+
+    # plt.legend(loc='best')
+    plt.xlim([0.8, 1.2])
+    plt.ylim([0.015, 0.035])
+    plt.yticks(np.arange(.016, .033, .04))
+    plt.xlabel(r'$\mathrm{mult}/\langle \mathrm{mult} \rangle$')
+    plt.ylabel(r'$\epsilon_2$')
+
     despine()
     plt.tight_layout(pad=0.05)
 
+
 @plotfn
 def eccentricity():
-
     systems = '$p=1$', '$p=0$', '$p=1$'
-    files =  'PbPb_m=-1_k=0.8_w=0.6', 'PbPb_m=0_k=0.8_w=0.6', 'PbPb_m=1_k=0.8_w=0.6'
+    files = ('PbPb_m=-1_k=0.8_w=0.6',
+             'PbPb_m=0_k=0.8_w=0.6',
+             'PbPb_m=1_k=0.8_w=0.6')
     colors = '#4c72b0', '#55a868', '#c44e52'
 
-    fig, axes = plt.subplots(nrows=3, figsize=(columnwidth, columnwidth*aspect*1.5))
+    fig, axes = plt.subplots(nrows=3,
+                             figsize=(columnwidth, columnwidth*aspect*1.5))
 
-    for label, fn, plotcolor in zip(systems,files,colors):
-        e2, e3 = load_from_cache(
-            'data/trento/eccentricity/'+fn,
-            usecols=(4,5), 
-            unpack=True
-        )
+    for label, fn, color in zip(systems, files, colors):
+        e2, e3 = load_from_cache('data/trento/eccentricity/'+fn,
+                                 usecols=(4, 5), unpack=True)
 
-        cmin, cmax, expmin, expmax, glb, ncoll, npart, kln, rcbk, glasma, dipsy  = load_from_cache(
-            'data/exp/ratio',
-            usecols=(0,1,2,3,4,5,6,7,8,9,10), 
-            unpack=True,
-        )
-
-        cent, ratio, stat, syshigh, syslow = load_from_cache(
-            'data/exp/v2_ratio',
-            usecols=(0,1,2,3,4), 
-            unpack=True,
+        cmin, cmax, expmin, expmax = load_from_cache(
+            'data/exp/ratio', usecols=(0, 1, 2, 3), unpack=True
         )
 
         bins = 20
-        e2 = e2.reshape((bins,-1))
-        e3 = e3.reshape((bins,-1))
-        e2rms = np.sqrt(np.mean(np.square(e2),axis=1))
-        e3rms = np.sqrt(np.mean(np.square(e3),axis=1))
-        centrality = np.linspace(0,1,bins+1)*100
+        e2 = e2.reshape(bins, -1)
+        e3 = e3.reshape(bins, -1)
+        e2rms = np.sqrt(np.mean(np.square(e2), axis=1))
+        e3rms = np.sqrt(np.mean(np.square(e3), axis=1))
+        centrality = np.linspace(0, 1, bins+1) * 100
         middles = 0.5*(centrality[1:]+centrality[:-1])
         e2avg = e2.mean(axis=1)
         e3avg = e3.mean(axis=1)
-        e2std = e2.std(axis=1)
-        e3std = e3.std(axis=1)
-        e2err = e2.std(axis=1)/np.sqrt(e2.shape[1])
-        e3err = e3.std(axis=1)/np.sqrt(e3.shape[1])
 
         ax = axes[0]
-        ax.plot(middles, e2avg, "-", label=label, color=plotcolor, linewidth=1.0)
-        ax.set_xlim([0,100])
-        ax.set_xticks([0,25,50,75,100])
-        #ax.set_xlabel("centrality $\%$")
-        ax.set_yticks([0,0.2,0.4,0.6])
-        ax.set_ylim([0,0.62])
-        ax.set_ylabel(r"$\varepsilon_2$")
+        ax.plot(middles, e2avg, '-', label=label, color=color, linewidth=1.0)
+        ax.set_xlim(0, 100)
+        ax.set_xticks(np.arange(0, 101, 25))
+        ax.set_yticks(np.arange(0, .61, .2))
+        ax.set_ylim(0, 0.62)
+        ax.set_ylabel(r'$\varepsilon_2$')
         despine(ax)
 
         ax = axes[1]
-        ax.plot(middles, e3avg, "-", label=label, color=plotcolor, linewidth=1.0)
-        ax.set_xlim([0,100])
-        ax.set_xticks([0,25,50,75,100])
-        #ax.set_xlabel("centrality $\%$")
-        ax.set_yticks([0,0.1,0.2,0.3,0.4])
-        ax.set_ylim([0,0.41])
-        ax.set_ylabel(r"$\varepsilon_3$")
+        ax.plot(middles, e3avg, '-', label=label, color=color, linewidth=1.0)
+        ax.set_xlim(0, 100)
+        ax.set_xticks(np.arange(0, 101, 25))
+        ax.set_yticks(np.arange(0, .41, .1))
+        ax.set_ylim(0, 0.41)
+        ax.set_ylabel(r'$\varepsilon_3$')
         despine(ax)
 
         ax = axes[2]
-        ax.plot(middles, e2rms/(e3rms**0.6), "-", label=label, color=plotcolor, linewidth=1.0)
-        ax.fill_between((cmin+cmax)/2, expmin, expmax, label='ALICE', facecolor='#927CCF', alpha=0.15, linecolor='none')
-        ax.set_xlim([0,40])
-        ax.set_xlabel("centrality $\%$")
-        ax.set_xticks([0,10,20,30,40])
-        ax.set_yticks([0,0.4,0.8,1.2])
-        ax.set_ylim([0,1.25])
-        ax.set_ylabel(r"ratio")
+        ax.plot(middles, e2rms/(e3rms**0.6),
+                '-', color=color, linewidth=1.0, label=label)
+        ax.fill_between((cmin+cmax)/2, expmin, expmax,
+                        facecolor='#927CCF', alpha=0.15, label='ALICE')
+        ax.set_xlim(0, 40)
+        ax.set_xlabel('Centrality %')
+        ax.set_xticks(np.arange(0, 41, 10))
+        ax.set_yticks(np.arange(0, 1.21, .4))
+        ax.set_ylim(0, 1.25)
+        ax.set_ylabel('Ratio')
         despine(ax)
 
     plt.legend(loc='best', ncol=3)
     plt.tight_layout(pad=0.05,)
-        
+
+
 if __name__ == "__main__":
-    #saturation()
-    #multdist()
+    saturation()
+    multdist()
     uranium()
-    #eccentricity()
+    eccentricity()
