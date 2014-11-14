@@ -44,6 +44,8 @@ plt.rcParams.update({
     'pdf.fonttype': 42
 })
 
+pmean_colors = {1: '#4c72b0', 0: '#55a868', -1: '#c44e52'}
+
 
 def plotfn(f):
     @functools.wraps(f)
@@ -81,10 +83,9 @@ def saturation():
         (2*A*B/(A+B), -1, 'Harmonic')
     )
 
-    plt.rc('axes', color_cycle=('#4c72b0', '#55a868', '#c44e52'))
-
     for M, p, name in means:
-        plt.plot(A, M, label='{}: $p = {}$'.format(name, p))
+        plt.plot(A, M, color=pmean_colors[p],
+                 label='{}: $p = {}$'.format(name, p))
 
     plt.xlabel('$a$')
     plt.ylabel('$M_p(a, 1)$')
