@@ -3,3 +3,5 @@
 Working version.
 
 Run `make-plots` in the `fig` subdirectory to generate figures.  Python with numpy and matplotlib is required.
+
+Run `make` to compile the PDF using `latexmk`.
