@@ -1,7 +1,7 @@
 \documentclass[aps,prl,reprint,amsmath,nofootinbib]{revtex4-1}
+
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{placeins}
 \graphicspath{{fig/}}
 
 
@@ -18,232 +18,282 @@
 
 
 \begin{abstract}
-   We investigate entropy deposition at mid-rapidity in pp, pA and AA systems using a generalized mean of projectile and target 
-densities $M_p(T_A,T_B)$ which describes a family of vector norms spanning a continuum of projectile/target saturation scenarios. 
-Results are presented for three well known subcases of the generalized mean, the arithmetic, geometric and harmonic forms and 
-compared against charged particle production in a wide range of collision systems. When combined with partonic density fluctuations of 
-the nucleons within each nucleus, the data is well described by a generalized mean with power $p$ close to zero. We encapsulate 
-these results in a new model for relativistic hydrodynamic initial conditions.
+   We investigate entropy deposition at mid-rapidity in pp, pA and AA systems using a generalized mean of
+   projectile and target densities $M_p(T_A,T_B)$ which describes a family of vector norms spanning a
+   continuum of projectile/target saturation scenarios.  Results are presented for three well known subcases
+   of the generalized mean, the arithmetic, geometric and harmonic forms and compared against charged particle
+   production in a wide range of collision systems. When combined with partonic density fluctuations of the
+   nucleons within each nucleus, the data is well described by a generalized mean with power $p$ close to
+   zero. We encapsulate these results in a new model for relativistic hydrodynamic initial conditions.
 \end{abstract}
 
 \maketitle
 
 \section{Intoduction}
 
-The discovery of the quark-gluon plasma (QGP) at RHIC initiated a large scale effort to quantify the transport properties of 
-hot and dense nuclear matter. The success of ideal hydrodynamics in describing the collectivity observed in ultra-relativistic 
-heavy-ion collisions supports the production of a fluid-like QGP with minimal specific shear viscosity close to the proposed 
-K.S.S. bound $\eta/s \ge 1/4\pi$ \cite{KSS, Bjorken:1982qr}. 
+The discovery of the quark-gluon plasma (QGP) at RHIC initiated a large scale effort to quantify the transport
+properties of hot and dense nuclear matter. The success of ideal hydrodynamics in describing the collectivity
+observed in ultra-relativistic heavy-ion collisions supports the production of a fluid-like QGP with minimal
+specific shear viscosity close to the proposed K.S.S.\ bound $\eta/s \ge 1/4\pi$ \cite{KSS, Bjorken}.
 
-Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow from spatial 
-deformations of the produced fireball with a conversion efficiency proportional to the system's average specific shear viscosity. 
-Consequently, model-to-data extractions of $\eta/s$ are subject to the accuracy of the simulations used to calculate entropy and 
-energy deposition in the initial state.
+Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow
+from spatial deformations of the produced fireball with a conversion efficiency proportional to the system's
+average specific shear viscosity.  Consequently, model-to-data extractions of $\eta/s$ are subject to the
+accuracy of the simulations used to calculate entropy and energy deposition in the initial state.
 
 \section{The Model}
 
-We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and target nucleus with atomic mass number $B$ characterized 
-by collision impact parameter ${\bf b}$ in the transverse plane $\vec{r}_\perp = \vec{x} \times \vec{y}$. The density of nuclear matter in the rest frame of each 
-nucleus is described by the relevant un-perturbed multi-body nuclear wavefunction $\Psi_N$, where $\Psi_N$ is often characterized by the beam-integrated 
-nuclear thickness function,
+We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and
+target nucleus with atomic mass number $B$ characterized by collision impact parameter ${\bf b}$ in the
+transverse plane $\vec{r}_\perp = \vec{x} \times \vec{y}$. The density of nuclear matter in the rest frame of
+each nucleus is described by the relevant un-perturbed multi-body nuclear wavefunction $\Psi_N$, where
+$\Psi_N$ is often characterized by the beam-integrated nuclear thickness function,
 \begin{equation}
- T(x,y) = \int dz\, \left|\Psi_N(x,y,z) \right|^2. 
+  T(x,y) = \int dz\, \left|\Psi_N(x,y,z) \right|^2.
 \end{equation}
 
-Let $T_A$ and $T_B$ denote the transverse density of nucleons determined by the collapse of wavefunctions $\Psi_A$ and $\Psi_B$ in a given nucleus-nucleus 
-collision. We consider the existence of an eikonal mapping $f(T_A,T_B)$ that characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
+Let $T_A$ and $T_B$ denote the transverse density of nucleons determined by the collapse of wavefunctions
+$\Psi_A$ and $\Psi_B$ in a given nucleus-nucleus collision. We consider the existence of an eikonal mapping
+$f(T_A,T_B)$ that characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
 \begin{equation}
   \label{ansatz}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  = f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} =
+  f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
 \end{equation}
 
-It's reasonable to insist that this mapping $f(x_1,x_2)$ respect several key properties, namely that:  
+It's reasonable to insist that this mapping $f(x_1,x_2)$ respect several key properties, namely that:
 \begin{enumerate}
- \item{$f$ is smooth} \\ $f'$, $f''$,..., $f^{(k)}$ exist and are continuous
- \item{$f$ is monatonic} \\ if $x_1 \le x'_1$ and $x_2 \le x'_2$ then $f(x_1,x_2) \le f(x'_1,x'_2)$
- \item{$f$ is symmetric} \\ $f(x_1,x_2) = f(x_2,x_1)$
- \item{$f$ obeys sensible limits} \\ $\lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) = 0$.
+  \item{$f$ is smooth} \\
+    $f'$, $f''$,..., $f^{(k)}$ exist and are continuous
+  \item{$f$ is monatonic} \\
+    if $x_1 \le x'_1$ and $x_2 \le x'_2$ then $f(x_1,x_2) \le f(x'_1,x'_2)$
+  \item{$f$ is symmetric} \\
+    $f(x_1,x_2) = f(x_2,x_1)$
+  \item{$f$ obeys sensible limits} \\
+    $\lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) = 0$.
 \end{enumerate}
-Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a 
+Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a
 suitable ansatz for the mapping $f$,
 \begin{equation}
- \label{generalized mean ansatz}
- f(x_1, x_2) \propto M_p(x_1,x_2) = \left( \frac{x_1^p + x_2^p}{2} \right)^{1/p}.
+  \label{generalized mean ansatz}
+  f(x_1, x_2) \propto M_p(x_1,x_2) = \left( \frac{x_1^p + x_2^p}{2} \right)^{1/p}.
 \end{equation}
 
 \begin{figure}[b]
- \includegraphics{saturation}
- \caption{\label{saturation}Attentuation in the generalized mean $M_p(a, 1)$ for special forms $p=-1, 0, 1$.}
+  \includegraphics{saturation}
+  \caption{\label{saturation}Attentuation in the generalized mean $M_p(a, 1)$ for special forms $p=-1, 0, 1$.}
 \end{figure}
 
 \begin{figure*}[t]
-    \includegraphics{multdist}
-    \caption{\label{fig:multdist} Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$, fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
+  \includegraphics{multdist}
+  \caption{\label{fig:multdist}Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$,
+  fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
 \end{figure*}
 
-For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and maximum functions respectively which can be shown
-to obey the following ordering inequality, 
+For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and
+maximum functions respectively which can be shown to obey the following ordering inequality,
 \begin{equation}
- \mathrm{if} ~ p<p', ~ \mathrm{then} ~ M_{p}(x_1,x_2) \le M_{p'}(x_1,x_2).
+  \mathrm{if} ~ p<p', ~ \mathrm{then} ~ M_{p}(x_1,x_2) \le M_{p'}(x_1,x_2).
 \end{equation}
-In this sense, the continuous parameter $p$ characterizes the attentuation of entropy deposited at mid-rapidity by each nucleon as it pierces the target nucleus. This 
-attentuation is best visualized by fixing the projectile thickness $T_A$ and varying the target thickness $T_B$ as shown in figure \ref{saturation}.
+In this sense, the continuous parameter $p$ characterizes the attentuation of entropy deposited at
+mid-rapidity by each nucleon as it pierces the target nucleus. This attentuation is best visualized by fixing
+the projectile thickness $T_A$ and varying the target thickness $T_B$ as shown in figure \ref{saturation}.
 
-There is of course one important caveat to the suitability of a generalized mean ansatz. It is easy to see in figure (\ref{fig:multdist}) that
+There is of course one important caveat to the suitability of a generalized mean ansatz. It is easy to see in
+figure (\ref{fig:multdist}) that
 \begin{equation}
- \lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) \ne 0 ~\mathrm{for} ~ p>0.
+  \lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) \ne 0 ~\mathrm{for} ~ p>0.
 \end{equation}
-Blithely applying an arithmetic mean for example to projectile and target densities would deposit entropy in regions of the fireball where 
-there is nothing to hit. 
+Blithely applying an arithmetic mean for example to projectile and target densities would deposit entropy in
+regions of the fireball where there is nothing to hit.
 
-We thus follow a common prescription and define equation \ref{ansatz} over \emph{participant} thickness functions $\mathcal{T}_A$ and $\mathcal{T}_B$ from an underlying Glauber model of 
-independent nucleon-nucleon collisions with additional source fluctuations $\gamma_i$ in the transverse density $T_p$ contributed by each participant nucleon,
+We thus follow a common prescription and define equation \ref{ansatz} over \emph{participant} thickness
+functions $\mathcal{T}_A$ and $\mathcal{T}_B$ from an underlying Glauber model of independent nucleon-nucleon
+collisions with additional source fluctuations $\gamma_i$ in the transverse density $T_p$ contributed by each
+participant nucleon,
 \begin{equation}
- \label{thickness def}
- \mathcal{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
+  \label{thickness def}
+  \mathcal{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
 \end{equation}
 
-The weights $\gamma_i$ are sampled from a two parameter Gamma distribution with mean $\mu=1$ and shape parameter $k$. These weights incorporate event-by-event 
-fluctuations in the density of partons sampled in each nucleon-nucleon collision. The choice of a Gamma distribution reflects a long history of fitting proton-proton 
-multiplicity distributions using a Negative Binomial distribution which arises naturally from a Gamma-Poisson mixture.
+The weights $\gamma_i$ are sampled from a two parameter Gamma distribution with mean $\mu=1$ and shape
+parameter $k$. These weights incorporate event-by-event fluctuations in the density of partons sampled in each
+nucleon-nucleon collision. The choice of a Gamma distribution reflects a long history of fitting proton-proton
+multiplicity distributions using a Negative Binomial distribution which arises naturally from a Gamma-Poisson
+mixture.
 
 For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
 \begin{equation}
- T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right) 
+  T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right)
 \end{equation}
-with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is a rather crude description of the nucleon and consequently restrict our attention 
-to properties of the collision that are insensitive to details of the nucleonic substructure.
+with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is a rather crude description of
+the nucleon and consequently restrict our attention to properties of the collision that are insensitive to
+details of the nucleonic substructure.
 
-Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision criteria described in reference \cite{proton-proton}. 
-The pair-wise collision probability is then sampled independently for each pair of projectile and target nucleons to determine the participants which contribute in 
-equation (\ref{thickness def}).
+Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision
+criteria described in reference \cite{proton-proton}.  The pair-wise collision probability is then sampled
+independently for each pair of projectile and target nucleons to determine the participants which contribute
+in equation (\ref{thickness def}).
 
-For simplicity, we refer to this generalized mean of participant densities as the \emph{reduced thickness} of projectile nucleus $A$ and target nucleus $B$,
+For simplicity, we refer to this generalized mean of participant densities as the \emph{reduced thickness} of
+projectile nucleus $A$ and target nucleus $B$,
 \begin{equation}
- \label{reduced}
- \mathcal{T}_R(p;x,y) \equiv \left( \frac{\mathcal{T}_A({\bf x}+{\bf b}/2,y)^p + \mathcal{T}_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
+  \label{reduced}
+  \mathcal{T}_R(p;x,y) \equiv
+  \left( \frac{\mathcal{T}_A({\bf x}+{\bf b}/2,y)^p + \mathcal{T}_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
 \end{equation}
-noting that the units of $T_R$ are also that of a nuclear thickness function. In terms of the reduced thickness function, entropy deposition at mid-rapidity is 
-determined according to
+noting that the units of $T_R$ are also that of a nuclear thickness function. In terms of the reduced
+thickness function, entropy deposition at mid-rapidity is determined according to
 \begin{equation}
- \label{entropy deposition}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \kappa_s(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
+  \label{entropy deposition}
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \kappa_s(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
 \end{equation}
-where $\kappa_s(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $\mathcal{T}_R(x,y)$ is the reduced thickness function.
+where $\kappa_s(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $\mathcal{T}_R(x,y)$
+is the reduced thickness function.
 
-Equivalently, it's been shown that the initial entropy is a close proxy for charged particle multiplicity up to viscous entropy corrections [?]. We can 
-recast equation (\ref{entropy deposition}) in terms of the charged particle production as,
+Equivalently, it's been shown that the initial entropy is a close proxy for charged particle multiplicity up
+to viscous entropy corrections [?]. We can recast equation (\ref{entropy deposition}) in terms of the charged
+particle production as,
 \begin{equation}
- \label{particle production}
- \frac{dN_{ch}({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \approx \kappa_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
+  \label{particle production}
+  \frac{dN_{ch}({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \approx
+  \kappa_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
 \end{equation}
 which allows us to make a direct comparison with experimentally measured charged particle distributions.
 
 \section{Results}
 
-We now use the aforementioned procedure to generate $10^6$ minimum bias events satisfying $N_{part} > 0$ for proton-proton, proton-lead and lead-lead nuclei using 
-realistic lead nucleon configurations incorporating short- and long-range correlations \cite{nucleon-correlations}. 
+We now use the aforementioned procedure to generate $10^6$ minimum bias events satisfying $N_{part} > 0$ for
+proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating
+short- and long-range correlations \cite{nucleon-correlations}.
 
-The charged particle distributions are calculated by rescaling equation (\ref{particle production}) using a modified normalization factor $\kappa'_n$ to match the average charged particle 
-multiplicity in the pseudo-rapidity interval $|\eta| < 1$,
+The charged particle distributions are calculated by rescaling equation (\ref{particle production}) using a
+modified normalization factor $\kappa'_n$ to match the average charged particle multiplicity in the
+pseudo-rapidity interval $|\eta| < 1$,
 \begin{equation}
- N_{ch}(|\eta|<1) = \kappa'_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp).
+  N_{ch}(|\eta|<1) = \kappa'_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp).
 \end{equation}
 
-In figure \ref{fig:multdist} we plot the predicted charged particle distributions for pp, pPb and PbPb systems using a geometric mean $p=0$ with fluctuation parameter $k=0.8$ tuned 
-to fit the p-p multiplicity distribution. 
+In figure \ref{fig:multdist} we plot the predicted charged particle distributions for pp, pPb and PbPb systems
+using a geometric mean $p=0$ with fluctuation parameter $k=0.8$ tuned to fit the pp multiplicity
+distribution.
 
-The normalization factor $\kappa'_n$ indicated on the figure is tuned to match the average charged particle multiplicity in each experiment. The observed
-$\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent with variations in the collision energy and kinematic cuts.
+The normalization factor $\kappa'_n$ indicated on the figure is tuned to match the average charged particle
+multiplicity in each experiment. The observed $\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent
+with variations in the collision energy and kinematic cuts.
 
-In figure (\ref{fig:eccen}) we plot the Pb-Pb ellipticity and triangularity $\epsilon_2$ and $\epsilon_3$ (top and middle panels) calculated according to,
+In figure (\ref{fig:eccen}) we plot the PbPb ellipticity and triangularity $\epsilon_2$ and $\epsilon_3$ (top
+and middle panels) calculated according to,
 \begin{equation}
- \varepsilon_n e^{i n\phi} = -\frac{\int d^2r\, r^n e^{i n \phi} dS/dy(\vec{r})}{\int d^2r\, r^n dS/dy(\vec{r})}.
+  \varepsilon_n e^{i n\phi} = -\frac{\int d^2r\, r^n e^{i n \phi} dS/dy(\vec{r})}{\int d^2r\, r^n dS/dy(\vec{r})}.
 \end{equation}
-along with the eccentricity ratio $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ (bottom panel). The shaded band in the bottom 
-panel indicates the values of this ratio allowed by LHC flow data and hydrodynamic calculations as determined by the authors in [?].
+along with the eccentricity ratio $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2
+\rangle}^{0.6}$ (bottom panel). The shaded band in the bottom panel indicates the values of this ratio allowed
+by LHC flow data and hydrodynamic calculations as determined by the authors in [?].
 
 \begin{figure}[t]
- \includegraphics{./fig/eccentricity.pdf}
- % eccentricity.pdf: 245x227 pixel, 72dpi, 8.64x8.01 cm, bb=0 0 245 227
-  \caption{\label{fig:eccen} Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle) calculated using an entropy weight for powers $p=-1,0,1$. 
-  In the bottom panel the ratio $\mathcal{R} = \sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ is shown with the experimentally allowed values calculated in ref. \cite{constraining-ic}}
+  \includegraphics{eccentricity}
+  \caption{\label{fig:eccen}Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle)
+  calculated using an entropy weight for powers $p=-1,0,1$.  In the bottom panel the ratio $\mathcal{R} =
+  \sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ is shown with the
+  experimentally allowed values calculated in ref.\ \cite{constraining-ic}}
 \end{figure}
 
 \section{Comparison to wounded nucleon and binary collision mixture}
 
-It's interesting to compare equation (\ref{entropy deposition}) against the commonly used wounded nucleon and binary collision parameterization where the 
-transverse entropy (or energy) density is set proportional to a linear combination of the local density of participant and pair-wise collisions,
+It's interesting to compare equation (\ref{entropy deposition}) against the commonly used wounded nucleon and
+binary collision parameterization where the transverse entropy (or energy) density is set proportional to a
+linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
- \label{glb ansatz}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}). 
+  \label{glb ansatz}
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \propto
+  \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}).
 \end{equation}
 
-In practice, wounded nucleon and binary collision deposition is implemented according to variety of different prescriptions. We use a two-component model
-with Gamma fluctuations $\gamma_i$ of the source nucelons given by,
+In practice, wounded nucleon and binary collision deposition is implemented according to variety of different
+prescriptions. We use a two-component model with Gamma fluctuations $\gamma_i$ of the source nucelons given
+by,
 \begin{equation}
- \label{glb algorithm}
- \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0}  \propto \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} + \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
+  \label{glb algorithm}
+  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \propto
+  \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} +
+  \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
 \end{equation}
-where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant. The $N_{coll}$ binary collision term in equation (\ref{glb ansatz}) scales with the product of nuclear thickness 
-functions $N_{coll} \propto T_A T_B$ and predicts a rapid increase in charged particle production in systems for which the density of nuclear overlap is large.  
+where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant. The $N_{coll}$ binary
+collision term in equation (\ref{glb ansatz}) scales with the product of nuclear thickness functions $N_{coll}
+\propto T_A T_B$ and predicts a rapid increase in charged particle production in systems for which the density
+of nuclear overlap is large.
 
-In contrast with the two-component model, the proposed generalized mean ansatz exhibits no such quadratic scaling. Specifically, for an idealized system in which the density of nuclear overlap is perfectly symmetric, 
-i.e. $\mathcal{T}_A = \mathcal{T}_B$, the generalized mean and two-component models behave quite differently:
+In contrast with the two-component model, the proposed generalized mean ansatz exhibits no such quadratic
+scaling. Specifically, for an idealized system in which the density of nuclear overlap is perfectly symmetric,
+i.e.\ $\mathcal{T}_A = \mathcal{T}_B$, the generalized mean and two-component models behave quite differently:
 \begin{equation}
-   \label{symmetric scaling}
-   \frac{dS}{dy} \propto
+  \label{symmetric scaling}
+  \frac{dS}{dy} \propto
   \begin{cases}
-   \mathcal{T} + \mathcal{C} \mathcal{T}^2 & \text{two-component,}\\
-   \mathcal{T} & \text{generalized mean}
+    \mathcal{T} + \mathcal{C} \mathcal{T}^2 & \text{two-component,} \\
+    \mathcal{T} & \text{generalized mean}
   \end{cases}
 \end{equation}
 where the coefficient $\mathcal{C}$ scales with the binary collision fraction $\alpha$.
 
-An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium nucleus is highly deformed and prolonged along a preferred
-axis. This geometry allows for two distinct configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip collisions
-where the Uranium symmetry axis is alligned with the beam axis and side-on-side collisions where the Uranium symmetry axis is perpendicular to the beam axis.
+An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium
+nucleus is highly deformed and prolonged along a preferred axis. This geometry allows for two distinct
+configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip
+collisions where the Uranium symmetry axis is alligned with the beam axis and side-on-side collisions where
+the Uranium symmetry axis is perpendicular to the beam axis.
 
-Binary collision scaling predicts that tip-to-tip collisions generate more charged particles than side-on-side collisions and hence should be found at slightly
-higher centralities. It was pointed out that this multiplicity ordering should imprint itself on the flow harmonics of central UU collisions due to the large 
-ellipticity expected in side-on-side collisions and small ellipticity expected in body-on-body collisions. This predicted structure was dubbed the ``knee''.
+Binary collision scaling predicts that tip-to-tip collisions generate more charged particles than side-on-side
+collisions and hence should be found at slightly higher centralities. It was pointed out that this
+multiplicity ordering should imprint itself on the flow harmonics of central UU collisions due to the large
+ellipticity expected in side-on-side collisions and small ellipticity expected in body-on-body collisions.
+This predicted structure was dubbed the ``knee''.
 
 \begin{figure}
- \centering
- \includegraphics{./fig/uranium.pdf}
- % uranium.pdf: 245x151 pixel, 72dpi, 8.64x5.33 cm, bb=0 0 245 151
- \caption{\label{fig:knee} Scaled TRENTO ($p=0$, $k=0.8$, $B=0.36~\mathrm{fm}^2$) and fluctuated Glauber ($\alpha=14$, $k=1.2$, $B=0.36~\mathrm{fm}^2$) ellipticities
- compared to STAR elliptic flow data.}
+  \centering
+  \includegraphics{uranium}
+  \caption{\label{fig:knee}Scaled TRENTO ($p=0$, $k=0.8$, $B=0.36~\mathrm{fm}^2$) and fluctuated Glauber
+  ($\alpha=14$, $k=1.2$, $B=0.36~\mathrm{fm}^2$) ellipticities compared to STAR elliptic flow data.}
 \end{figure}
 
-In figure (\ref{fig:knee}) we compare the predictions of the fluctuated two-component (eq. \ref{glb algorithm}) and generalized mean prescriptions
-(eq. \ref{entropy deposition}) using $10^6$ minimum bias events in the impact parameter range $0<b<3.5 ~\mathrm{fm}$ with a $15\%$ cut to avoid 
-contamination from events $b>3.5 ~\mathrm{fm}$.
+In figure (\ref{fig:knee}) we compare the predictions of the fluctuated two-component (eq. \ref{glb algorithm})
+and generalized mean prescriptions (eq. \ref{entropy deposition}) using $10^6$ minimum bias events
+in the impact parameter range $0<b<3.5 ~\mathrm{fm}$ with a $15\%$ cut to avoid contamination from events
+$b>3.5 ~\mathrm{fm}$.
 
-The fluctuated two component model shows clear evidence of a knee structure in the $0-0.5\%$ centrality bin which is inconsistent with the STAR data. These findings agree 
-with those previously reported in a comprehensive flow analysis by A. Goldschmidt, Zhi Qiu and U. Heinz, in preparation and private communication. The authors in [?] 
-found that a hot-spot model with sharply peaked entropy density fluctuations described by concentrated semi-hard cross-section $\sigma \approx 2 ~\mathrm{mb}$ is sufficient to wash 
-out the structure of the knee in UU collisions, but it remains to be seen if such sharply peaked hot-spots fit into a coherent description of charged particle production in 
-small systems.
+The fluctuated two component model shows clear evidence of a knee structure in the $0-0.5\%$ centrality bin
+which is inconsistent with the STAR data. These findings agree with those previously reported in a
+comprehensive flow analysis by A.\ Goldschmidt, Zhi Qiu and U.\ Heinz, in preparation and private communication.
+The authors in [?] found that a hot-spot model with sharply peaked entropy density fluctuations described by
+concentrated semi-hard cross-section $\sigma \approx 2 ~\mathrm{mb}$ is sufficient to wash out the structure
+of the knee in UU collisions, but it remains to be seen if such sharply peaked hot-spots fit into a coherent
+description of charged particle production in small systems.
 
-In contrast to the two-component model, the generalized mean correctly reproduces the shape of the ultra-central elliptic flow measured by STAR. This suggests that non-linearities
-in the mapping discussed in equation (\ref{symmetric scaling}) are small and it supports attentuation as the mechanism which describes the centrality dependence of charged particle production
-in AA collisions.
+In contrast to the two-component model, the generalized mean correctly reproduces the shape of the
+ultra-central elliptic flow measured by STAR. This suggests that non-linearities in the mapping discussed in
+equation (\ref{symmetric scaling}) are small and it supports attentuation as the mechanism which describes the
+centrality dependence of charged particle production in AA collisions.
 
 
 \section{Summary}
 
-Initial conditions currently comprise the largest source of uncertainty in hydrodynamic simulations of the QGP fireball [refs]. Ideally, one seeks a first principles calculation 
-of the initial state (i.e. see refs), but these derivations are often irrelevant to the problem of interest making effective models an attractive alternative.
+Initial conditions currently comprise the largest source of uncertainty in hydrodynamic simulations of the QGP
+fireball [refs]. Ideally, one seeks a first principles calculation of the initial state (i.e.\ see refs), but
+these derivations are often irrelevant to the problem of interest making effective models an attractive
+alternative.
 
-We propose the family of vector p-norms known as the generalized mean as an effective model for entropy production in ultra-relativistic nucleus-nucleus collisions and and demonstrate the model's
-ability to replicate pp, pPb and PbPb multiplicity distributions. In figure \ref{fig:eccen} we show that the predicted ellipticity of the produced fireball is highly sensitive to the power of 
-the p-norm while the fluctuation driven triangularity is less sensitive. The optimal ratio of these harmonics which was extracted from flow data in reference [?] prefers a value of p close to 0 
-corresponding to the geometric mean. We note that geometric mean scaling of the initial entropy was also reported by an AdS-CFT calculation in reference [?]. 
+We propose the family of vector p-norms known as the generalized mean as an effective model for entropy
+production in ultra-relativistic nucleus-nucleus collisions and and demonstrate the model's ability to
+replicate pp, pPb and PbPb multiplicity distributions. In figure \ref{fig:eccen} we show that the predicted
+ellipticity of the produced fireball is highly sensitive to the power of the p-norm while the fluctuation
+driven triangularity is less sensitive. The optimal ratio of these harmonics which was extracted from flow
+data in reference [?] prefers a value of p close to 0 corresponding to the geometric mean. We note that
+geometric mean scaling of the initial entropy was also reported by an AdS-CFT calculation in reference [?].
 
-
-We also compare the generalized mean ansatz against a fluctuated two-component model in Uranium-Uranium collisions where one expects the eccentricity harmonics to behave quite differently. The generalized mean
-correctly predicts the shape of the elliptic flow in ultra-central UU collisions while the two-component model exhibits a well known knee structure which is inconsistent with the STAR data.
+We also compare the generalized mean ansatz against a fluctuated two-component model in Uranium-Uranium
+collisions where one expects the eccentricity harmonics to behave quite differently. The generalized mean
+correctly predicts the shape of the elliptic flow in ultra-central UU collisions while the two-component model
+exhibits a well known knee structure which is inconsistent with the STAR data.
 
 
 \bibliography{sources}
