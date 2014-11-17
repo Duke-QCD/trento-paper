@@ -200,56 +200,60 @@ def multdist():
 def uranium():
     plt.figure(figsize=(columnwidth, columnwidth*aspect))
 
-    systems = 'generalized mean: $p=0$', 'two-component: $\alpha=0.14$'
-    files = 'UU-m0-k0.8-w0.5-central', 'UU-alpha0.14-central'
-    colors = 'blue', 'orange'
-    markers = '^', 'o'
+    systems = 'generalized mean: $p=0$', #'two-component: $\alpha=0.14$'
+    files = 'UU_p=0_k=0.7_w=0.5_bcut=3', #'UU-alpha0.14-central'
+    colors = 'magenta', #'orange'
+    markertypes = 'o', #'o'
+    bcut = 0.037854
 
-    def func(x, a, b):
-        return a + b*x
+    for label, fn, plotcolor, markertype in zip(systems,files,colors,markertypes):
 
-    for label, fn, color, marker in zip(systems, files, colors, markers):
-        data = load_from_cache('data/trento/uranium/' + fn, usecols=(2, 3, 4))
-        data = data[data[:, 0].argsort()]
-        N = data.shape[0]
-
-        cut = 0.8  # plot data from 0-1% ZDC
-        mult = data[cut*N:N, 1]
-        e2 = data[cut*N:N, 2]
-
-        z = mult/mult.mean()
-        nbins = 25
-        n, _ = np.histogram(z, bins=nbins)
-        middles = (_[1:] + _[:-1])/2
-        v2avg = np.histogram(z, bins=nbins, weights=e2)[0]/(n+1e-8)
-        v2err = np.sqrt(
-            np.histogram(z, bins=nbins, weights=e2*e2)[0]/(n+1e-8)
-        )/np.sqrt(n+1e-8)
-
-        factor = 0.2
-        middles_cut = middles[abs(1-middles[:]) < 0.1]
-        v2avg_cut = v2avg[abs(1-middles[:]) < 0.1]*factor
-        v2err_cut = v2err[abs(1-middles[:]) < 0.1]*factor
-
-        popt, pcov = optimize.curve_fit(
-            lambda x, a, b: a + b*x, middles_cut, v2avg_cut,
-            p0=None, sigma=v2err_cut
+        data = load_from_cache(
+            'data/trento/uranium/'+fn,
+            usecols=(2,3,4)
         )
-        xvec = np.linspace(0.9, 1.1, 1000)
 
-        # scatter plot the data
-        plt.plot(xvec, popt[0] + popt[1]*xvec, '-', color=color)
-        plt.errorbar(middles_cut, v2avg_cut, yerr=v2err_cut, color=color,
-                     linestyle='none', marker=marker, markeredgecolor='none',
-                     capsize=0)
+        # e2 -> v2 conversion factor
+        factor = 1.
+        
+        # prune data
+        cut = 0.001/bcut 
+        N = data.shape[0]
+        data = data[data[:,0].argsort()]
+        data = data[::-1]
+        mult = data[:cut*N,1]
+        v2 = data[:cut*N,2]*factor
 
-    # plt.legend(loc='best')
-    plt.xlim([0.8, 1.2])
-    plt.ylim([0.015, 0.035])
-    plt.yticks(np.arange(.016, .033, .04))
-    plt.xlabel(r'$\mathrm{mult}/\langle \mathrm{mult} \rangle$')
-    plt.ylabel(r'$\epsilon_2$')
+        # data points with errors
+        nbins = 20
+        z = mult/mult.mean()
 
+        n, edges = np.histogram(z, bins=nbins)
+        middles = (edges[1:] + edges[:-1])/2
+        v2avg = np.histogram(z, bins=nbins, weights=v2)[0]/(n+1e-8)
+        v2err = np.sqrt(np.histogram(z, bins=nbins, weights=v2*v2)[0]/(n+1e-8))/np.sqrt(n+1e-8)
+
+        # cut to interval (0.9,1.1)
+        middles_cut = middles[abs(1-middles[:]) < 0.1]
+        v2avg_cut = v2avg[abs(1-middles[:]) < 0.1]
+        v2err_cut = v2err[abs(1-middles[:]) < 0.1]
+        plt.errorbar(middles_cut, v2avg_cut, yerr=v2err_cut, color=pmean_colors[0], linestyle='none', marker=markertype, markeredgecolor='none',capsize=0)
+
+        # optimization
+        popt, pcov = optimize.curve_fit(lambda x, a, b: a*x+b, middles_cut, v2avg_cut, p0=None, sigma=v2err_cut)
+        xvec = np.linspace(0.9,1.1,1000)
+        plt.plot(xvec,popt[1]+popt[0]*xvec,'--', dashes=(6,2), color='grey',linewidth=1.5)
+        
+    
+    plt.legend(loc='best')
+    plt.xlim([0.85,1.15])
+    plt.ylim([0.07,0.18])
+    #plt.ylim([0.015,0.035])
+    #plt.yticks([0.016,0.02,0.024,0.028,0.032])
+    plt.annotate(r'$U+U$',(.03, .75), xycoords='axes fraction')
+    plt.xlabel(r"$N_{ch}/\langle N_{ch} \rangle$")
+    plt.ylabel("$\epsilon_2$")
+    
     despine()
     plt.tight_layout(pad=0.05)
 
