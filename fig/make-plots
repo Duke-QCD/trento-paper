@@ -228,7 +228,6 @@ def uranium():
             # data points with errors
             nbins = 20
             z = mult/mult.mean()
-
             n, edges = np.histogram(z, bins=nbins)
             middles = (edges[1:] + edges[:-1])/2
             e2avg = np.histogram(z, bins=nbins, weights=e2)[0]/(n+1e-8)
@@ -241,7 +240,7 @@ def uranium():
             ax.errorbar(middles_cut, e2avg_cut, yerr=e2err_cut, color=plotcolor, linestyle='none', marker=markertype, markeredgecolor='none',capsize=0, label=labels[ilabel])
 
             ilabel = ilabel + 1
-
+            
             # optimization
             popt, pcov = optimize.curve_fit(lambda x, a, b: a*x+b, middles_cut, e2avg_cut, p0=None, sigma=e2err_cut)
             xvec = np.linspace(0.9,1.1,1000)
@@ -253,17 +252,19 @@ def uranium():
             ax.set_ylim([0.04,0.18])
             ax.set_yticks([0.04,0.08,0.12,0.16])
             ax.set_ylabel(r"$\varepsilon_2$")
-            despine(ax, remove_ticks=True)
-            ax.legend(bbox_to_anchor=(0., 1.04), loc="upper left", ncol=4, borderaxespad=0.)
-            #leg = ax.legend()
-            #vp = leg._legend_box._children[-1]._children[0]
-            #for c in vp._children:
-            #    c._children.reverse()
-            #    vp.align="right" 
 
-            # increment label
+            despine(ax, remove_ticks=True)
+            leg = ax.legend(bbox_to_anchor=(0.01, 1.01), loc="upper left", ncol=5, borderaxespad=0., frameon=True, borderpad=0.05)
+            leg.get_frame().set_linewidth(0.0)
             ilabel = ilabel + 1
-            print(ilabel)
+
+    x = np.linspace(0.85,1.15,1000)
+    axes[0].plot(x, -0.526065*x + 0.67,'-',color='#006699', linewidth=1.5)
+    axes[0].plot(x, 0.064156*x + 0.0140,'-',color='#006699', linewidth=1.5)
+    axes[1].plot(x, -0.263391*x + 0.406,'-',color='#006699', linewidth=1.5, label="MC-Glauber + NBD")
+    axes[1].plot(x, 0.039964*x + 0.044,'-',color='#006699', linewidth=1.5)
+    leg = ax.legend(bbox_to_anchor=(0.01, 1.01), loc="upper left", ncol=5, borderaxespad=0., frameon=True, borderpad=0.05)
+    leg.get_frame().set_linewidth(0.0)
 
     axes[0].annotate("$0-0.1 \%$ spectators", (.35, .04), xycoords='axes fraction')
     axes[1].annotate("$0-1 \%$ spectators", (.35, .04), xycoords='axes fraction')
