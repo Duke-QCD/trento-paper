@@ -198,63 +198,76 @@ def multdist():
 
 @plotfn
 def uranium():
-    plt.figure(figsize=(columnwidth, columnwidth*aspect))
-
-    systems = 'generalized mean: $p=0$', #'two-component: $\alpha=0.14$'
-    files = 'UU_p=0_k=0.7_w=0.5_bcut=3', #'UU-alpha0.14-central'
-    colors = 'magenta', #'orange'
-    markertypes = 'o', #'o'
-    bcut = 0.037854
-
-    for label, fn, plotcolor, markertype in zip(systems,files,colors,markertypes):
-
-        data = load_from_cache(
-            'data/trento/uranium/'+fn,
-            usecols=(2,3,4)
-        )
-
-        # e2 -> v2 conversion factor
-        factor = 1.
-        
-        # prune data
-        cut = 0.001/bcut 
-        N = data.shape[0]
-        data = data[data[:,0].argsort()]
-        data = data[::-1]
-        mult = data[:cut*N,1]
-        v2 = data[:cut*N,2]*factor
-
-        # data points with errors
-        nbins = 20
-        z = mult/mult.mean()
-
-        n, edges = np.histogram(z, bins=nbins)
-        middles = (edges[1:] + edges[:-1])/2
-        v2avg = np.histogram(z, bins=nbins, weights=v2)[0]/(n+1e-8)
-        v2err = np.sqrt(np.histogram(z, bins=nbins, weights=v2*v2)[0]/(n+1e-8))/np.sqrt(n+1e-8)
-
-        # cut to interval (0.9,1.1)
-        middles_cut = middles[abs(1-middles[:]) < 0.1]
-        v2avg_cut = v2avg[abs(1-middles[:]) < 0.1]
-        v2err_cut = v2err[abs(1-middles[:]) < 0.1]
-        plt.errorbar(middles_cut, v2avg_cut, yerr=v2err_cut, color=pmean_colors[0], linestyle='none', marker=markertype, markeredgecolor='none',capsize=0)
-
-        # optimization
-        popt, pcov = optimize.curve_fit(lambda x, a, b: a*x+b, middles_cut, v2avg_cut, p0=None, sigma=v2err_cut)
-        xvec = np.linspace(0.9,1.1,1000)
-        plt.plot(xvec,popt[1]+popt[0]*xvec,'--', dashes=(6,2), color='grey',linewidth=1.5)
-        
+    ilabel = 0
+    labels = 'TRENTO U+U', '', 'TRENTO Au+Au', '', '', 'TRENTO fit', '', ''
+    files = 'UU_p=0_k=0.7_w=0.5_bcut=3', 'AuAu_p=0_k=0.7_w=0.5_bcut=3'
+    markertypes = 'o', '^'
+    colors = '#c71487', '#339966'
+    cuts = 0.037854, 0.039909
+    centralities = 0.001, 0.01
     
-    plt.legend(loc='best')
-    plt.xlim([0.85,1.15])
-    plt.ylim([0.07,0.18])
-    #plt.ylim([0.015,0.035])
-    #plt.yticks([0.016,0.02,0.024,0.028,0.032])
-    plt.annotate(r'$U+U$',(.03, .75), xycoords='axes fraction')
+    fig, axes = plt.subplots(nrows=2,
+                             figsize=(columnwidth, columnwidth*aspect*1.5),sharex=True)
+
+    for centrality, ax in zip(centralities,axes):
+        for fn, cut, markertype, plotcolor in zip(files,cuts,markertypes, colors):
+
+            data = load_from_cache(
+                'data/trento/uranium/'+fn,
+                usecols=(2,3,4)
+            )
+
+            # prune data
+            cut = centrality/cut 
+            N = data.shape[0]
+            data = data[data[:,0].argsort()]
+            data = data[::-1]
+            mult = data[:cut*N,1]
+            e2 = data[:cut*N,2]
+
+            # data points with errors
+            nbins = 20
+            z = mult/mult.mean()
+
+            n, edges = np.histogram(z, bins=nbins)
+            middles = (edges[1:] + edges[:-1])/2
+            e2avg = np.histogram(z, bins=nbins, weights=e2)[0]/(n+1e-8)
+            e2err = np.sqrt(np.histogram(z, bins=nbins, weights=e2*e2)[0]/(n+1e-8))/np.sqrt(n+1e-8)
+
+            # cut to interval (0.9,1.1)
+            middles_cut = middles[abs(1-middles[:]) < 0.1]
+            e2avg_cut = e2avg[abs(1-middles[:]) < 0.1]
+            e2err_cut = e2err[abs(1-middles[:]) < 0.1]
+            ax.errorbar(middles_cut, e2avg_cut, yerr=e2err_cut, color=plotcolor, linestyle='none', marker=markertype, markeredgecolor='none',capsize=0, label=labels[ilabel])
+
+            ilabel = ilabel + 1
+
+            # optimization
+            popt, pcov = optimize.curve_fit(lambda x, a, b: a*x+b, middles_cut, e2avg_cut, p0=None, sigma=e2err_cut)
+            xvec = np.linspace(0.9,1.1,1000)
+            ax.plot(xvec,popt[1]+popt[0]*xvec,'--', dashes=(6,2), color='grey',linewidth=1.5,label=labels[ilabel])
+
+            #set figure properties
+            ax.set_xlim([0.85,1.15])
+            ax.set_xticks([0.85,0.9,0.95,1.0,1.05,1.1,1.15])
+            ax.set_ylim([0.04,0.18])
+            ax.set_yticks([0.04,0.08,0.12,0.16])
+            ax.set_ylabel(r"$\varepsilon_2$")
+            despine(ax, remove_ticks=True)
+            ax.legend(bbox_to_anchor=(0., 1.04), loc="upper left", ncol=4, borderaxespad=0.)
+            #leg = ax.legend()
+            #vp = leg._legend_box._children[-1]._children[0]
+            #for c in vp._children:
+            #    c._children.reverse()
+            #    vp.align="right" 
+
+            # increment label
+            ilabel = ilabel + 1
+            print(ilabel)
+
+    axes[0].annotate("$0-0.1 \%$ spectators", (.35, .04), xycoords='axes fraction')
+    axes[1].annotate("$0-1 \%$ spectators", (.35, .04), xycoords='axes fraction')
     plt.xlabel(r"$N_{ch}/\langle N_{ch} \rangle$")
-    plt.ylabel("$\epsilon_2$")
-    
-    despine()
     plt.tight_layout(pad=0.05)
 
 
