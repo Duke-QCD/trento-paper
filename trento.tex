@@ -54,7 +54,43 @@ In this letter, we present a new unified initial condition model for high-energy
 proton-proton to nucleus-nucleus.
 
 
-\section{The Model}
+\section{Model}
+
+The model is built from the ground up to handle a variety of collision systems.  Let us first consider the
+simplest case, a proton-proton collision.
+
+Suppose a pair of protons collide along beam axis $z$.  Each proton is represented by its
+thickness $T(x, y)$; thickness may be thought of as the beam-integrated density of nuclear matter,
+\begin{equation}
+  T(x, y) = \int dz \, \rho(x, y, z).
+\end{equation}
+Label the protons $A$, $B$ with corresponding thicknesses $T_A(x, y)$, $T_B(x, y)$.
+
+We now postulate the following:
+\begin{enumerate}
+  \item The eikonal approximation is valid:  entropy is produced if $T_A$ and $T_B$ eikonally overlap.
+  \item There exists a scalar field $f(T_A, T_B)$ which converts projectile thicknesses into entropy
+    deposition.
+\end{enumerate}
+The function $f$ is interpreted as the entropy created at the hydrodynamic thermalization time.  It should be
+provide an \emph{effective} description of early collision dynamics:  it need not arise from a
+first-principles calculation, but must obey basic physical restrictions.
+
+With this in mind, we propose for $f$ the family of functions
+\begin{equation}
+  f = f(p; T_A, T_B) = \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/2},
+\end{equation}
+where the parameter $p$ is any real number in $(-\infty, \infty)$.  This functional form---known as the
+generalized mean---reduces to the arithmetic, geometric, and harmonic mean for certain values of $p$, i.e.
+\begin{equation}
+  f(p; T_A, T_B) =
+  \begin{cases}
+    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)} \\
+    \sqrt{T_A T_B} & p = 0 \text{ (geometric)} \\
+    \dfrac{1}{1/T_A + 1/T_B} & p = -1 \text{ (harmonic)} \\
+  \end{cases}.
+\end{equation}
+
 
 We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and
 target nucleus with atomic mass number $B$ characterized by collision impact parameter ${\bf b}$ in the
