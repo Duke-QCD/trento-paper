@@ -18,28 +18,41 @@
 
 
 \begin{abstract}
-   We investigate entropy deposition at mid-rapidity in pp, pA and AA systems using a generalized mean of
-   projectile and target densities $M_p(T_A,T_B)$ which describes a family of vector norms spanning a
-   continuum of projectile/target saturation scenarios.  Results are presented for three well known subcases
-   of the generalized mean, the arithmetic, geometric and harmonic forms and compared against charged particle
-   production in a wide range of collision systems. When combined with partonic density fluctuations of the
-   nucleons within each nucleus, the data is well described by a generalized mean with power $p$ close to
-   zero. We encapsulate these results in a new model for relativistic hydrodynamic initial conditions.
+  We investigate entropy deposition at mid-rapidity in pp, pA and AA systems using a generalized mean of
+  projectile and target densities $M_p(T_A,T_B)$ which describes a family of vector norms spanning a continuum
+  of projectile/target saturation scenarios.  Results are presented for three well known subcases of the
+  generalized mean, the arithmetic, geometric and harmonic forms and compared against charged particle
+  production in a wide range of collision systems. When combined with partonic density fluctuations of the
+  nucleons within each nucleus, the data is well described by a generalized mean with power $p$ close to zero.
+  We encapsulate these results in a new model for relativistic hydrodynamic initial conditions.
 \end{abstract}
+
 
 \maketitle
 
 \section{Introduction}
 
-The discovery of the quark-gluon plasma (QGP) at RHIC initiated a large scale effort to quantify the transport
-properties of hot and dense nuclear matter. The success of ideal hydrodynamics in describing the collectivity
-observed in ultra-relativistic heavy-ion collisions supports the production of a fluid-like QGP with minimal
-specific shear viscosity close to the proposed K.S.S.\ bound $\eta/s \ge 1/4\pi$ \cite{KSS, Bjorken}.
+Viscous relativistic fluid dynamics provides a stable, well-tested model for the time-evolution and collective
+behavior in high-energy nuclear collision.  However, a realistic Monte Carlo (MC) model for the initial state of
+the medium is essential for describing many event-by-event observables.   These initial conditions remain one
+of the most poorly-constrained components of modern computational models.
 
-Extractions of $\eta/s$ from experiment using viscous hydrodynamics describe the emergence of collective flow
-from spatial deformations of the produced fireball with a conversion efficiency proportional to the system's
-average specific shear viscosity.  Consequently, model-to-data extractions of $\eta/s$ are subject to the
-accuracy of the simulations used to calculate entropy and energy deposition in the initial state.
+Initial condition models create profiles of energy or entropy density at some early time which are then
+evolved by fluid dynamics; several prescriptions are commonly used today.  Perhaps the simplest is the
+so-called wounded nucleon model, which determines participating nucleons via optical overlap and deposits a
+blob of energy for each participant.  The MC-Glauber model generalizes the wounded nucleon description by
+additionally depositing entropy proportional to the number of nucleon-nucleon collisions.  Despite its
+simplicity, the Glauber model has qualitatively fit a variety of experimental measurements.
+
+Several models are based on the color-glass condensate (CGC) effective field theory.  The MC-KLN model is one
+of the simpler implementations.  More recently, the IP-Glasma model applied CGC and classical Yang-Mills
+theory to create a dynamical description of the pre-fluid stage of the collision.  IP-Glasma has
+quantitatively fit many experimental data.  However, it is theoretically and computationally complex and its
+applicability to smaller collision systems (e.g.~proton-proton) is uncertain.
+
+In this letter, we present a new unified initial condition model for high-energy collisions ranging from
+proton-proton to nucleus-nucleus.
+
 
 \section{The Model}
 
