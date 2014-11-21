@@ -36,16 +36,16 @@
 \section{Introduction}
 
 Viscous relativistic fluid dynamics provides a stable, well-tested model for the time-evolution and collective
-behavior in high-energy nuclear collision.  However, a realistic Monte Carlo (MC) model for the initial state of
-the medium is essential for describing many event-by-event observables.   These initial conditions remain one
-of the most poorly-constrained components of modern computational models.
+behavior in high-energy nuclear collisions.  However, a realistic Monte Carlo (MC) model for the initial state
+of the medium is essential for describing many event-by-event observables.  These initial conditions remain
+one of the most poorly-constrained components of modern computational models.
 
-Initial condition models create profiles of energy or entropy density at some early time which are then
-evolved by fluid dynamics; several prescriptions are commonly used today.  Perhaps the simplest is the
-so-called wounded nucleon model, which determines participating nucleons via optical overlap and deposits a
-blob of energy for each participant.  The MC-Glauber model generalizes the wounded nucleon description by
-additionally depositing entropy proportional to the number of nucleon-nucleon collisions.  Despite its
-simplicity, the Glauber model has qualitatively fit a variety of experimental measurements.
+Initial condition models create profiles of energy or entropy at some early time which are then evolved by
+fluid dynamics; several prescriptions are commonly used today.  Perhaps the simplest is the so-called wounded
+nucleon model, which determines participating nucleons via optical overlap and deposits a blob of energy for
+each participant.  The MC-Glauber model generalizes the wounded nucleon description by additionally depositing
+entropy proportional to the number of nucleon-nucleon collisions.  Despite its simplicity, the Glauber model
+has qualitatively fit a variety of experimental measurements.
 
 Several models are based on the color-glass condensate (CGC) effective field theory.  The MC-KLN model is one
 of the simpler implementations.  More recently, the IP-Glasma model applied CGC and classical Yang-Mills
@@ -84,7 +84,7 @@ first-principles calculation, but must obey basic physical restrictions.
 
 With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \begin{equation}
-  f = T_R = T_R(p; T_A, T_B) = \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/p},
+  f = T_R(p; T_A, T_B) \equiv \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/p},
 \end{equation}
 so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
 reduced mass.  The dimensionless parameter $p$ may take any real value in $(-\infty, \infty)$ and is to be
