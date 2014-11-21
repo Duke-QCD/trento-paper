@@ -71,11 +71,12 @@ postulate the following:
   \item There exists a scalar field $f(T_A, T_B)$ which converts projectile thicknesses into entropy
     deposition.
 \end{enumerate}
-The function $f$ is proportional to the entropy created at the hydrodynamic thermalization time:
+The function $f$ is proportional to the entropy created at mid-rapidity and at the hydrodynamic thermalization
+time:
 \begin{equation}
-  f \propto \frac{dS}{dy} \biggr|_{\tau = \tau_0}.
+  f \propto dS/dy \, |_{\tau = \tau_0}.
 \end{equation}
-It should be provide an \emph{effective} description of early collision dynamics:  it need not arise from a
+It should provide an \emph{effective} description of early collision dynamics:  it need not arise from a
 first-principles calculation, but must obey basic physical restrictions.
 
 With this in mind, we introduce for $f$ the \emph{reduced thickness}
@@ -89,10 +90,10 @@ geometric, and harmonic mean for certain values of $p$, i.e.
 \begin{equation}
   T_R(p; T_A, T_B) =
   \begin{cases}
-    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)} \\[2ex]
-    \sqrt{T_A T_B} & p = 0 \text{ (geometric)} \\[2ex]
-    \dfrac{2 T_A T_B}{T_A + T_B} & p = -1 \text{ (harmonic)} \\
-  \end{cases}.
+    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)}, \\[2ex]
+    \sqrt{T_A T_B} & p = 0 \text{ (geometric)}, \\[2ex]
+    \dfrac{2 T_A T_B}{T_A + T_B} & p = -1 \text{ (harmonic)}. \\
+  \end{cases}
 \end{equation}
 More generally, $p$ quantifies the amount of attenuation in asymmetric ($T_A \neq T_B$) regions of the
 collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:saturation}.  As $p$
@@ -128,37 +129,50 @@ The reduced thickness possesses several other key properties.  It is
 The reduced thickness provides the basis of the model name:
 T\raisebox{-.5ex}{R}ENTo, for Thickness-Reduced Event-by-event Nuclear Topology.
 
+We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
+of the reduced thickness completes the specification of the model.  The procedure is constructed from the
+ground up to handle a variety of collision systems; we begin with the simplest case.
+
 \subsection{Proton-proton collisions}
 
-We thus follow a common prescription and define Eq.~(ansatz) over \emph{participant} thickness
-functions $\mathcal{T}_A$ and $\mathcal{T}_B$ from an underlying Glauber model of independent nucleon-nucleon
-collisions with additional source fluctuations $\gamma_i$ in the transverse density $T_p$ contributed by each
-participant nucleon,
-\begin{equation}
-  \label{thickness def}
-  \mathcal{T}(x,y) = \sum\limits_{i=1}^{N_{part}} \gamma_i\, T_p(x-x_i,y-y_i).
-\end{equation}
+Consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction.
+Denote their nuclear densities by
+\begin{equation*}
+  \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
+\end{equation*}
+and let us assume that the integral $\int dz \, \rho_\text{proton}$ either has a closed form or may be
+evaluated numerically, so that the proton thickness functions can be calculated.
 
-The weights $\gamma_i$ are sampled from a two parameter Gamma distribution with mean $\mu=1$ and shape
-parameter $k$. These weights incorporate event-by-event fluctuations in the density of partons sampled in each
-nucleon-nucleon collision. The choice of a Gamma distribution reflects a long history of fitting proton-proton
-multiplicity distributions using a Negative Binomial distribution which arises naturally from a Gamma-Poisson
-mixture.
-
-For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
+We now randomly decide whether the protons collide according to the probability
 \begin{equation}
-  T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right)
+  P_\text{coll} = 1 - \exp\biggl[ -\sigma_{gg} \int dx \, dy \int dz \, \rho_A \int dz \, \rho_B \biggr],
 \end{equation}
-with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is a rather crude description of
-the nucleon and consequently restrict our attention to properties of the collision that are insensitive to
-details of the nucleonic substructure.
+where the integral in the exponential is the overlap integral of the proton thickness functions and
+$\sigma_{gg}$ is a cross-section which is set so that the total proton-proton cross-section equals the
+experimental inelastic nucleon nucleon cross-section $\sigma_{NN}$.
+
+Assuming the protons collide, each is assigned a \emph{fluctuated} thickness
+\begin{equation}
+  T_{A,B}(x, y) = \gamma_{A,B} \int dz \, \rho_{A,B}(x, y),
+\end{equation}
+where $\gamma_{A,B}$ are independent random numbers sampled from a gamma distribution with unit mean,
+\begin{equation}
+  P(\gamma; k) \propto \gamma^{k-1} e^{-\gamma/k},
+\end{equation}
+with shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
+flexibility---it is exponential for $k = 1$ and becomes Gaussian for large $k$---and because it is the
+continuous analog of the negative binomial distribution, which has historically been used to fit proton-proton
+multiplicity fluctuations.
+
+The reduced thickness is then calculated from the projectile thickness functions; this furnishes the initial
+transverse entropy profile up to an overall normalization factor, $dS/dy \propto T_R(p; T_A, T_B)$.
 
 \subsection{Larger systems}
 
 Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision
 criteria described in reference \cite{proton-proton}.  The pair-wise collision probability is then sampled
 independently for each pair of projectile and target nucleons to determine the participants which contribute
-in Eq.~\eqref{thickness def}.
+in Eq.~(thickness def).
 
 
 \section{Results}
@@ -168,6 +182,14 @@ in Eq.~\eqref{thickness def}.
   \caption{\label{fig:multdist}Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$,
   fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
 \end{figure*}
+
+For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
+\begin{equation}
+  T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right)
+\end{equation}
+with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is a rather crude description of
+the nucleon and consequently restrict our attention to properties of the collision that are insensitive to
+details of the nucleonic substructure.
 
 In terms of the reduced
 thickness function, entropy deposition at mid-rapidity is determined according to
