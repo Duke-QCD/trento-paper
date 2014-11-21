@@ -7,6 +7,9 @@
 \usepackage{mdwlist}
 \renewcommand\labelitemi{\raisebox{.3ex}{\tiny$\bullet$}}
 
+\newcommand{\trento}{T\raisebox{-.5ex}{R}ENTo}
+\newcommand{\nch}{N_\text{ch}}
+\newcommand{\needcite}{\textbf{[???]}}
 
 \begin{document}
 
@@ -129,7 +132,7 @@ The reduced thickness possesses several other key properties.  It is
 \end{itemize*}
 
 Finally, the reduced thickness provides the basis of the model name:
-T\raisebox{-.5ex}{R}ENTo, for Thickness-Reduced Event-by-event Nuclear Topology.
+\trento, for Thickness-Reduced Event-by-event Nuclear Topology.
 
 We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
 of the reduced thickness completes the specification of the model.  The procedure is constructed from the
@@ -186,51 +189,59 @@ $i$ in projectile $A$.  $T_B$ is constructed using the same definition over its 
 \textbf{SOMETHING HERE?}
 
 
-\section{Results}
-
 \begin{figure*}[t]
   \includegraphics{multdist}
-  \caption{\label{fig:multdist}Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$,
-  fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
+  \caption{
+    \label{fig:multdist}
+    Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$, fluctuation parameter
+    $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.
+  }
 \end{figure*}
 
-For the average transverse parton density $T_p(x,y)$ we use a Gaussian,
-\begin{equation}
-  T_p(x,y) = \frac{1}{\sqrt{2 \pi B}} \exp\left(-\frac{x^2+y^2}{2 B}\right)
-\end{equation}
-with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is a rather crude description of
-the nucleon and consequently restrict our attention to properties of the collision that are insensitive to
-details of the nucleonic substructure.
 
-In terms of the reduced
-thickness function, entropy deposition at mid-rapidity is determined according to
-\begin{equation}
-  \label{entropy deposition}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} = \kappa_s(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
-\end{equation}
-where $\kappa_s(\sqrt{s})$ is an undetermined energy-dependent normalization factor and $\mathcal{T}_R(x,y)$
-is the reduced thickness function.
+\section{Results}
 
-Equivalently, it's been shown that the initial entropy is a close proxy for charged particle multiplicity up
-to viscous entropy corrections [?]. We can recast Eq.~\eqref{entropy deposition} in terms of the charged
-particle production as,
+This section explores the qualitative behavior of the \trento\ model and compares some results to experimental
+measurements.  Model calculations depend on several undetermined parameters, namely the reduced thickness
+parameter $p$, gamma fluctuation parameter $k$, and nucleon size and shape.  To rigorously constrain these
+parameters would require a systematic model-to-data comparison which is beyond the scope of this work;
+instead, we invoke some simplifying assumptions.
+
+We restrict our attention to the special cases of the reduced thickness parameter $p = 1$, 0, $-1$ which
+correspond respectively to the arithmetic, geometric, and harmonic mean.  The gamma fluctuation parameter $k$
+is fixed at 0.8, and we assume the beam-integrated proton density is a Gaussian
 \begin{equation}
-  \label{particle production}
-  \frac{dN_{ch}({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \approx
-  \kappa_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
+  \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
+\end{equation}
+with fixed area $B = (0.6\;\text{fm})^2$.  This is at best a rough average profile, so we do not attempt to
+explain phenomena such as collective behavior in proton-proton collisions which depend on subnucleonic
+structure.
+
+Due to these assumptions, the following results do not necessarily represent the best-fit of the model to data.
+
+\subsection{Multiplicity distributions}
+
+It's been shown that the initial entropy is a close proxy for charged particle multiplicity up
+to viscous entropy corrections \needcite
+\begin{equation}
+  \nch \propto \int dx \, dy \, T_R.
 \end{equation}
 which allows us to make a direct comparison with experimentally measured charged particle distributions.
+
+\begin{figure}[b]
+  \includegraphics{eccentricity}
+  \caption{
+    \label{fig:eccen}
+    Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle) as a function of centrality for
+    reduced thickness parameters $p = -1$, 0, 1.  The bottom panel shows the ratio of the rms eccentricities
+    $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}$ against the
+    experimentally allowed values (grey band) from \cite{constraining-ic}.
+  }
+\end{figure}
 
 We now use the aforementioned procedure to generate $10^6$ minimum bias events satisfying $N_{part} > 0$ for
 proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating
 short- and long-range correlations \cite{nucleon-correlations}.
-
-The charged particle distributions are calculated by rescaling Eq.~\eqref{particle production} using a
-modified normalization factor $\kappa'_n$ to match the average charged particle multiplicity in the
-pseudo-rapidity interval $|\eta| < 1$,
-\begin{equation}
-  N_{ch}(|\eta|<1) = \kappa'_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp).
-\end{equation}
 
 In FIG.~\ref{fig:multdist} we plot the predicted charged particle distributions for pp, pPb and PbPb systems
 using a geometric mean $p=0$ with fluctuation parameter $k=0.8$ tuned to fit the pp multiplicity
@@ -240,6 +251,8 @@ The normalization factor $\kappa'_n$ indicated on the figure is tuned to match t
 multiplicity in each experiment. The observed $\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent
 with variations in the collision energy and kinematic cuts.
 
+\subsection{Eccentricity harmonics}
+
 In FIG.~\ref{fig:eccen} we plot the PbPb ellipticity and triangularity $\epsilon_2$ and $\epsilon_3$ (top
 and middle panels) calculated according to,
 \begin{equation}
@@ -247,11 +260,11 @@ and middle panels) calculated according to,
 \end{equation}
 along with the eccentricity ratio $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2
 \rangle}^{0.6}$ (bottom panel). The shaded band in the bottom panel indicates the values of this ratio allowed
-by LHC flow data and hydrodynamic calculations as determined by the authors in [?].
+by LHC flow data and hydrodynamic calculations as determined by the authors in \needcite.
 
-\section{Comparison to wounded nucleon and binary collision mixture}
+\subsection{Ultracentral uranium-uranium}
 
-It's interesting to compare Eq.~\eqref{entropy deposition} against the commonly used wounded nucleon and
+It's interesting to compare Eq.~(entropy deposition) against the commonly used wounded nucleon and
 binary collision parameterization where the transverse entropy (or energy) density is set proportional to a
 linear combination of the local density of participant and pair-wise collisions,
 \begin{equation}
@@ -273,14 +286,6 @@ where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th parti
 collision term in Eq.~\eqref{glb ansatz} scales with the product of nuclear thickness functions $N_{coll}
 \propto T_A T_B$ and predicts a rapid increase in charged particle production in systems for which the density
 of nuclear overlap is large.
-
-\begin{figure}[t]
-  \includegraphics{eccentricity}
-  \caption{\label{fig:eccen}Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle)
-  calculated using an entropy weight for powers $p=-1,0,1$.  In the bottom panel the ratio $\mathcal{R} =
-  \sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{0.6}$ is shown with the
-  experimentally allowed values calculated in ref.\ \cite{constraining-ic}}
-\end{figure}
 
 In contrast with the two-component model, the proposed generalized mean ansatz exhibits no such quadratic
 scaling. Specifically, for an idealized system in which the density of nuclear overlap is perfectly symmetric,
@@ -315,14 +320,14 @@ This predicted structure was dubbed the ``knee''.
 \end{figure}
 
 In FIG.~\ref{fig:knee} we compare the predictions of the fluctuated two-component Eq.~\eqref{glb algorithm}
-and generalized mean prescriptions Eq.~\eqref{entropy deposition} using $10^6$ minimum bias events
+and generalized mean prescriptions Eq.~(entropy deposition) using $10^6$ minimum bias events
 in the impact parameter range $0<b<3.5 ~\mathrm{fm}$ with a $15\%$ cut to avoid contamination from events
 $b>3.5 ~\mathrm{fm}$.
 
 The fluctuated two component model shows clear evidence of a knee structure in the $0-0.5\%$ centrality bin
 which is inconsistent with the STAR data. These findings agree with those previously reported in a
 comprehensive flow analysis by A.\ Goldschmidt, Zhi Qiu and U.\ Heinz, in preparation and private communication.
-The authors in [?] found that a hot-spot model with sharply peaked entropy density fluctuations described by
+The authors in \needcite\ found that a hot-spot model with sharply peaked entropy density fluctuations described by
 concentrated semi-hard cross-section $\sigma \approx 2 ~\mathrm{mb}$ is sufficient to wash out the structure
 of the knee in UU collisions, but it remains to be seen if such sharply peaked hot-spots fit into a coherent
 description of charged particle production in small systems.
@@ -345,8 +350,9 @@ production in ultra-relativistic nucleus-nucleus collisions and demonstrate the 
 replicate pp, pPb and PbPb multiplicity distributions. In FIG.~\ref{fig:eccen} we show that the predicted
 ellipticity of the produced fireball is highly sensitive to the power of the p-norm while the fluctuation
 driven triangularity is less sensitive. The optimal ratio of these harmonics which was extracted from flow
-data in reference [?] prefers a value of p close to 0 corresponding to the geometric mean. We note that
-geometric mean scaling of the initial entropy was also reported by an AdS-CFT calculation in reference [?].
+data in reference \needcite\ prefers a value of p close to 0 corresponding to the geometric mean. We note that
+geometric mean scaling of the initial entropy was also reported by an AdS-CFT calculation in reference
+\needcite.
 
 We also compare the generalized mean ansatz against a fluctuated two-component model in Uranium-Uranium
 collisions where one expects the eccentricity harmonics to behave quite differently. The generalized mean
