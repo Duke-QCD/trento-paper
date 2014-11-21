@@ -56,6 +56,9 @@ proton-proton to nucleus-nucleus.
 
 \section{Model}
 
+The model is constructed in a similar fashion to the two-component Glauber model, but using a different ansatz
+for entropy production.
+
 Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
 the beam-integrated density of its nuclear matter, typically called thickness:
 \begin{equation}
@@ -92,9 +95,10 @@ geometric, and harmonic mean for certain values of $p$, i.e.
   \end{cases}.
 \end{equation}
 More generally, $p$ quantifies the amount of attenuation in asymmetric ($T_A \neq T_B$) regions of the
-collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:saturation}.  The model behaves
-quite differently depending on $p$, for instance $p=1$ is precisely a wounded nucleon model, while
-$-1 \lesssim p \lesssim 0$ mimics CGC saturation.
+collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:saturation}.  As $p$
+\emph{decreases}, the degree of attenuation \emph{increases}.  This significantly impacts the behavior of the
+model, for instance $p=1$ is precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics CGC
+saturation.
 
 \begin{figure}[t]
   \includegraphics{saturation}
@@ -108,15 +112,16 @@ $-1 \lesssim p \lesssim 0$ mimics CGC saturation.
 The reduced thickness possesses several other key properties.  It is
 \begin{itemize}
   \item continuous;
-  \item monotonic, hence if
+  \item monotonically increasing:  if
     $T_A \leq T_A'$, $T_B \leq T_B'$, then
     $T_R(p; T_A, T_B) \leq T_R(p; T_A', T_B')$;
   \item and symmetric:
     $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$.
-    Indeed, the reduced thickness is independent of $p$ when $T_A$ equals $T_B$: $T_R(p; T, T) = T$.
+    Indeed, the reduced thickness is independent of $p$ when the projectile thicknesses are equal:
+    $T_R(p; T, T) = T$.
   \item Finally, it vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.
     In fact, for $p \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.  It is unclear whether
-    positive values of $p$ provide a physically meaningful model, since it violates the principle of eikonal
+    positive values of $p$ provide a physically meaningful model, since it violates the postulate of eikonal
     entropy production.
 \end{itemize}
 
