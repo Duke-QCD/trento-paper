@@ -2,7 +2,7 @@ NAME = trento
 PDF = $(NAME).pdf
 SRC = $(NAME).tex
 BUILDDIR = build
-LATEX = latexmk -pdf -output-directory=$(BUILDDIR)
+LATEX = latexmk -pdf -halt-on-error -synctex=1 -output-directory=$(BUILDDIR)
 
 all: $(PDF)
 
