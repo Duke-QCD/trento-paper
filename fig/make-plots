@@ -87,8 +87,8 @@ def saturation():
         plt.plot(A, M, color=pmean_colors[p],
                  label='{}: $p = {}$'.format(name, p))
 
-    plt.xlabel('$a$')
-    plt.ylabel('$M_p(a, 1)$')
+    plt.xlabel('$T_A$')
+    plt.ylabel('$T_R(T_A, 1)$')
     plt.xticks(range(6))
     plt.yticks(range(4))
     plt.gca().set_aspect('equal')

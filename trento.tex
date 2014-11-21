@@ -56,107 +56,76 @@ proton-proton to nucleus-nucleus.
 
 \section{Model}
 
-The model is built from the ground up to handle a variety of collision systems.  Let us first consider the
-simplest case, a proton-proton collision.
-
-Suppose a pair of protons collide along beam axis $z$.  Each proton is represented by its
-thickness $T(x, y)$; thickness may be thought of as the beam-integrated density of nuclear matter,
+Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
+the beam-integrated density of its nuclear matter, typically called thickness:
 \begin{equation}
-  T(x, y) = \int dz \, \rho(x, y, z).
+  T_{A,B}(x, y) = \int dz \, \rho_{A,B}(x, y, z).
 \end{equation}
-Label the protons $A$, $B$ with corresponding thicknesses $T_A(x, y)$, $T_B(x, y)$.
-
-We now postulate the following:
+The construction of the thickness functions will be addressed in the following subsections; first, we
+postulate the following:
 \begin{enumerate}
   \item The eikonal approximation is valid:  entropy is produced if $T_A$ and $T_B$ eikonally overlap.
   \item There exists a scalar field $f(T_A, T_B)$ which converts projectile thicknesses into entropy
     deposition.
 \end{enumerate}
-The function $f$ is interpreted as the entropy created at the hydrodynamic thermalization time.  It should be
-provide an \emph{effective} description of early collision dynamics:  it need not arise from a
+The function $f$ is proportional to the entropy created at the hydrodynamic thermalization time:
+\begin{equation}
+  f \propto \frac{dS}{dy} \biggr|_{\tau = \tau_0}.
+\end{equation}
+It should be provide an \emph{effective} description of early collision dynamics:  it need not arise from a
 first-principles calculation, but must obey basic physical restrictions.
 
-With this in mind, we propose for $f$ the family of functions
+With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \begin{equation}
-  f = f(p; T_A, T_B) = \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/2},
+  f = T_R = T_R(p; T_A, T_B) = \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/p},
 \end{equation}
-where the parameter $p$ is any real number in $(-\infty, \infty)$.  This functional form---known as the
-generalized mean---reduces to the arithmetic, geometric, and harmonic mean for certain values of $p$, i.e.
+so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
+reduced mass.  The dimensionless parameter $p$ may take any real value in $(-\infty, \infty)$ and is to be
+determined by experiment.  This functional form---known as the generalized mean---simplifies to the arithmetic,
+geometric, and harmonic mean for certain values of $p$, i.e.
 \begin{equation}
-  f(p; T_A, T_B) =
+  T_R(p; T_A, T_B) =
   \begin{cases}
-    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)} \\
-    \sqrt{T_A T_B} & p = 0 \text{ (geometric)} \\
-    \dfrac{1}{1/T_A + 1/T_B} & p = -1 \text{ (harmonic)} \\
+    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)} \\[2ex]
+    \sqrt{T_A T_B} & p = 0 \text{ (geometric)} \\[2ex]
+    \dfrac{2 T_A T_B}{T_A + T_B} & p = -1 \text{ (harmonic)} \\
   \end{cases}.
 \end{equation}
+More generally, $p$ quantifies the amount of attenuation in asymmetric ($T_A \neq T_B$) regions of the
+collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:saturation}.  The model behaves
+quite differently depending on $p$, for instance $p=1$ is precisely a wounded nucleon model, while
+$-1 \lesssim p \lesssim 0$ mimics CGC saturation.
 
-
-We consider an ultra-relativistic collision between a projectile nucleus with atomic mass number $A$ and
-target nucleus with atomic mass number $B$ characterized by collision impact parameter ${\bf b}$ in the
-transverse plane $\vec{r}_\perp = \vec{x} \times \vec{y}$. The density of nuclear matter in the rest frame of
-each nucleus is described by the relevant un-perturbed multi-body nuclear wavefunction $\Psi_N$, where
-$\Psi_N$ is often characterized by the beam-integrated nuclear thickness function,
-\begin{equation}
-  T(x,y) = \int dz\, \left|\Psi_N(x,y,z) \right|^2.
-\end{equation}
-
-Let $T_A$ and $T_B$ denote the transverse density of nucleons determined by the collapse of wavefunctions
-$\Psi_A$ and $\Psi_B$ in a given nucleus-nucleus collision. We consider the existence of an eikonal mapping
-$f(T_A,T_B)$ that characterizes entropy deposition at mid-rapidity as a function of $T_A$ and $T_B$,
-\begin{equation}
-  \label{ansatz}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} =
-  f(T_A({\bf r}_\perp + {\bf b}/2),\,T_B({\bf r}_\perp - {\bf b}/2)).
-\end{equation}
-
-It's reasonable to insist that this mapping $f(x_1,x_2)$ respect several key properties, namely that:
-\begin{enumerate}
-  \item{$f$ is smooth} \\
-    $f'$, $f''$,..., $f^{(k)}$ exist and are continuous
-  \item{$f$ is monotonic} \\
-    if $x_1 \le x'_1$ and $x_2 \le x'_2$ then $f(x_1,x_2) \le f(x'_1,x'_2)$
-  \item{$f$ is symmetric} \\
-    $f(x_1,x_2) = f(x_2,x_1)$
-  \item{$f$ obeys sensible limits} \\
-    $\lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) = 0$.
-\end{enumerate}
-Motivated by these stipulations, we consider the family of vector p-norms known as the generalized mean as a
-suitable ansatz for the mapping $f$,
-\begin{equation}
-  \label{generalized mean ansatz}
-  f(x_1, x_2) \propto M_p(x_1,x_2) = \left( \frac{x_1^p + x_2^p}{2} \right)^{1/p}.
-\end{equation}
-
-\begin{figure}[b]
+\begin{figure}[t]
   \includegraphics{saturation}
-  \caption{\label{saturation}Attenuation in the generalized mean $M_p(a, 1)$ for special forms $p=-1, 0, 1$.}
+  \caption{
+    \label{fig:saturation}
+    Attenuation of the reduced thickness.  Thickness $T_B$ is fixed to one (in arbitrary units) while $T_A$ is
+    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (blue, green, and red).
+  }
 \end{figure}
 
-\begin{figure*}[t]
-  \includegraphics{multdist}
-  \caption{\label{fig:multdist}Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$,
-  fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
-\end{figure*}
+The reduced thickness possesses several other key properties.  It is
+\begin{itemize}
+  \item continuous;
+  \item monotonic, hence if
+    $T_A \leq T_A'$, $T_B \leq T_B'$, then
+    $T_R(p; T_A, T_B) \leq T_R(p; T_A', T_B')$;
+  \item and symmetric:
+    $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$.
+    Indeed, the reduced thickness is independent of $p$ when $T_A$ equals $T_B$: $T_R(p; T, T) = T$.
+  \item Finally, it vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.
+    In fact, for $p \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.  It is unclear whether
+    positive values of $p$ provide a physically meaningful model, since it violates the principle of eikonal
+    entropy production.
+\end{itemize}
 
-For $p = \{-\infty,-1,0,1,\infty\}$, the generalized mean becomes minimum, harmonic, geometric, arithmetic and
-maximum functions respectively which can be shown to obey the following ordering inequality,
-\begin{equation}
-  \mathrm{if} ~ p<p', ~ \mathrm{then} ~ M_{p}(x_1,x_2) \le M_{p'}(x_1,x_2).
-\end{equation}
-In this sense, the continuous parameter $p$ characterizes the attenuation of entropy deposited at
-mid-rapidity by each nucleon as it pierces the target nucleus. This attenuation is best visualized by fixing
-the projectile thickness $T_A$ and varying the target thickness $T_B$ as shown in FIG.~\ref{saturation}.
+The reduced thickness provides the basis of the model name:
+T\raisebox{-.5ex}{R}ENTo, for Thickness-Reduced Event-by-event Nuclear Topology.
 
-There is of course one important caveat to the suitability of a generalized mean ansatz. It is easy to see in
-FIG.~\ref{fig:multdist} that
-\begin{equation}
-  \lim\limits_{x_1,x_2 \to 0} f(x_1,x_2) \ne 0 ~\mathrm{for} ~ p>0.
-\end{equation}
-Blithely applying an arithmetic mean for example to projectile and target densities would deposit entropy in
-regions of the fireball where there is nothing to hit.
+\subsection{Proton-proton collisions}
 
-We thus follow a common prescription and define Eq.~\eqref{ansatz} over \emph{participant} thickness
+We thus follow a common prescription and define Eq.~(ansatz) over \emph{participant} thickness
 functions $\mathcal{T}_A$ and $\mathcal{T}_B$ from an underlying Glauber model of independent nucleon-nucleon
 collisions with additional source fluctuations $\gamma_i$ in the transverse density $T_p$ contributed by each
 participant nucleon,
@@ -179,19 +148,23 @@ with fixed nucleon width $B=0.36 ~\mathrm{fm}^2$ although we stress that this is
 the nucleon and consequently restrict our attention to properties of the collision that are insensitive to
 details of the nucleonic substructure.
 
+\subsection{Larger systems}
+
 Participant nucleons are determined in the projectile and target nuclei using the probabilistic collision
 criteria described in reference \cite{proton-proton}.  The pair-wise collision probability is then sampled
 independently for each pair of projectile and target nucleons to determine the participants which contribute
 in Eq.~\eqref{thickness def}.
 
-For simplicity, we refer to this generalized mean of participant densities as the \emph{reduced thickness} of
-projectile nucleus $A$ and target nucleus $B$,
-\begin{equation}
-  \label{reduced}
-  \mathcal{T}_R(p;x,y) \equiv
-  \left( \frac{\mathcal{T}_A({\bf x}+{\bf b}/2,y)^p + \mathcal{T}_B({\bf x}-{\bf b}/2,y)^p}{2} \right)^{1/p}
-\end{equation}
-noting that the units of $T_R$ are also that of a nuclear thickness function. In terms of the reduced
+
+\section{Results}
+
+\begin{figure*}[t]
+  \includegraphics{multdist}
+  \caption{\label{fig:multdist}Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$,
+  fluctuation parameter $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.}
+\end{figure*}
+
+In terms of the reduced
 thickness function, entropy deposition at mid-rapidity is determined according to
 \begin{equation}
   \label{entropy deposition}
@@ -209,8 +182,6 @@ particle production as,
   \kappa_n(\sqrt{s})\, \mathcal{T}_R(p;{\bf r}_\perp)
 \end{equation}
 which allows us to make a direct comparison with experimentally measured charged particle distributions.
-
-\section{Results}
 
 We now use the aforementioned procedure to generate $10^6$ minimum bias events satisfying $N_{part} > 0$ for
 proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating
