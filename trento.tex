@@ -4,6 +4,9 @@
 \usepackage{graphicx}
 \graphicspath{{fig/}}
 
+\usepackage{mdwlist}
+\renewcommand\labelitemi{\raisebox{.3ex}{\tiny$\bullet$}}
+
 
 \begin{document}
 
@@ -111,22 +114,20 @@ saturation.
 \end{figure}
 
 The reduced thickness possesses several other key properties.  It is
-\begin{itemize}
+\begin{itemize*}
   \item continuous;
-  \item monotonically increasing:  if
-    $T_A \leq T_A'$, $T_B \leq T_B'$, then
-    $T_R(p; T_A, T_B) \leq T_R(p; T_A', T_B')$;
-  \item and symmetric:
-    $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$.
-    Indeed, the reduced thickness is independent of $p$ when the projectile thicknesses are equal:
+  \item monotonically increasing:  \\
+    if $T_A \leq T_A'$ and $T_B \leq T_B'$, then $T_R \leq T_R'$;
+  \item symmetric in the projectile thicknesses: \\
+    $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$, and hence
+  \item independent of $p$ when the thicknesses are equal: \\
     $T_R(p; T, T) = T$.
-  \item Finally, it vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.
-    In fact, for $p \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.  It is unclear whether
-    positive values of $p$ provide a physically meaningful model, since it violates the postulate of eikonal
-    entropy production.
-\end{itemize}
+  \item The reduced thickness vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.  In fact, for $p
+    \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.  It is unclear whether positive values of $p$
+    yield a physically meaningful model, since it violates the postulate of eikonal entropy production.
+\end{itemize*}
 
-The reduced thickness provides the basis of the model name:
+Finally, the reduced thickness provides the basis of the model name:
 T\raisebox{-.5ex}{R}ENTo, for Thickness-Reduced Event-by-event Nuclear Topology.
 
 We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
