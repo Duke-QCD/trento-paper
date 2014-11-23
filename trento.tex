@@ -200,32 +200,36 @@ $i$ in projectile $A$.  $T_B$ is constructed using the same definition over its 
 
 \section{Results}
 
-This section explores the qualitative behavior of the \trento\ model and compares some results to experimental
-measurements.  Model calculations depend on several undetermined parameters, namely the reduced thickness
-parameter $p$, gamma fluctuation parameter $k$, and nucleon size and shape.  To rigorously constrain these
-parameters would require a systematic model-to-data comparison which is beyond the scope of this work;
-instead, we invoke some simplifying assumptions.
-
-We restrict our attention to the special cases of the reduced thickness parameter $p = 1$, 0, $-1$ which
-correspond respectively to the arithmetic, geometric, and harmonic mean.  The gamma fluctuation parameter $k$
-is fixed at 0.8, and we assume the beam-integrated proton density is a Gaussian
-\begin{equation}
-  \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
-\end{equation}
-with fixed area $B = (0.6\;\text{fm})^2$.  This is at best a rough average profile, so we do not attempt to
-explain phenomena such as collective behavior in proton-proton collisions which depend on subnucleonic
-structure.
-
-Due to these assumptions, the following results do not necessarily represent the best-fit of the model to data.
+\trento\ simulations depend on several undetermined parameters---to rigorously constrain these parameters
+would require a systematic model-to-data comparison which is beyond the scope of this work.  Therefore, the
+following results do not necessarily represent the best-fit of the model to data.
 
 \subsection{Multiplicity distributions}
 
-It's been shown that the initial entropy is a close proxy for charged particle multiplicity up
-to viscous entropy corrections \needcite
+Charged-particle multiplicity $\nch$ is to an excellent approximation proportional to the total initial
+entropy \needcite, and hence proportional to the integrated reduced thickness:
 \begin{equation}
   \nch \propto \int dx \, dy \, T_R.
 \end{equation}
-which allows us to make a direct comparison with experimentally measured charged particle distributions.
+To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$
+profiles, and multiply by a normalization constant to rescale the distribution to the experimental mean.
+
+The left panel of FIG.~\ref{fig:multdist} shows the $\nch$ distribution from $10^6$ proton-proton simulations
+using reduced thickness parameter $p = 0$ (geometric mean), gamma fluctuation parameter $k = 0.8$, and
+Gaussian beam-integrated proton density
+\begin{equation}
+  \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
+\end{equation}
+with effective area $B = (0.6\;\text{fm})^2$.  Results compare favorably with the experimental distribution
+measured by ALICE \needcite.
+
+Proton-lead and lead-lead distributions are presented in the middle and right panels of
+FIG.~\ref{fig:multdist}.  We use lead nucleus configurations including nucleon-nucleon correlations from
+\cite{nucleon-correlations}; model parameters are otherwise identical to proton-proton.
+
+The model is able to reproduce the shapes of all three distributions, although the normalization factors
+(annotated in the figure) only agree within $\sim$20\%.  This could be a shortcoming of the model or may be
+attributable to differences in beam energy and kinematic cuts.
 
 \begin{figure}[b]
   \includegraphics{eccentricity}
@@ -237,18 +241,6 @@ which allows us to make a direct comparison with experimentally measured charged
     experimentally allowed values (grey band) from \cite{constraining-ic}.
   }
 \end{figure}
-
-We now use the aforementioned procedure to generate $10^6$ minimum bias events satisfying $N_{part} > 0$ for
-proton-proton, proton-lead and lead-lead nuclei using realistic lead nucleon configurations incorporating
-short- and long-range correlations \cite{nucleon-correlations}.
-
-In FIG.~\ref{fig:multdist} we plot the predicted charged particle distributions for pp, pPb and PbPb systems
-using a geometric mean $p=0$ with fluctuation parameter $k=0.8$ tuned to fit the pp multiplicity
-distribution.
-
-The normalization factor $\kappa'_n$ indicated on the figure is tuned to match the average charged particle
-multiplicity in each experiment. The observed $\mathcal{O}(20\%)$ discrepancies in $\kappa'_n$ are consistent
-with variations in the collision energy and kinematic cuts.
 
 \subsection{Eccentricity harmonics}
 
