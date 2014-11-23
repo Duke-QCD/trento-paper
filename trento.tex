@@ -104,15 +104,6 @@ collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:sa
 model, for instance $p=1$ is precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics CGC
 saturation.
 
-\begin{figure}[t]
-  \includegraphics{saturation}
-  \caption{
-    \label{fig:saturation}
-    Attenuation of the reduced thickness.  Thickness $T_B$ is fixed to one (in arbitrary units) while $T_A$ is
-    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (blue, green, and red).
-  }
-\end{figure}
-
 The reduced thickness possesses several other key properties.  It is
 \begin{itemize*}
   \item continuous;
@@ -134,6 +125,15 @@ Finally, the reduced thickness provides the basis of the model name:
 We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
 of the reduced thickness completes the specification of the model.  The procedure is constructed from the
 ground up to handle a variety of collision systems; we begin with the simplest case.
+
+\begin{figure}[t]
+  \includegraphics{saturation}
+  \caption{
+    \label{fig:saturation}
+    Attenuation of the reduced thickness.  Thickness $T_B$ is fixed to one (in arbitrary units) while $T_A$ is
+    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (blue, green, and red).
+  }
+\end{figure}
 
 \subsection{Proton-proton collisions}
 
@@ -229,6 +229,8 @@ The model is able to reproduce the shapes of all three distributions, although t
 (annotated in the figure) only agree within $\sim$20\%.  This could be a shortcoming of the model or may be
 attributable to differences in beam energy and kinematic cuts.
 
+\subsection{Eccentricity harmonics}
+
 \begin{figure}[b]
   \includegraphics{eccentricity}
   \caption{
@@ -239,8 +241,6 @@ attributable to differences in beam energy and kinematic cuts.
     experimentally allowed region (grey band) from \cite{constraining-ic}.
   }
 \end{figure}
-
-\subsection{Eccentricity harmonics}
 
 Eccentricity harmonics $\varepsilon_n$ are calculated for lead-lead collisions using the definition
 \begin{equation}
@@ -261,6 +261,16 @@ falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows
 
 \subsection{Ultracentral uranium-uranium}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics{uranium}
+  \caption{
+    \label{fig:uranium}
+    Ellipticity $\varepsilon_2$ as a function of charged-particle multiplicity for ultracentral
+    uranium-uranium collisions.
+  }
+\end{figure}
+
 Uranium nuclei have a deformed prolate spheroid shape, thus a uranium-uranium collision may achieve maximal
 overlap via two distinct orientations:  ``tip-tip'', in which the long axes of the spheroids are aligned with
 the beam axis and the overlap area is circular; or ``side-side'', where the long axes are perpendicular to the
@@ -279,16 +289,6 @@ The reduced thickness ansatz \eqref{eq:tr} does not have binary collision scalin
 constant ellipticity in ultracentral uranium-uranium, as shown in FIG.~\ref{fig:uranium}.  Short of conducting
 a full hydrodynamic analysis, these results appear to be more consistent with STAR data than Glauber, and are
 similar to IP-Glasma \needcite.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics{uranium}
-  \caption{
-    \label{fig:uranium}
-    Ellipticity $\varepsilon_2$ as a function of charged-particle multiplicity for ultracentral
-    uranium-uranium collisions.
-  }
-\end{figure}
 
 
 \section{Conclusion}
