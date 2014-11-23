@@ -238,20 +238,28 @@ attributable to differences in beam energy and kinematic cuts.
     Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle) as a function of centrality for
     reduced thickness parameters $p = -1$, 0, 1.  The bottom panel shows the ratio of the rms eccentricities
     $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}$ against the
-    experimentally allowed values (grey band) from \cite{constraining-ic}.
+    experimentally allowed region (grey band) from \cite{constraining-ic}.
   }
 \end{figure}
 
 \subsection{Eccentricity harmonics}
 
-In FIG.~\ref{fig:eccen} we plot the PbPb ellipticity and triangularity $\epsilon_2$ and $\epsilon_3$ (top
-and middle panels) calculated according to,
+Eccentricity harmonics $\varepsilon_n$ are calculated for lead-lead collisions using the definition
 \begin{equation}
-  \varepsilon_n e^{i n\phi} = -\frac{\int d^2r\, r^n e^{i n \phi} dS/dy(\vec{r})}{\int d^2r\, r^n dS/dy(\vec{r})}.
+  \varepsilon_n e^{i n\phi} = -\frac{\int dx \, dy\, r^n e^{i n \phi} \, T_R}{\int dx \, dy \, r^n \, T_R}.
 \end{equation}
-along with the eccentricity ratio $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2
-\rangle}^{0.6}$ (bottom panel). The shaded band in the bottom panel indicates the values of this ratio allowed
-by LHC flow data and hydrodynamic calculations as determined by the authors in \needcite.
+Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ as a
+function of centrality for reduced thickness $p = 1$, 0, $-1$.  There is a clear trend of increasing
+eccentricity with decreasing $p$, particularly $\varepsilon_2$.  This may be understood by the attenuation
+property of the reduced thickness:  as $p$ decreases, asymmetric regions of the collision produce less
+entropy, which accentuates the elliptical overlap shape in noncentral collisions and hence enhances eccentricity.
+
+In addition, we perform the test described in \cite{constraining-ic}.  The authors use experimental flow data
+and hydrodynamics to construct an experimentally allowed band of the ratio of root-mean-square eccentricities
+$\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}$ as a function of
+centrality.  They check a number of common initial condition models and find that only IP-Glasma consistently
+falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows that the geometric mean
+($p = 0$) yields excellent agreement with experiment.
 
 \subsection{Ultracentral uranium-uranium}
 
