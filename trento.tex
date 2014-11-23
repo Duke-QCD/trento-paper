@@ -87,6 +87,7 @@ first-principles calculation, but must obey basic physical restrictions.
 With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \begin{equation}
   f = T_R(p; T_A, T_B) \equiv \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/p},
+  \label{eq:tr}
 \end{equation}
 so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
 reduced mass.  The dimensionless parameter $p$ may take any real value in $(-\infty, \infty)$ and is to be
@@ -263,78 +264,34 @@ falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows
 
 \subsection{Ultracentral uranium-uranium}
 
-It's interesting to compare Eq.~(entropy deposition) against the commonly used wounded nucleon and
-binary collision parameterization where the transverse entropy (or energy) density is set proportional to a
-linear combination of the local density of participant and pair-wise collisions,
-\begin{equation}
-  \label{glb ansatz}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \propto
-  \frac{1-\alpha}{2}\mbox{WN}({\bf r_\perp}) + \alpha\, \mbox{BC}({\bf r_\perp}).
-\end{equation}
+Uranium nuclei have a deformed prolate spheroid shape, thus a uranium-uranium collision may achieve maximal
+overlap via two distinct orientations:  ``tip-tip'', in which the long axes of the spheroids are aligned with
+the beam axis and the overlap area is circular; or ``side-side'', where the long axes are perpendicular to the
+beam axis and the overlap area is elliptical.
 
-In practice, wounded nucleon and binary collision deposition is implemented according to variety of different
-prescriptions. We use a two-component model with Gamma fluctuations $\gamma_i$ of the source nucleons given
-by,
-\begin{equation}
-  \label{glb algorithm}
-  \frac{dS({\bf r}_\perp)}{d^2r_\perp dy} \biggr \rvert_{y=0} \propto
-  \sum\limits_{i=1}^{N_{part}} \gamma_i \left(\frac{1-\alpha}{2} +
-  \alpha \frac{N_{coll,i}}{2} \right ) T_p(\vec{r}-\vec{r}_i)
-\end{equation}
-where $N_{coll,i}$ denotes the number of collisions suffered by the $i$-th participant. The $N_{coll}$ binary
-collision term in Eq.~\eqref{glb ansatz} scales with the product of nuclear thickness functions $N_{coll}
-\propto T_A T_B$ and predicts a rapid increase in charged particle production in systems for which the density
-of nuclear overlap is large.
+In the two-component Glauber model, tip-tip collisions have the same number wounded nucleons but more binary
+collisions than side-side, so tip-tip would have larger multiplicity.  Therefore, the Glauber model predicts a
+rapid decrease in elliptic flow $v_2$ as a function of multiplicity in the most central uranium-uranium
+collisions.  This structure is known as the ``knee'' \needcite.
 
-In contrast with the two-component model, the proposed generalized mean ansatz exhibits no such quadratic
-scaling. Specifically, for an idealized system in which the density of nuclear overlap is perfectly symmetric,
-i.e.\ $\mathcal{T}_A = \mathcal{T}_B$, the generalized mean and two-component models behave quite differently:
-\begin{equation}
-  \label{symmetric scaling}
-  \frac{dS}{dy} \propto
-  \begin{cases}
-    \mathcal{T} + \mathcal{C} \mathcal{T}^2 & \text{two-component,} \\
-    \mathcal{T} & \text{generalized mean}
-  \end{cases}
-\end{equation}
-where the coefficient $\mathcal{C}$ scales with the binary collision fraction $\alpha$.
+The STAR experiment at RHIC recently performed uranium-uranium collisions and found no evidence of a knee
+\cite{UU-STAR}.  It has been proposed that fluctuations could wash out the knee \needcite, but a recent
+comprehensive flow analysis showed that the knee would still be visible \cite{osu}.
 
-An interesting consequence of this non-linearity becomes manifest in central U-U collisions. The Uranium
-nucleus is highly deformed and prolonged along a preferred axis. This geometry allows for two distinct
-configurations of Uranium collisions in which the density of nuclear matter is fully overlapping - tip-to-tip
-collisions where the Uranium symmetry axis is aligned with the beam axis and side-on-side collisions where
-the Uranium symmetry axis is perpendicular to the beam axis.
-
-Binary collision scaling predicts that tip-to-tip collisions generate more charged particles than side-on-side
-collisions and hence should be found at slightly higher centralities. It was pointed out that this
-multiplicity ordering should imprint itself on the flow harmonics of central UU collisions due to the large
-ellipticity expected in side-on-side collisions and small ellipticity expected in body-on-body collisions.
-This predicted structure was dubbed the ``knee''.
+The reduced thickness ansatz \eqref{eq:tr} does not have binary collision scaling and hence produces roughly
+constant ellipticity in ultracentral uranium-uranium, as shown in FIG.~\ref{fig:uranium}.  Short of conducting
+a full hydrodynamic analysis, these results appear to be more consistent with STAR data than Glauber, and are
+similar to IP-Glasma \needcite.
 
 \begin{figure}[t]
   \centering
   \includegraphics{uranium}
-  \caption{\label{fig:knee}Scaled TRENTO ($p=0$, $k=0.8$, $B=0.36~\mathrm{fm}^2$) and fluctuated Glauber
-  ($\alpha=14$, $k=1.2$, $B=0.36~\mathrm{fm}^2$) ellipticities compared to STAR elliptic flow data.}
+  \caption{
+    \label{fig:uranium}
+    Ellipticity $\varepsilon_2$ as a function of charged-particle multiplicity for ultracentral
+    uranium-uranium collisions.
+  }
 \end{figure}
-
-In FIG.~\ref{fig:knee} we compare the predictions of the fluctuated two-component Eq.~\eqref{glb algorithm}
-and generalized mean prescriptions Eq.~(entropy deposition) using $10^6$ minimum bias events
-in the impact parameter range $0<b<3.5 ~\mathrm{fm}$ with a $15\%$ cut to avoid contamination from events
-$b>3.5 ~\mathrm{fm}$.
-
-The fluctuated two component model shows clear evidence of a knee structure in the $0-0.5\%$ centrality bin
-which is inconsistent with the STAR data. These findings agree with those previously reported in a
-comprehensive flow analysis by A.\ Goldschmidt, Zhi Qiu and U.\ Heinz, in preparation and private communication.
-The authors in \needcite\ found that a hot-spot model with sharply peaked entropy density fluctuations described by
-concentrated semi-hard cross-section $\sigma \approx 2 ~\mathrm{mb}$ is sufficient to wash out the structure
-of the knee in UU collisions, but it remains to be seen if such sharply peaked hot-spots fit into a coherent
-description of charged particle production in small systems.
-
-In contrast to the two-component model, the generalized mean correctly reproduces the shape of the
-ultra-central elliptic flow measured by STAR. This suggests that non-linearities in the mapping discussed in
-Eq.~\eqref{symmetric scaling} are small and it supports attenuation as the mechanism which describes the
-centrality dependence of charged particle production in AA collisions.
 
 
 \section{Summary}
