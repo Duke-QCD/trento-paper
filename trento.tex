@@ -294,28 +294,24 @@ similar to IP-Glasma \needcite.
 \end{figure}
 
 
-\section{Summary}
+\section{Conclusion}
 
-Initial conditions currently comprise the largest source of uncertainty in hydrodynamic simulations of the QGP
-fireball [refs]. Ideally, one seeks a first principles calculation of the initial state (i.e.\ see refs), but
-these derivations are often irrelevant to the problem of interest making effective models an attractive
-alternative.
+We introduce \trento, a new unified initial condition model for high-energy nuclear collisions based on
+eikonal entropy creation via the \emph{reduced thickness}.  The model is able to simultaneously fit
+proton-proton, proton-lead, and lead-lead multiplicity distributions along with lead-lead eccentricity harmonics,
+and provides a possible resolution to the ``knee'' problem in ultracentral uranium-uranium collisions.
+It is flexible by design and able to mimic the behavior of other initial condition models.
 
-We propose the family of vector p-norms known as the generalized mean as an effective model for entropy
-production in ultra-relativistic nucleus-nucleus collisions and demonstrate the model's ability to
-replicate pp, pPb and PbPb multiplicity distributions. In FIG.~\ref{fig:eccen} we show that the predicted
-ellipticity of the produced fireball is highly sensitive to the power of the p-norm while the fluctuation
-driven triangularity is less sensitive. The optimal ratio of these harmonics which was extracted from flow
-data in reference \needcite\ prefers a value of p close to 0 corresponding to the geometric mean. We note that
-geometric mean scaling of the initial entropy was also reported by an AdS-CFT calculation in reference
-\needcite.
+This is an intentionally \emph{effective} model.  A first-principles derivation would be ideal, but such
+models are usually complex and require significant computation time.  So in practical terms, effective models
+are often preferable for empirical modeling.
 
-We also compare the generalized mean ansatz against a fluctuated two-component model in Uranium-Uranium
-collisions where one expects the eccentricity harmonics to behave quite differently. The generalized mean
-correctly predicts the shape of the elliptic flow in ultra-central UU collisions while the two-component model
-exhibits a well known knee structure which is inconsistent with the STAR data.
+We plan to publicly release \trento\ in the coming weeks, and the community is encouraged to use, test, and
+contribute to the source code.
+
 
 
 \bibliography{sources}
+
 
 \end{document}
