@@ -167,21 +167,25 @@ def multdist():
             )
             w = xmax - xmin
             z = y/w
-            ax.errorbar(x, z, yerr=.06*z, xerr=.035*x,
+            ax.errorbar(x, z, xerr=.06*x, yerr=.035*z,
                         fmt='o', markersize=2, markeredgewidth=0,
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
 
-            norm = (27.5 if system == 'pPb' else 720.) / mult.mean()
+            norm = (27.5 if system == 'pPb' else 700.) / mult.mean()
             mult_rescaled = norm*mult
-            counts, edges = np.histogram(mult_rescaled, bins=40, density=True)
+            counts, edges = np.histogram(
+                mult_rescaled, bins=40 if system == 'pPb' else 100,
+                density=True
+            )
             ax.step(edges[:-1], 1.22*counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
             if system == 'pPb':
                 ax.set_xlim(0, 200)
             else:
-                ax.set_xlim(0, 3800)
+                ax.set_xlim(0, 3600)
+                ax.set_ylim(ymin=.5*z.min())
 
             ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
                         (.145, .035), xycoords='axes fraction',
