@@ -119,6 +119,7 @@ experiment = 'ALICE'
 def multdist():
     systems = 'pp', 'pPb', 'PbPb'
     energies = 2.36, 5.02, 2.76
+    color = pmean_colors[0]
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, textwidth*aspect/2))
 
@@ -150,8 +151,8 @@ def multdist():
                 bins=np.arange(np.max(mult_rescaled)+1),
                 density=True
             )
-            ax.step(edges[:-1], counts, where='post', color='#55a868',
-                    label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
+            ax.step(edges[:-1], counts, where='post', color=color,
+                    label=r'$T_R$, norm = {:.1f}'.format(norm))
 
             ax.set_xlim(xmax=52)
             ax.set_ylim(ymin=.45*y.min())
@@ -174,17 +175,19 @@ def multdist():
             norm = (27.5 if system == 'pPb' else 720.) / mult.mean()
             mult_rescaled = norm*mult
             counts, edges = np.histogram(mult_rescaled, bins=40, density=True)
-            ax.step(edges[:-1], 1.22*counts, where='post', color='#55a868',
-                    label=r'TRENTO $\kappa = {:.3f}$'.format(norm))
+            ax.step(edges[:-1], 1.22*counts, where='post', color=color,
+                    label=r'$T_R$, norm = {:.1f}'.format(norm))
 
             if system == 'pPb':
                 ax.set_xlim(0, 200)
+            else:
+                ax.set_xlim(0, 3800)
 
             ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
                         (.145, .035), xycoords='axes fraction',
                         ha='left', va='bottom')
 
-        ax.xaxis.set_major_locator(tick.MaxNLocator(4, prune='upper'))
+        ax.xaxis.set_major_locator(tick.MaxNLocator(4))
         ax.yaxis.set_major_locator(
             tick.LogLocator(base=10 if system == 'pp' else 100)
         )
