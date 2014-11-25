@@ -266,7 +266,7 @@ def uranium():
         ax.set_ylim([0.04, 0.20])
         ax.set_yticks((.06, .12, .18))
         ax.set_ylabel(r'$\varepsilon_2$')
-        despine(ax, remove_ticks=True)
+        despine(ax)
 
     axes[0].legend((trentoline, glbline), ('TRENTO', 'Glauber+NBD'),
                    loc='upper right', ncol=1,
@@ -274,13 +274,13 @@ def uranium():
     # top.legend(loc='best', ncol=3, handlelength=1.3, columnspacing=1.2)
 
     ax = axes[0]
-    ax.annotate('0–0.1% spectators', (.5, .02), xycoords='axes fraction',
+    ax.annotate('0–0.1% spectators', (.5, .05), xycoords='axes fraction',
                 ha='center', va='bottom')
     ax.text(.9, .138, 'U+U', ha='left', va='top')
     ax.text(.9, .088, 'Au+Au', ha='left', va='bottom')
 
     ax = axes[1]
-    ax.annotate('0–1% spectators', (.5, .02), xycoords='axes fraction',
+    ax.annotate('0–1% spectators', (.5, .05), xycoords='axes fraction',
                 ha='center', va='bottom')
     ax.text(.9, .136, 'U+U', ha='left', va='top')
     ax.text(.9, .090, 'Au+Au', ha='left', va='bottom')
@@ -308,7 +308,7 @@ def eccentricity():
         ).T.reshape(2, bins, -1)
 
         for ecc, dashes, label in zip(
-                eccentricity, ((None, None), (2.5, 1.5)), (plabel, None)):
+                eccentricity, ((None, None), (8, 2)), (plabel, None)):
             top.plot(cent_mid, ecc.mean(axis=1),
                      dashes=dashes, color=color, label=label)
 
@@ -330,7 +330,7 @@ def eccentricity():
     top.legend(loc='best', ncol=3, handlelength=1.3, columnspacing=1.2)
     top.text(35, .34, r'$\varepsilon_2$')
     top.text(55, .21, r'$\varepsilon_3$')
-    despine(top, remove_ticks=True)
+    despine(top)
 
     bottom.set_xlim(0, 40)
     bottom.xaxis.set_major_locator(tick.MaxNLocator(4))
@@ -338,7 +338,7 @@ def eccentricity():
     bottom.set_ylim(.3, 1.2)
     bottom.set_yticks((.3, .7, 1.1))
     bottom.set_ylabel('Ratio')
-    despine(bottom, remove_ticks=True)
+    despine(bottom)
 
     plt.tight_layout(pad=.05)
 
