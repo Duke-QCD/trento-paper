@@ -43,15 +43,15 @@ one of the most poorly-constrained components of modern computational models.
 
 Initial condition models create profiles of energy or entropy at some early time which are then evolved by
 fluid dynamics.  Perhaps the simplest prescription is the so-called wounded nucleon model, which determines
-participating nucleons via optical overlap and deposits a blob of energy for each participant.  The MC-Glauber
-model generalizes wounded nucleons by additionally depositing entropy proportional to the number of binary
-nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a variety of
-experimental measurements.
+participating nucleons via optical overlap and deposits a blob of energy or entropy for each participant.  The
+MC-Glauber model generalizes wounded nucleons by additionally depositing entropy proportional to the number of
+binary nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a variety
+of experimental measurements.
 
 More recently, the IP-Glasma model applied color-glass condensate (CGC) effective field theory to create a
 dynamical description of the pre-fluid stage of the collision.  IP-Glasma has quantitatively fit many
-experimental data.  However, it is theoretically and computationally complex and its applicability to smaller
-collision systems (e.g.~proton-proton) is uncertain.
+experimental data and is regarded as state-of-the-art.  However, it is theoretically and computationally
+complex and its applicability to smaller collision systems (e.g.~proton-proton) is uncertain.
 
 In this letter, we present a new unified initial condition model for high-energy collisions ranging from
 proton-proton to nucleus-nucleus.
@@ -99,11 +99,10 @@ geometric, and harmonic mean for certain values of $p$, i.e.
     \dfrac{2 T_A T_B}{T_A + T_B} & p = -1 \text{ (harmonic)}. \\
   \end{cases}
 \end{equation}
-More generally, $p$ quantifies the amount of attenuation in asymmetric ($T_A \neq T_B$) regions of the
-collision.  By attenuation, we mean \textbf{WHAT?}, as shown in FIG.~\ref{fig:saturation}.  As $p$
-\emph{decreases}, the degree of attenuation \emph{increases}.  This significantly impacts the behavior of the
-model, for instance $p=1$ is precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics CGC
-saturation.
+More generally, $p$ quantifies the attenuation of entropy production in asymmetric ($T_A \neq T_B$) regions of
+the collision, as demonstrated in FIG.~\ref{fig:saturation}.  As $p$ \emph{decreases}, the degree of
+attenuation \emph{increases}.  This significantly impacts the behavior of the model, for instance $p=1$ is
+precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics CGC saturation.
 
 The reduced thickness possesses several other key properties.  It is
 \begin{itemize*}
@@ -229,9 +228,9 @@ Proton-lead and lead-lead distributions are presented in the middle and right pa
 FIG.~\ref{fig:multdist}.  We use lead nucleus configurations including nucleon-nucleon correlations from
 \cite{nucleon-correlations}; model parameters are otherwise identical to proton-proton.
 
-The model is able to reproduce the shapes of all three distributions, although the normalization factors
-(annotated in the figure) only agree within $\sim$20\%.  This could be a shortcoming of the model or may be
-attributable to differences in beam energy and kinematic cuts.
+The model is able to reproduce the shape of each distribution using a single set of parameters except for the
+overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with
+differences in experimental beam energy and kinematic cuts.
 
 \subsection{Eccentricity harmonics}
 
@@ -303,10 +302,10 @@ similar to IP-Glasma \needcite.
 \section{Conclusion}
 
 We introduce \trento, a new unified initial condition model for high-energy nuclear collisions based on
-eikonal entropy creation via the \emph{reduced thickness}.  The model is able to simultaneously fit
-proton-proton, proton-lead, and lead-lead multiplicity distributions along with lead-lead eccentricity harmonics,
-and provides a possible resolution to the ``knee'' problem in ultracentral uranium-uranium collisions.
-It is flexible by design and able to mimic the behavior of other initial condition models.
+eikonal entropy creation via the ``reduced thickness''.  The model is able to simultaneously fit
+proton-proton, proton-lead, and lead-lead multiplicity distributions along with lead-lead eccentricity
+harmonics, and provides a possible resolution to the ``knee'' problem in ultracentral uranium-uranium
+collisions.  It is flexible by design and able to mimic the behavior of other initial condition models.
 
 This is an intentionally \emph{effective} model.  A first-principles derivation would be ideal, but such
 models are usually complex and require significant computation time.  So in practical terms, effective models
