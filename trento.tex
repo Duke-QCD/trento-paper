@@ -9,6 +9,7 @@
 
 \newcommand{\trento}{T\raisebox{-.5ex}{R}ENTo}
 \newcommand{\nch}{N_\text{ch}}
+\newcommand{\eccratio}{\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}}
 \newcommand{\needcite}{\textbf{[???]}}
 
 \begin{document}
@@ -131,7 +132,7 @@ ground up to handle a variety of collision systems; we begin with the simplest c
   \caption{
     \label{fig:saturation}
     Attenuation of the reduced thickness.  Thickness $T_B$ is fixed to one (in arbitrary units) while $T_A$ is
-    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (blue, green, and red).
+    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (green, blue, and red).
   }
 \end{figure}
 
@@ -190,8 +191,11 @@ participant $i$ in projectile $A$.  $T_B$ is constructed using the same definiti
   \includegraphics{multdist}
   \caption{
     \label{fig:multdist}
-    Minimum bias pp, pPb and PbPb charged particle distributions for power $p=0$, fluctuation parameter
-    $k=0.8$ and normalization factor $\kappa'_n$ indicated in the legend.
+    Multiplicity distributions for proton-proton, proton-lead, and lead-lead collisions.  The blue histograms
+    are \protect\trento\ results from $10^6$ minimum-bias events for each collision system, all with reduced
+    thickness parameter $p = 0$ (geometric mean) and gamma fluctuation parameter $k = 0.8$.  The normalization
+    constants indicated in the legends are set so that the model and experimental distributions (points with
+    error bars) have the same mean.  Experimental data are from ALICE \needcite.
   }
 \end{figure*}
 
@@ -235,10 +239,10 @@ attributable to differences in beam energy and kinematic cuts.
   \includegraphics{eccentricity}
   \caption{
     \label{fig:eccen}
-    Eccentricity harmonics $\varepsilon_2$ (top) and $\varepsilon_3$ (middle) as a function of centrality for
-    reduced thickness parameters $p = -1$, 0, 1.  The bottom panel shows the ratio of the rms eccentricities
-    $\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}$ against the
-    experimentally allowed region (grey band) from \cite{constraining-ic}.
+    Upper plot:  Eccentricity harmonics $\varepsilon_2$ (solid lines) and $\varepsilon_3$ (dashed lines) as a
+    function of centrality for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, and red).  Lower
+    plot:  Ratio of the rms eccentricities $\eccratio$ against the experimentally allowed region (grey band)
+    from \cite{constraining-ic}.  Note that the centrality axis has a different range in the ratio plot.
   }
 \end{figure}
 
@@ -254,10 +258,9 @@ accentuates the elliptical overlap shape in noncentral collisions and enhances e
 
 In addition, we perform the test described in \cite{constraining-ic}.  The authors use experimental flow data
 and hydrodynamics to construct an experimentally allowed band of the ratio of root-mean-square eccentricities
-$\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}$ as a function of
-centrality.  They check a number of common initial condition models and find that only IP-Glasma consistently
-falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows that the geometric mean
-($p = 0$) yields excellent agreement with experiment.
+$\eccratio$ as a function of centrality.  They check a number of common initial condition models and find that
+only IP-Glasma consistently falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows
+that the geometric mean ($p = 0$) yields excellent agreement with experiment.
 
 \subsection{Ultracentral uranium-uranium}
 
@@ -266,8 +269,14 @@ falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows
   \includegraphics{uranium}
   \caption{
     \label{fig:uranium}
-    Ellipticity $\varepsilon_2$ as a function of charged-particle multiplicity for ultracentral
-    uranium-uranium collisions.
+    Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity
+    $\nch/\langle\nch\rangle$ in ultracentral uranium-uranium and gold-gold collisions at RHIC.  The top and
+    bottom plots show the top 0.1\% and 1\% (respectively) of collisions selected by number of spectators to
+    mimic STAR's experimental ZDC selection \cite{UU-STAR}.  Blue points with error bars are binned
+    \protect\trento\ results from $10^6$ events with reduced thickness parameter $p = 0$ (geometric mean) and
+    gamma fluctuation parameter $k = 0.8$.  Blue lines are linear fits within
+    $0.9~<~\nch/\langle\nch\rangle~<~1.1$.  Grey lines represent the analogous Glauber+NBD slopes calculated
+    in \cite{UU-STAR}.
   }
 \end{figure}
 
