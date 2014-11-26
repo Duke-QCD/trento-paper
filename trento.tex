@@ -59,7 +59,7 @@ In this letter, we present a new initial condition model, \trento, for high-ener
 
 \section{The Model}
 
-\trento is constructed in a similar fashion as the two-component Glauber model, but uses a different ansatz
+\trento\ is constructed in a similar fashion as the two-component Glauber model, but uses a different ansatz
 for entropy production.
 
 Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
@@ -80,7 +80,7 @@ time:
   f \propto dS/dy \, |_{\tau = \tau_0}.
 \end{equation}
 It should provide an \emph{effective} description of early collision dynamics:  it need not arise from a
-first-principles calculation, but must obey basic physical restrictions.
+first-principles calculation, but it must obey basic physical constraints.
 
 With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \begin{equation}
@@ -102,18 +102,16 @@ geometric, and harmonic mean for certain values of $p$, i.e.
 More generally, $p$ quantifies the attenuation of entropy production in asymmetric ($T_A \neq T_B$) regions of
 the collision, as demonstrated in FIG.~\ref{fig:saturation}.  As $p$ \emph{decreases}, the degree of
 attenuation \emph{increases}.  This significantly impacts the behavior of the model, for instance $p=1$ is
-precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics CGC saturation.
+precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics features of CGC saturation based models.
 
 The reduced thickness possesses several other key properties.  It is
 \begin{itemize*}
-  \item continuous;
-  \item monotonically increasing:  \\
-    if $T_A \leq T_A'$ and $T_B \leq T_B'$, then $T_R \leq T_R'$;
+  \item continuous and monotonically increasing: \\ if $T_A \leq T_A'$ and $T_B \leq T_B'$, then $T_R \leq T_R'$;
   \item symmetric in the projectile thicknesses: \\
     $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$, and hence
   \item independent of $p$ when the thicknesses are equal: \\
     $T_R(p; T, T) = T$.
-  \item The reduced thickness vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.  In fact, for $p
+  \item it vanishes when both $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$.  In fact, for $p
     \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.  On the other hand, positive values of $p$
     introduce small violations of the eikonal entropy production postulate, similar to a traditional wounded
     nucleon model.
