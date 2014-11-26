@@ -19,7 +19,7 @@
 \author{J.\ Scott Moreland}
 \author{Jonah E.\ Bernhard}
 \author{Steffen A.\ Bass}
-\affiliation{Duke University}
+\affiliation{Department of Physics, Duke University, Durham, NC 27708-0305}
 
 \date{\today}
 
@@ -36,30 +36,30 @@
 
 \section{Introduction}
 
-Viscous relativistic fluid dynamics provides a stable, well-tested model for the time-evolution and collective
-behavior in high-energy nuclear collisions.  However, a realistic Monte Carlo (MC) model for the initial state
-of the medium is essential for describing many event-by-event observables.  These initial conditions remain
-one of the most poorly-constrained components of modern computational models.
+Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider (LHC) have succeeded in producing and exploring a novel highly excited phase of QCD matter, dubbed the strongly interacting Quark-Gluon Plasma (sQGP) \cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}. Among the major goals of current research into the sQGP are the quantitative characterization of its properties, such as its transport coefficients and its equation of state as well as the exploration of the complex non-equilibrium dynamics that leads to its creation during the first fm/c of the nuclear collision. 
 
-Initial condition models create profiles of energy or entropy at some early time which are then evolved by
+Generally, the determination of sQGP properties relies on their extraction from a comparison of computational models for the full time-evolution of the heavy-ion collision to data on the measurable final state properties of the collision \cite{}.
+Viscous relativistic fluid dynamics provides a stable, well-tested model for this time-evolution and the collective
+behavior in high-energy nuclear collisions \cite{}.  However, a realistic Monte Carlo (MC) model for the initial state
+of the medium is essential for describing many event-by-event observables.  These initial conditions remain
+one of the most poorly-constrained components of modern computational models \cite{}.
+
+Initial condition models create profiles of energy or entropy at the time of sQGP formation which are then evolved by
 fluid dynamics.  Perhaps the simplest prescription is the so-called wounded nucleon model, which determines
 participating nucleons via optical overlap and deposits a blob of energy or entropy for each participant.  The
 MC-Glauber model generalizes wounded nucleons by additionally depositing entropy proportional to the number of
-binary nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a variety
-of experimental measurements.
+binary nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a large number 
+of experimental measurements \cite{}.
 
-More recently, the IP-Glasma model applied color-glass condensate (CGC) effective field theory to create a
-dynamical description of the pre-fluid stage of the collision.  IP-Glasma has quantitatively fit many
-experimental data and is regarded as state-of-the-art.  However, it is theoretically and computationally
-complex and its applicability to smaller collision systems (e.g.~proton-proton) is uncertain.
+The current state-of-the-art for initial condition models is the IP-Glasma model \cite{}, which is based on the color-glass condensate (CGC) effective field theory \cite{} to create a
+dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. It's main draw back is it's  computational
+complexity and that it's applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
 
-In this letter, we present a new unified initial condition model for high-energy collisions ranging from
-proton-proton to nucleus-nucleus.
+In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions across the full collision system range from proton-proton to uranium-uranium. In concert with transport calculations of the time-evolution of ultra-relativistic nuclear collisions our model is capable of constraining the initial state of the sQGP at the time of its formation. Note that it is not designed to model the dynamics of thermalization of QCD matter and sQGP formation. However, it's constrained initial state can provide guidance on the outcome that needs to be achieved by these calculations. 
 
+\section{The Model}
 
-\section{Model}
-
-The model is constructed in a similar fashion to the two-component Glauber model, but using a different ansatz
+\trento is constructed in a similar fashion as the two-component Glauber model, but uses a different ansatz
 for entropy production.
 
 Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
@@ -315,7 +315,9 @@ Future work will couple the initial condition generator to a full hydrodynamical
 various model parameters.  We plan to publicly release \trento\ in the coming weeks, and the community is
 encouraged to use, test, and contribute to the source code.
 
+\section*{Acknowledgements}
 
+SAB acknowledges supported by the U.S. Department of Energy Grant No. DE-FG02-05ER41367, JB was supported through the NSF Office of Cyberinfrastructure by grant PHY-0941373 and JSM acknowledges support by the NNSA SSGF...
 
 \bibliography{sources}
 
