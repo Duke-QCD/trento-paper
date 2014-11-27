@@ -3,7 +3,6 @@
 *.dvi
 *.out
 *.log
-*.bbl
 *.blg
 *.dat
 *.backup
