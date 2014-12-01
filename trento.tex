@@ -135,22 +135,22 @@ ground up to handle a variety of collision systems; we begin with the simplest c
 
 \subsection{Proton-proton collisions}
 
-Consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction.
-Denote their nuclear densities by
+Let us consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction.
+We denote their nuclear densities by
 \begin{equation}
   \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
 \end{equation}
-and let us assume that the integral $\int dz \, \rho_\text{proton}$ either has a closed form or may be
+and assume that the integral $\int dz \, \rho_\text{proton}$ either has a closed form or may be
 evaluated numerically, so that the proton thickness functions can be calculated.
 
-We now randomly decide whether the protons collide according to the probability \cite{dEnterria:2010hd}
+We now randomly sample the collision probability of the protons according to \cite{dEnterria:2010hd},
 \begin{equation}
-  P_\text{coll} = 1 - \exp\biggl[ -\sigma_{gg} \int dx \, dy \int dz \, \rho_A \int dz \, \rho_B \biggr],
+  P_\text{coll} = 1 - \exp\biggl[ -\sigma_{p} \int dx \, dy \int dz \, \rho_A \int dz \, \rho_B \biggr],
   \label{eq:pcoll}
 \end{equation}
 where the integral in the exponential is the overlap integral of the proton thickness functions and
-$\sigma_{gg}$ is a cross-section which is set so that the total proton-proton cross-section equals the
-experimental inelastic nucleon nucleon cross-section $\sigma_{NN}$.
+$\sigma_{p}$ is a cross-section which is tuned such that the total proton-proton cross-section in our model equals the
+experimentally measured inelastic nucleon nucleon cross-section $\sigma_{NN}$.
 
 Assuming the protons collide, each is assigned a \emph{fluctuated} thickness
 \begin{equation}
@@ -160,28 +160,32 @@ where $\gamma_{A,B}$ are independent random numbers sampled from a gamma distrib
 \begin{equation}
   P(\gamma; k) \propto \gamma^{k-1} e^{-\gamma/k},
 \end{equation}
-with shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
-flexibility---it is exponential for $k = 1$ and becomes Gaussian for large $k$---and because it is the
+with the shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
+flexibility -- it is exponential for $k = 1$ and becomes Gaussian for large $k$ -- and because it is the
 continuous analog of the negative binomial distribution, which has historically been used to fit proton-proton
 multiplicity fluctuations.
 
-The reduced thickness is then calculated from the projectile thickness functions; this furnishes the initial
+The reduced thickness is then calculated from the projectile thickness function; this furnishes the initial
 transverse entropy profile up to an overall normalization factor, $dS/dy \propto T_R(p; T_A, T_B)$.
 
-\subsection{Larger systems}
+\subsection{Larger systems+ p+A and A+A}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
-superpositions of proton-proton collisions.  A set of nucleon positions is chosen for each
-projectile $A$, $B$, then the collision probability \eqref{eq:pcoll} is sampled for each pairwise interaction.
+superpositions of proton-proton collisions.  A set of nucleon positions is sampled for each
+projectile $A$, $B$, utilizing either a uncorrelated Woods-Saxon distribution or correlated nuclear configurations when available \cite{Alvioli:2009ab}.
+Subsequently the collision probability \eqref{eq:pcoll} is sampled for each pairwise interaction.
 Those nucleons that collide with at least one partner are labeled ``participants'' and the rest are discarded.
-The fluctuated thickness function for projectile $A$ is then
+The fluctuated thickness function for the projectile $A$ reads then
 \begin{equation}
   T_A = \sum_i \gamma_i \int dz \, \rho_\text{proton}(x - x_i, y - y_i, z - z_i),
 \end{equation}
 where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of
 participant $i$ in projectile $A$.  $T_B$ is constructed using the same definition over its participants.
 
-\textbf{SOMETHING HERE?}
+\textbf{SOMETHING HERE? How about a brief recap on what the parameters of the model are and what the
+model produces as output, i.e. energy-density/entropy deposition as init. cond. for Hydro...}
+
+
 
 
 \begin{figure*}[t]
@@ -197,7 +201,7 @@ participant $i$ in projectile $A$.  $T_B$ is constructed using the same definiti
 \end{figure*}
 
 
-\section{Results}
+\section{Model Applications}
 
 \trento\ simulations depend on several undetermined parameters---to rigorously constrain these parameters
 would require a systematic model-to-data comparison which is beyond the scope of this work.  Therefore, the
@@ -205,13 +209,13 @@ following results do not necessarily represent the best-fit of the model to data
 
 \subsection{Multiplicity distributions}
 
-Charged-particle multiplicity $\nch$ is to an excellent approximation proportional to the total initial
-entropy \needcite, and hence proportional to the integrated reduced thickness:
+The experimentally observed charged-particle multiplicity $\nch$ is to a very good approximation proportional to the total initial
+entropy \needcite, and hence proportional to the integrated reduced thickness in our model:
 \begin{equation}
   \nch \propto \int dx \, dy \, T_R.
 \end{equation}
 To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$
-profiles, and multiply by a normalization constant to rescale the distribution to the experimental mean.
+profiles, and determine a multiplicative normalization constant in order to rescale the distribution to the experimental mean.
 
 The left panel of FIG.~\ref{fig:multdist} shows the $\nch$ distribution from $10^6$ proton-proton simulations
 using reduced thickness parameter $p = 0$ (geometric mean), gamma fluctuation parameter $k = 0.8$, and
@@ -219,16 +223,12 @@ Gaussian beam-integrated proton density
 \begin{equation}
   \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
 \end{equation}
-with effective area $B = (0.6\;\text{fm})^2$.  Results compare favorably with the experimental distribution
+with an effective area of $B = (0.6\;\text{fm})^2$.  The results compare favorably with the experimental distribution
 measured by ALICE \needcite.
 
 Proton-lead and lead-lead distributions are presented in the middle and right panels of
-FIG.~\ref{fig:multdist}.  We use lead nucleus configurations including nucleon-nucleon correlations from
-\cite{Alvioli:2009ab}; model parameters are otherwise identical to proton-proton.
-
-The model is able to reproduce the shape of each distribution using a single set of parameters except for the
-overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with
-differences in experimental beam energy and kinematic cuts.
+FIG.~\ref{fig:multdist}. The Model parameters are  identical to proton-proton, except for the overall normalization factor, which depends on the beam energy and kinematic cuts, both of which vary across the data analyzed in this figure.
+Overall, the model is able to reproduce the shapes of all three distributions using a single set of parameters, and only allowing for a change in the normalization, whose $\sim$20\% variation across collision systems is consistent with differences in experimental beam energy and kinematic cuts.
 
 \subsection{Eccentricity harmonics}
 
@@ -243,23 +243,24 @@ differences in experimental beam energy and kinematic cuts.
   }
 \end{figure}
 
-Eccentricity harmonics $\varepsilon_n$ are calculated for lead-lead collisions using the definition
+Eccentricity harmonics $\varepsilon_n$ can be calculated using the definition
 \begin{equation}
   \varepsilon_n e^{i n\phi} = -\frac{\int dx \, dy\, r^n e^{i n \phi} \, T_R}{\int dx \, dy \, r^n \, T_R}.
 \end{equation}
-Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ as a function of
+Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ for Pb+Pb collisions as a function of
 centrality for reduced thickness $p = 1$,~0,~$-1$.  There is a clear trend of increasing eccentricity
 (particularly $\varepsilon_2$) with decreasing $p$.  This may be understood by the attenuation property of the
 reduced thickness:  as $p$ decreases, asymmetric regions of the collision produce less entropy, which
-accentuates the elliptical overlap shape in noncentral collisions and enhances eccentricity.
+accentuates the elliptical overlap shape in non-central collisions and enhances their eccentricity.
 
-In addition, we perform the test described in \cite{Retinskaya:2013gca}.  The authors use experimental flow data
+In addition, we perform the test described in \cite{Retinskaya:2013gca} and calculate the ratio of root-mean-square eccentricities
+$\eccratio$.  In \cite{Retinskaya:2013gca}, the authors have used experimental flow data
 and hydrodynamics to construct an experimentally allowed band of the ratio of root-mean-square eccentricities
-$\eccratio$ as a function of centrality.  They check a number of common initial condition models and find that
-only IP-Glasma consistently falls within the allowed region.  The bottom panel of FIG.~\ref{fig:eccen} shows
-that the geometric mean ($p = 0$) yields excellent agreement with experiment.
+as a function of centrality.  They compare a number of common initial condition models to that band and find that
+currently only the IP-Glasma model consistently falls within the allowed region.  As can be seen in the bottom panel of FIG.~\ref{fig:eccen} our model yields excellent agreement with the allowed band for
+the geometric mean ($p = 0$).
 
-\subsection{Ultracentral uranium-uranium}
+\subsection{Ultracentral U+U collisions}
 
 \begin{figure}[t]
   \centering
@@ -277,13 +278,13 @@ that the geometric mean ($p = 0$) yields excellent agreement with experiment.
   }
 \end{figure}
 
-Uranium nuclei have a deformed prolate spheroid shape, thus a uranium-uranium collision may achieve maximal
+Uranium nuclei have a deformed prolate spheroid shape, which can be exploited to achieve a larger variance in the initially produced energy-density or eccentricities. A uranium-uranium collision may achieve maximal
 overlap via two distinct orientations:  ``tip-tip'', in which the long axes of the spheroids are aligned with
 the beam axis and the overlap area is circular; or ``side-side'', where the long axes are perpendicular to the
-beam axis and the overlap area is elliptical.
+beam axis and the overlap area is elliptical. {\bf something is missing here: expectation on $\epsilon_2$...}
 
-In the two-component Glauber model, tip-tip collisions have the same number wounded nucleons but more binary
-collisions than side-side, so tip-tip would have larger multiplicity.  Therefore, the Glauber model predicts a
+In the two-component Glauber model, tip-tip collisions have the same number of wounded nucleons but a larger number of binary
+collisions than side-side collisions, leading to a larger charged particle multiplicity in tip-tip collisions.  Therefore, the Glauber model predicts a
 rapid decrease in elliptic flow $v_2$ as a function of multiplicity in the most central uranium-uranium
 collisions.  This structure is known as the ``knee'' \needcite.
 
@@ -291,10 +292,9 @@ The STAR experiment at RHIC recently performed uranium-uranium collisions and fo
 \cite{FortheSTAR:2013bza}.  It has been proposed that fluctuations could wash out the knee \needcite, but a recent
 comprehensive flow analysis showed that the knee would still be visible \cite{osu}.
 
-The reduced thickness ansatz \eqref{eq:tr} does not have binary collision scaling and hence produces roughly
-constant ellipticity in ultracentral uranium-uranium, as shown in FIG.~\ref{fig:uranium}.  Short of conducting
-a full hydrodynamic analysis, these results appear to be more consistent with STAR data than Glauber, and are
-similar to IP-Glasma \needcite.
+The reduced thickness ansatz in our model \eqref{eq:tr}, however, does not exhibit binary collision scaling and hence produces a roughly
+constant ellipticity in ultra-central uranium-uranium, as shown in FIG.~\ref{fig:uranium}.  Short of conducting
+a full hydrodynamic analysis, our model results therefore appear to be more consistent with STAR data than Glauber, and are similar to calculations by the IP-Glasma \needcite.
 
 
 \section{Conclusion}
@@ -315,7 +315,8 @@ encouraged to use, test, and contribute to the source code.
 
 \section*{Acknowledgements}
 
-SAB acknowledges supported by the U.S. Department of Energy Grant no. DE-FG02-05ER41367, JB was supported through the NSF Office of Cyberinfrastructure by grant no. PHY-0941373 and JSM acknowledges support by the DOE/NNSA Stockpile Stewardship Graduate Fellowship under 
+We would like to thank Ulrich Heinz and Berndt M\"uller for many helpful discussions and valuable feedback. 
+SAB is being supported by the U.S. Department of Energy Grant no. DE-FG02-05ER41367, JB is supported through the NSF Office of Cyberinfrastructure by grant no. PHY-0941373 and JSM acknowledges support by the DOE/NNSA Stockpile Stewardship Graduate Fellowship under 
 grant no. DE-FC52-08NA28752.
 
 %\bibliography{sources}
