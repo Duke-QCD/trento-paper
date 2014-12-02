@@ -55,11 +55,15 @@ MC-Glauber model generalizes wounded nucleons by additionally depositing entropy
 binary nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a large number 
 of experimental measurements \cite{}.
 
-The current state-of-the-art for initial condition models is the IP-Glasma model \cite{}, which is based on the color-glass condensate (CGC) effective field theory \cite{} to create a
-dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. It's main draw back is it's  computational
+The current state-of-the-art for initial condition models is the IP-Glasma model \cite{}, which is based on the color-glass condensate (CGC) effective 
+field theory \cite{} to create a dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the 
+latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. It's main draw back is it's computational 
 complexity and that it's applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
 
-In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions across the full collision system range from proton-proton to uranium-uranium. In concert with transport calculations of the time-evolution of ultra-relativistic nuclear collisions our model is capable of constraining the initial state of the sQGP at the time of its formation. Note that it is not designed to model the dynamics of thermalization of QCD matter and sQGP formation. However, it's constrained initial state can provide guidance on the outcome that needs to be achieved by these calculations. 
+In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions across the full collision system range from proton-proton 
+to uranium-uranium. In concert with transport calculations for the time-evolution of ultra-relativistic nuclear collisions, our model is capable of constraining the 
+initial state of the sQGP at the time of its formation. While it is not designed to model the dynamics of sQGP formation or thermalization, such constraints 
+provide valuable insight into the properties of sQGP matter.
 
 \section{The Model}
 
@@ -179,14 +183,17 @@ flexibility -- it is exponential for $k = 1$ and becomes Gaussian for large $k$ 
 continuous analog of the negative binomial distribution, which has historically been used to fit proton-proton
 multiplicity fluctuations.
 
-The reduced thickness is then calculated from the projectile thickness function; this furnishes the initial
-transverse entropy profile up to an overall normalization factor, $dS/dy \propto T_R(p; T_A, T_B)$.
+The reduced thickness is then calculated from the projectile thickness functions; this furnishes the initial
+transverse entropy profile up to an overall normalization factor, 
+\begin{equation}
+dS/dy \propto T_R(p; T_A, T_B).
+\end{equation}
 
 \subsection{Larger systems p+A and A+A}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
 superpositions of proton-proton collisions.  A set of nucleon positions is sampled for each
-projectile $A$, $B$, utilizing either a uncorrelated Woods-Saxon distribution or correlated nuclear configurations 
+projectile $A$, $B$, utilizing either an uncorrelated Woods-Saxon distribution or correlated nuclear configurations 
 when available \cite{Alvioli:2009ab}. Subsequently the collision probability \eqref{eq:pcoll} is sampled for each 
 pairwise interaction. Those nucleons that collide with at least one partner are labeled ``participants'' and the 
 rest are discarded. The fluctuated thickness function of nucleus $A$ then reads
@@ -195,20 +202,20 @@ rest are discarded. The fluctuated thickness function of nucleus $A$ then reads
   \label{nuclear thickness}
 \end{equation}
 where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of
-participant $i$ in nucleus $A$. Fluctuated thickness function $T_B$ follows analygously. At this point, 
-it's useful to enumerate all parameters of the model and summarize its construction. 
+participant $i$ in nucleus $A$. Fluctuated thickness function $T_B$ follows analygously. 
 
 \begin{figure*}[t]
   \includegraphics{eccentricity}
   \caption{
     \label{fig:eccen}
-    Upper plot:  Eccentricity harmonics $\varepsilon_2$ (solid lines) and $\varepsilon_3$ (dashed lines) as a
-    function of centrality for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, and red).  Lower
-    plot:  Ratio of the rms eccentricities $\eccratio$ against the experimentally allowed region (grey band)
-    from \cite{Retinskaya:2013gca}.  Note that the centrality axis has a different range in the ratio plot.
+    Left and middle plots:  Eccentricity harmonics $\varepsilon_2$ and $\varepsilon_3$ as a function of centrality 
+    for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, and red).  Right plot:  Ratio of the rms eccentricities 
+    $\eccratio$ against the experimentally allowed region (grey band) from \cite{Retinskaya:2013gca}.  Note that the centrality 
+    axis has a different range in the ratio plot.
   }
 \end{figure*}
 
+At this point, it's useful to enumerate the parameters of the model and summarize its construction. 
 The inputs to the model are the Monte-Carlo nucleon coordinates $\{\vec{x}_1,\vec{x}_2,...,\vec{x}_{A,B}\}$, a randomly sampled 
 nucleus-nucleus impact parameter $b$, the nucleon-nucleon cross section $\sigma_{NN}$, the nucleon density profile 
 $\rho_{\mathrm{proton}}$, the Gamma shape parameter $k$ in the fluctuated nuclear thickness function, the generalized 

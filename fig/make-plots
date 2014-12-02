@@ -312,12 +312,11 @@ def eccentricity():
             if n==2:
                 label = '{}: $p = {}$'.format(label, p)
             ax.plot(cent_mid, ecc.mean(axis=1), color=color, label=label)
-            ax.set_ylim(0, .6)
-            ymax = .6
-            label_pos = .04, 1.0
-            ax.set_yticks(np.arange(0, ymax+.01, .2))
+            ymax = 0.62
+            ax.set_ylim(0,ymax)
+            ax.set_yticks(np.arange(0, ymax+0.01, .2))
             ax.spines['left'].set_bounds(0, ymax)
-            ax.annotate(r'$\varepsilon_{}$'.format(n), label_pos, size=10,
+            ax.annotate(r'$\varepsilon_{}$'.format(n), (0.04, 1.0), size=10,
                         xycoords='axes fraction', ha='left', va='top')
 
         ecc_rms = np.sqrt(np.mean(np.square(eccentricity), axis=-1))
