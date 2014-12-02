@@ -50,6 +50,14 @@ pmean_colors = {
     -1: (0.7686274509803922, 0.3058823529411765, 0.3215686274509804)
 }
 
+pmean_labels = {
+    p: '{}: $p = {}$'.format(name, p) for (p, name) in (
+        (1, 'Arithmetic'),
+        (0, 'Geometric'),
+        (-1, 'Harmonic')
+    )
+}
+
 
 def plotfn(f):
     @functools.wraps(f)
@@ -82,14 +90,13 @@ def saturation():
     B = np.ones_like(A)
 
     means = (
-        ((A+B)/2, 1, 'Arithmetic'),
-        (np.sqrt(A*B), 0, 'Geometric'),
-        (2*A*B/(A+B), -1, 'Harmonic')
+        ((A+B)/2, 1),
+        (np.sqrt(A*B), 0),
+        (2*A*B/(A+B), -1)
     )
 
-    for M, p, name in means:
-        plt.plot(A, M, color=pmean_colors[p],
-                 label='{}: $p = {}$'.format(name, p))
+    for M, p in means:
+        plt.plot(A, M, color=pmean_colors[p], label=pmean_labels[p])
 
     plt.xlabel('$T_A$')
     plt.ylabel('$T_R(T_A, 1)$')
@@ -291,32 +298,37 @@ def uranium():
 @plotfn
 def eccentricity():
     fig, axes = plt.subplots(ncols=3,
-                             figsize=(textwidth, 0.4*textwidth*aspect))
+                             figsize=(textwidth, .36*aspect*textwidth))
 
     e2_ax, e3_ax, ratio_ax = axes
 
     bins = 20
     cent_mid = np.linspace(0, 100, bins, endpoint=False) + 50/bins
 
-    pvals = -1,0,1
-    plabels = "Harmonic", "Geometric", "Arithmetic"
-
-    for p, label in zip(pvals,plabels):
+    for p in 1, 0, -1:
         color = pmean_colors[p]
+        label = pmean_labels[p]
+
         eccentricity = load_from_cache(
             'data/trento/eccentricity/PbPb_m={}_k=0.8_w=0.6'.format(p),
             usecols=(4, 5)
         ).T.reshape(2, bins, -1)
 
         for n, (ax, ecc) in enumerate(zip(axes, eccentricity), start=2):
-            if n==2:
-                label = '{}: $p = {}$'.format(label, p)
             ax.plot(cent_mid, ecc.mean(axis=1), color=color, label=label)
-            ymax = 0.62
-            ax.set_ylim(0,ymax)
-            ax.set_yticks(np.arange(0, ymax+0.01, .2))
+            ax.set_ylim(0, .62)
+            if n == 2:
+                ymax = .6
+                label_pos = .08, .87
+                ax.set_ylabel(r'$\varepsilon_n$')
+            else:
+                ymax = .6
+                label_pos = .08, .52
+                ax.legend(loc='upper left', bbox_to_anchor=(.03, 1.1),
+                          fontsize=8, labelspacing=.33)
+            ax.set_yticks(np.arange(0, ymax+.01, .2))
             ax.spines['left'].set_bounds(0, ymax)
-            ax.annotate(r'$\varepsilon_{}$'.format(n), (0.04, 1.0), size=10,
+            ax.annotate(r'$\varepsilon_{}$'.format(n), label_pos, size=10,
                         xycoords='axes fraction', ha='left', va='top')
 
         ecc_rms = np.sqrt(np.mean(np.square(eccentricity), axis=-1))
@@ -327,15 +339,12 @@ def eccentricity():
     cent_mid = ratio_data[:2].mean(axis=0)
     ratio_min, ratio_max = ratio_data[2:]
 
-    handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles[::-1], labels[::-1], loc=(0.225,0.62), handlelength=1.4, ncol=1)
-
     ratio_ax.fill_between(cent_mid, ratio_min, ratio_max,
                           color='.5', edgecolor='none', alpha=0.3, zorder=-1)
     ratio_ax.set_xlim(0, 40)
     ratio_ax.set_ylim(.3, 1.2)
     ratio_ax.set_yticks((.3, .6, .9, 1.2))
-    ratio_ax.annotate('Ratio', (.04, 1.0), xycoords='axes fraction',
+    ratio_ax.annotate('Ratio', (.08, .87), xycoords='axes fraction',
                       ha='left', va='top')
 
     for ax in axes:
