@@ -44,7 +44,7 @@ the sQGP are the quantification of its properties, such as transport coefficient
 that lead to its formation in the first fm/c of a nuclear collision. 
 
 Viscous relativistic fluid dynamics provides 
-a stable, well-tested description of this time-evolution and the collective behavior in high-energy nuclear collisions \cite{}.  However, a 
+a stable, well-tested description of this time-evolution and the collectivity observed in high-energy nuclear collisions \cite{}.  However, a 
 realistic Monte Carlo (MC) model for the initial state of the medium is essential for describing many event-by-event observables.  These initial 
 conditions remain one of the most poorly-constrained components of modern computational models \cite{}.
 
@@ -60,7 +60,11 @@ field theory \cite{} to create a dynamical description of the pre-fluid stage of
 latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. It's main draw back is it's computational 
 complexity and that it's applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
 
-In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions spanning the full range of projectile combinations, 
+Most recently, members of the PHENIX collaboration demonstrated that a wounded quark model can be used to describe the transverse energy distributions of 
+proton-proton, deuteron-gold and gold-gold collisions at RHIC without the use of a binary collision term. It is however, not yet clear if these scaling laws are
+valid at the LHC where gluon occupation is expected to dominate.
+
+In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions spanning the full range of projectile and target combinations, 
 from proton-proton to proton-lead, lead-lead and uranium-uranium collisions. In concert with transport calculations for the time-evolution of ultra-relativistic 
 nuclear collisions, such an approach provides {\bf PUT SOMETHING HERE} %a unified description of high energy nucleus-nucleus collisions.
 
@@ -290,20 +294,16 @@ the geometric mean ($p = 0$).
   }
 \end{figure}
 
-Uranium nuclei have a prolate, spheroidal shape which can be exploited to achieve a larger variance in the transverse anisotropy 
-of the initial state. A uranium-uranium collision may achieve maximal overlap via two distinct orientations: 
-``tip-tip'', in which the long axes of the spheroids are aligned with the beam axis and the overlap area is circular; or ``side-side'', 
-where the long axes are perpendicular to the beam axis and the overlap area is elliptical. 
+Uranium nuclei have a prolate, spheroidal shape which can be exploited to achieve a larger variance in the anisotropy of thermalized QGP matter. 
+These deformed nuclear collisions achieve maximal overlap via two distinct orientations: ``tip-tip'' collisions, in which the long axes of the spheroids are 
+aligned with the beam axis and the overlap area is circular; or ``side-side'' collisions, where the long axes are perpendicular to the beam axis and the overlap area is elliptical. 
 
-%{\bf something is missing here: expectation on $\epsilon_2$...}
+In the two-component Glauber model, tip-tip collisions have the same number of wounded nucleons as side-side collisions while generating more binary collisions and hence more charged particles.
+Consequently, Glauber models predict an excess of tip-tip collisions in ultra-central event classes where binary collision scaling dominates. These tip-tip collisions 
+are characterized by highly circular overlap regions and thus are expected to produce very little elliptic flow. This predicted drop in the uranium-uranium elliptic flow harmonic is known as the ``knee'' \needcite.
 
-In the two-component Glauber model, tip-tip collisions have the same number of wounded nucleons but a larger number of binary
-collisions than side-side collisions, leading to a larger charged particle multiplicity in tip-tip collisions. Therefore, the Glauber model predicts a
-rapid decrease in elliptic flow $v_2$ as a function of multiplicity in the most central uranium-uranium
-collisions.  This structure is known as the ``knee'' \needcite.
-
-The STAR experiment at RHIC recently performed uranium-uranium collisions and found no evidence of the knee
-\cite{FortheSTAR:2013bza}.  It has been proposed that fluctuations could wash out the knee \needcite, but a recent
+The STAR experiment at RHIC recently performed uranium-uranium collisions and found no evidence that tip-tip collisions produce more charged particle than side-side collisions and no evidence of the 
+a knee-like structure in the measured flow harmonics \cite{FortheSTAR:2013bza}.  It has been proposed that fluctuations could wash out the knee \needcite, but a recent
 comprehensive flow analysis showed that the knee would still be visible \cite{osu}.
 
 The reduced thickness ansatz in our model \eqref{eq:tr}, however, does not exhibit binary collision scaling and hence predicts similar slopes for ultra-central 
