@@ -291,34 +291,30 @@ def uranium():
 @plotfn
 def eccentricity():
     fig, axes = plt.subplots(ncols=3,
-                             figsize=(textwidth, .35*aspect*textwidth))
+                             figsize=(textwidth, 0.4*textwidth*aspect))
 
     e2_ax, e3_ax, ratio_ax = axes
 
     bins = 20
     cent_mid = np.linspace(0, 100, bins, endpoint=False) + 50/bins
 
-    for p in 1, 0, -1:
-        label = '$p = {}$'.format(p)
-        color = pmean_colors[p]
+    pvals = -1,0,1
+    plabels = "Harmonic", "Geometric", "Arithmetic"
 
+    for p, label in zip(pvals,plabels):
+        color = pmean_colors[p]
         eccentricity = load_from_cache(
             'data/trento/eccentricity/PbPb_m={}_k=0.8_w=0.6'.format(p),
             usecols=(4, 5)
         ).T.reshape(2, bins, -1)
 
         for n, (ax, ecc) in enumerate(zip(axes, eccentricity), start=2):
+            if n==2:
+                label = '{}: $p = {}$'.format(label, p)
             ax.plot(cent_mid, ecc.mean(axis=1), color=color, label=label)
-            ax.set_ylim(0, .62)
-            if n == 2:
-                ymax = .6
-                label_pos = .07, .88
-                ax.set_ylabel(r'$\varepsilon_n$')
-            else:
-                ymax = .4
-                label_pos = .12, .60
-                ax.legend(loc=(0, .8), handlelength=1.4,
-                          ncol=3, columnspacing=1)
+            ax.set_ylim(0, .6)
+            ymax = .6
+            label_pos = .04, 1.0
             ax.set_yticks(np.arange(0, ymax+.01, .2))
             ax.spines['left'].set_bounds(0, ymax)
             ax.annotate(r'$\varepsilon_{}$'.format(n), label_pos, size=10,
@@ -332,12 +328,15 @@ def eccentricity():
     cent_mid = ratio_data[:2].mean(axis=0)
     ratio_min, ratio_max = ratio_data[2:]
 
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labels[::-1], loc=(0.225,0.62), handlelength=1.4, ncol=1)
+
     ratio_ax.fill_between(cent_mid, ratio_min, ratio_max,
                           color='.5', edgecolor='none', alpha=0.3, zorder=-1)
     ratio_ax.set_xlim(0, 40)
     ratio_ax.set_ylim(.3, 1.2)
     ratio_ax.set_yticks((.3, .6, .9, 1.2))
-    ratio_ax.annotate('Ratio', (.07, .9), xycoords='axes fraction',
+    ratio_ax.annotate('Ratio', (.04, 1.0), xycoords='axes fraction',
                       ha='left', va='top')
 
     for ax in axes:
