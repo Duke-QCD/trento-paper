@@ -35,46 +35,41 @@
 
 \maketitle
 
-\section{Introduction}
+%\section{Introduction}
 
-Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider 
-(LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly interacting Quark-Gluon Plasma (sQGP) 
-\cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}. Among the major goals of current research into 
-the sQGP are the quantification of its properties, such as transport coefficients and equation of state, and exploration of the non-equilibrium dynamics 
-that lead to its formation in the first fm/c of a nuclear collision. 
+%Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider 
+%(LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly interacting Quark-Gluon Plasma (sQGP) 
+%\cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}.  
 
-Viscous relativistic fluid dynamics provides 
-a stable, well-tested description of this time-evolution and the collectivity observed in high-energy nuclear collisions \cite{}.  However, a 
-realistic Monte Carlo (MC) model for the initial state of the medium is essential for describing many event-by-event observables.  These initial 
-conditions remain one of the most poorly-constrained components of modern computational models \cite{}.
+Viscous relativistic fluid dynamics provides a stable, well-tested description of the time-evolution and collectivite behavior in high-energy 
+nuclear collisions \cite{PhysRevLett.89.159901,Teaney:2004qa,Chaudhuri:2005ea,Muronga:2004sf}. However, a realistic Monte Carlo (MC) model for the initial 
+state of the medium is essential for describing many event-by-event observables. These initial conditions remain one of the most poorly-constrained 
+components of modern computational models \cite{Song:2010mg}.
 
-Initial condition models create profiles of energy or entropy at the time of sQGP formation which are then evolved by
-fluid dynamics.  Perhaps the simplest prescription is the so-called wounded nucleon model, which determines
-participating nucleons via optical overlap and deposits a blob of energy or entropy for each participant.  The
-MC-Glauber model generalizes wounded nucleons by additionally depositing entropy proportional to the number of
-binary nucleon-nucleon collisions.  Despite its simplicity, the Glauber model has qualitatively fit a large number 
-of experimental measurements \cite{}.
+Initial condition models create profiles of energy or entropy at the time of sQGP formation which are then evolved by fluid dynamics. Perhaps the simplest 
+prescription is the so-called wounded nucleon model which deposits initial energy or entropy proportional to the local density of participant nucleons \cite{Białłas1976461}. 
+The wounded nucleon model was later generalized to include additional contributions from binary nucleon-nucleon collisions, forming the basis of a two-component
+model commonly referred to as the Glauber model. Despite its simplicity, the Glauber model has qualitatively fit a large number of experimental measurements \cite{}.
 
-The current state-of-the-art for initial condition models is the IP-Glasma model \cite{}, which is based on the color-glass condensate (CGC) effective 
-field theory \cite{} to create a dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the 
+Recently, the PHENIX collaboration demonstrated that a quark participant model can be used to fit the transverse energy distributions in 
+proton-proton, deuteron-gold and gold-gold collisions without the use of additional binary collision terms \cite{PhysRevC.89.044905}. Such a description may provide a natural successor to 
+current Glauber initial condition models, although it is unclear if wounded quark models yield accurate hydrodynamic flows or remain valid at LHC energies where gluon occupation is expected to dominate.
+
+The current state-of-the-art for initial condition models is the IP-Glasma model \cite{Schenke:2012wb}, which is based on the color-glass condensate (CGC) effective 
+field theory \cite{Gelis:2010nm} to create a dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the 
 latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. It's main draw back is it's computational 
 complexity and that it's applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
 
-Most recently, members of the PHENIX collaboration demonstrated that a wounded quark model can be used to describe the transverse energy distributions of 
-proton-proton, deuteron-gold and gold-gold collisions at RHIC without the use of a binary collision term. It is however, not yet clear if these scaling laws are
-valid at the LHC where gluon occupation is expected to dominate.
+In this letter we present \trento, a new initial condition model for high-energy nuclear collisions, designed to model a wide range of systems, including but not limited to proton-proton, proton-lead, gold-gold, 
+lead-lead and uranium-uranium collisions. In concert with transport calculations for the time-evolution of ultra-relativistic nuclear collisions, \trento\ provides an effective and computationally cheap method
+for simulating and extracting fundamental properties of sQGP matter. 
 
-In this letter, we present a new initial condition model, \trento, for high-energy nuclear collisions spanning the full range of projectile and target combinations, 
-from proton-proton to proton-lead, lead-lead and uranium-uranium collisions. In concert with transport calculations for the time-evolution of ultra-relativistic 
-nuclear collisions, such an approach provides {\bf PUT SOMETHING HERE} %a unified description of high energy nucleus-nucleus collisions.
+We now detail the construction of the model which proceeds in a similar fashion to a two-component Glauber model, but with a different ansatz for the deposition of entropy. 
 
-\section{The Model}
-
-\trento\ is constructed in a similar fashion as the two-component Glauber model, but uses a different ansatz
-for entropy production. 
+%\section{The Model}
 
 Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
-the beam-integrated density of its nuclear matter, typically called thickness:
+the beam-integrated density of its nuclear matter, typically called a nuclear thickness:
 \begin{equation}
   T_{A,B}(x, y) = \int dz \, \rho_{A,B}(x, y, z).
 \end{equation}
@@ -100,7 +95,7 @@ With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \end{equation}
 so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
 reduced mass.  The dimensionless parameter $p$ may take any real value in $(-\infty, \infty)$ and is to be
-determined by experiment.  This functional form --- known as the generalized mean or vector p-norm --- simplifies to arithmetic,
+determined by experiment.  This functional form --- known as the generalized mean --- simplifies to arithmetic,
 geometric, and harmonic means for certain values of $p$, i.e.
 \begin{equation}
   T_R(p; T_A, T_B) =
@@ -154,7 +149,7 @@ ground up to handle a variety of collision systems; we begin with the simplest c
   }
 \end{figure*}
 
-\subsection{Proton-proton collisions}
+%\subsection{Proton-proton collisions}
 
 Let us consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction.
 We denote their nuclear densities by
@@ -192,7 +187,7 @@ transverse entropy profile up to an overall normalization factor,
 dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
 \end{equation}
 
-\subsection{Larger systems p+A and A+A}
+%\subsection{Larger systems p+A and A+A}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
 superpositions of proton-proton collisions.  A set of nucleon positions is sampled for each
@@ -207,6 +202,22 @@ rest are discarded. The fluctuated thickness function of nucleus $A$ then reads
 where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of
 participant $i$ in nucleus $A$. Fluctuated thickness function $T_B$ follows analygously. 
 
+At this point, it's useful to enumerate the parameters of the model and summarize its construction. 
+The inputs to the model are the Monte-Carlo nucleon coordinates $\{\vec{x}_1,\vec{x}_2,...,\vec{x}_{A,B}\}$, a randomly sampled 
+nucleus-nucleus impact parameter $b$, the nucleon-nucleon cross section $\sigma_{NN}$, the nucleon density profile 
+$\rho_{\mathrm{proton}}$, the Gamma fluctuation shape parameter $k$ in the fluctuated nuclear thickness function, the generalized 
+mean exponent $p$ in the definition of the \emph{reduced} thickness function, and an overall normalization factor denoted simply as ``norm''.
+
+The output of the model is the transverse entropy density in an interval about mid-rapidity constructed from the reduced thickness function 
+$dS/dy \propto T_R(p;T_A,T_B)$ using expression \eqref{eq:tr}. We now proceed to demonstrate the effectiveness of the model in 
+describing a wide range of collision systems.
+
+%\section{Model Applications}
+
+\trento\ simulations are designed with an inherrent freedom in the choice of several parameters such as the nucleon density profile $\rho_\mathrm{proton}$, Gamma fluctuation parameter $k$,
+and generalized mean exponent $p$. Rigorously constraining these parameters would require a systematic model-to-data comparison which is beyond the scope of this work.  
+Therefore, the following results do not necessarily represent the best-fit of the model to data.
+
 \begin{figure*}[t]
   \includegraphics{eccentricity}
   \caption{
@@ -217,24 +228,7 @@ participant $i$ in nucleus $A$. Fluctuated thickness function $T_B$ follows anal
     axis has a different range in the ratio plot.
   }
 \end{figure*}
-
-At this point, it's useful to enumerate the parameters of the model and summarize its construction. 
-The inputs to the model are the Monte-Carlo nucleon coordinates $\{\vec{x}_1,\vec{x}_2,...,\vec{x}_{A,B}\}$, a randomly sampled 
-nucleus-nucleus impact parameter $b$, the nucleon-nucleon cross section $\sigma_{NN}$, the nucleon density profile 
-$\rho_{\mathrm{proton}}$, the Gamma shape parameter $k$ in the fluctuated nuclear thickness function, the generalized 
-mean exponent $p$ in the definition of the \emph{reduced} thickness function, and an overall normalization factor denoted simply as ``norm''.
-
-The output of the model is the transverse entropy density in an interval about mid-rapidity constructed from the reduced thickness function 
-$dS/dy \propto T_R(p;T_A,T_B)$ using expression \eqref{eq:tr}. We now proceed to demonstrate the effectiveness of the model in 
-describing a wide range of collision systems.
-
-\section{Model Applications}
-
-\trento\ simulations are designed with an inherrent freedom in the choice of several parameters such as the nucleon density profile $\rho_\mathrm{proton}$, Gamma fluctuation parameter $k$,
-and generalized mean exponent $p$. Rigorously constraining these parameters would require a systematic model-to-data comparison which is beyond the scope of this work.  
-Therefore, the following results do not necessarily represent the best-fit of the model to data.
-
-\subsection{Multiplicity distributions}
+%\subsection{Multiplicity distributions}
 
 The experimentally observed charged-particle multiplicity $\nch$ is to a very good approximation proportional to the total initial
 entropy \needcite, and hence proportional to the integrated reduced thickness in our model:
@@ -257,7 +251,7 @@ Proton-lead and lead-lead distributions are presented in the middle and right pa
 FIG.~\ref{fig:multdist}. The Model parameters are  identical to proton-proton, except for the overall normalization factor, which depends on the beam energy and kinematic cuts, both of which vary across the data analyzed in this figure.
 Overall, the model is able to reproduce the shapes of all three distributions using a single set of parameters, and only allowing for a change in the normalization, whose $\sim$20\% variation across collision systems is consistent with differences in experimental beam energy and kinematic cuts.
 
-\subsection{Eccentricity harmonics}
+%\subsection{Eccentricity harmonics}
 
 Eccentricity harmonics $\varepsilon_n$ can be calculated using the definition
 \begin{equation}
@@ -276,7 +270,9 @@ as a function of centrality.  They compare a number of common initial condition 
 currently only the IP-Glasma model consistently falls within the allowed region.  As can be seen in the bottom panel of FIG.~\ref{fig:eccen} our model yields excellent agreement with the allowed band for
 the geometric mean ($p = 0$).
 
-\subsection{Ultracentral U+U collisions}
+{\bf need transition}
+
+%\subsection{Ultracentral U+U collisions}
 
 \begin{figure}[b]
   \centering
@@ -311,17 +307,24 @@ gold-gold and uranium-uranium collisions as shown in FIG.~\ref{fig:uranium}. Sho
 with STAR data than Glauber, and are similar to calculations by the IP-Glasma model \needcite.
 
 
-\section{Conclusion}
+\section{Summary}
 
 We introduce \trento, a new unified initial condition model for high-energy nuclear collisions based on
-eikonal entropy creation via the ``reduced thickness''.  The model is able to simultaneously fit
+eikonal entropy creation via a ``reduced thickness'' function.  The model is able to simultaneously fit
 proton-proton, proton-lead, and lead-lead multiplicity distributions along with lead-lead eccentricity
 harmonics, and provides a possible resolution to the ``knee'' problem in ultracentral uranium-uranium
-collisions.  It is flexible by design and able to mimic the behavior of other initial condition models.
+collisions.  
 
-This is an intentionally \emph{effective} model.  A first-principles derivation would be ideal, but such
-models are usually complex and require significant computation time.  So in practical terms, effective models
-are often preferable for empirical modeling.
+The model is flexible by design and able to mimic the behavior of other initial condition models. Preliminary results
+indicate that
+
+%The fundamental premise motivating \trento\ is that variations in the choice of projectile and target nuclei 
+%should not constitute disjoint physical models, but should be describable within a single theoretical framework 
+%with well defined bounds that 
+
+%This is an intentionally \emph{effective} model.  A first-principles derivation would be ideal, but such
+%models are usually complex and require significant computation time.  So in practical terms, effective models
+%are often preferable for empirical modeling.
 
 Future work will couple the initial condition generator to a full hydrodynamical simulation and constrain the
 various model parameters.  We plan to publicly release \trento\ in the coming weeks, and the community is
