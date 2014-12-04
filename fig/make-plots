@@ -134,7 +134,8 @@ def multdist():
         ax.set_yscale('log')
 
         mult = load_from_cache(
-            'data/trento/multdist/{}-m0-k0.8-w0.6'.format(system),
+            #'data/trento/multdist/{}-m0-k0.8-w0.6'.format(system),
+            'data/trento/multdist/{}-m0-k0.6-w0.5'.format(system),
             usecols=(3,)
         )
 
@@ -151,7 +152,7 @@ def multdist():
                         label=label
                         )
 
-            norm = 19.7
+            norm = 20.5
             mult_rescaled = (mult*norm)[(mult*norm)[:] > 0.5]
             print("TRENTO norm:",mult_rescaled.mean())
             print("ALICE norm:",(np.inner(x, y) / y.sum()))
@@ -229,6 +230,9 @@ def uranium():
 
     fig, axes = plt.subplots(nrows=2, sharex='col',
                              figsize=(columnwidth, columnwidth*aspect*1.5))
+
+    #fig, axes = plt.subplots(ncols=2, sharex='row',
+    #                         figsize=(2*columnwidth, columnwidth*aspect))
 
     for system, cent_range, gslopes in zip(
             systems, system_cent_range, glb_slopes):
