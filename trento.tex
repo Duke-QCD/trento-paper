@@ -37,34 +37,25 @@
 
 %\section{Introduction}
 
-Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider
-(LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly interacting Quark-Gluon Plasma (sQGP)
+Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider (LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly-interacting Quark-Gluon Plasma (sQGP)
 \cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}.
+A major goal of current research is the quantification of fundamental sQGP properties, typically accomplished by matching experimental measurements to computational models for the full spacetime evolution of heavy-ion collisions \cite{}.
+While viscous relativistic fluid dynamics provides a stable, well-tested description of the thermalized sQGP medium \cite{PhysRevLett.89.159901,Teaney:2004qa,Chaudhuri:2005ea,Muronga:2004sf}, the initial state and pre-equilibrium evolution of the collision (approximately the first fm/c) lacks a standard description and remains one of the most poorly-constrained components of modern models \cite{Song:2010mg}.
 
-Viscous relativistic fluid dynamics provides a stable, well-tested description of the time-evolution and collective behavior in high-energy
-nuclear collisions \cite{PhysRevLett.89.159901,Teaney:2004qa,Chaudhuri:2005ea,Muronga:2004sf}. However, a realistic Monte Carlo (MC) model for the initial
-state of the medium is essential for describing many event-by-event observables. These initial conditions remain one of the most poorly-constrained
-components of modern computational models \cite{Song:2010mg}.
+Initial condition models create profiles of energy or entropy at the sQGP thermalization time which are then evolved by fluid dynamics.
+The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision \cite{Miller:2007ri}.
+Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{}.
 
-Initial condition models create profiles of energy or entropy at the time of sQGP formation which are then evolved by fluid dynamics. Perhaps the simplest
-prescription is the so-called wounded nucleon model which deposits initial energy or entropy proportional to the local density of participant nucleons \cite{Białłas1976461}.
-The wounded nucleon model was later generalized to include additional contributions from binary nucleon-nucleon collisions, forming the basis of a two-component
-model commonly referred to as the Glauber model. Despite its simplicity, the Glauber model has qualitatively fit a large number of experimental measurements \cite{}.
+Recently, the PHENIX collaboration used a quark participant model to fit the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC \cite{PhysRevC.89.044905}.
+Such a model may become a natural successor to the Glauber model, although it is has yet to predict flow harmonics or LHC data, where gluon occupation dominates \cite{}.
 
-Recently, the PHENIX collaboration demonstrated that a quark participant model can be used to fit the transverse energy distributions in
-proton-proton, deuteron-gold and gold-gold collisions without the use of additional binary collision terms \cite{PhysRevC.89.044905}. Such a description may provide a natural successor to
-current Glauber initial condition models, although it is unclear if wounded quark models yield accurate hydrodynamic flows or remain valid at LHC energies where gluon occupation is expected to dominate.
+The current state-of-the-art is the IP-Glasma model \cite{Schenke:2012wb}, which uses color-glass condensate (CGC) effective field theory \cite{Gelis:2010nm} to create a dynamical description of the pre-sQGP stage of the collision.
+IP-Glasma has quantitatively described the latest event-by-event data on higher order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
+However, it is computationally complex and its applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
 
-The current state-of-the-art for initial condition models is the IP-Glasma model \cite{Schenke:2012wb}, which is based on the color-glass condensate (CGC) effective
-field theory \cite{Gelis:2010nm} to create a dynamical description of the pre-fluid stage of the collision.  IP-Glasma has been able to quantitatively describe the
-latest event-by-event data on higher order flow harmonics as well as many other observables \cite{Schenke:2014zha}. Its main draw back is its computational
-complexity and that its applicability to smaller collision systems (e.g.~proton-proton) remains uncertain.
-
-In this letter we present \trento, a new initial condition model for high-energy nuclear collisions, designed to model a wide range of systems, including but not limited to proton-proton, proton-lead, gold-gold,
-lead-lead and uranium-uranium collisions. In concert with transport calculations for the time-evolution of ultra-relativistic nuclear collisions, \trento\ provides an effective and computationally cheap method
-for simulating and extracting fundamental properties of sQGP matter.
-
-We now detail the construction of the model which proceeds in a similar fashion to a two-component Glauber model, but with a different ansatz for the deposition of entropy.
+In this work we present \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
+It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming a specific physical mechanism for entropy production or thermalization.
+We now begin to detail the construction of the model.
 
 %\section{The Model}
 
@@ -73,8 +64,7 @@ the beam-integrated density of its nuclear matter, typically called a nuclear th
 \begin{equation}
   T_{A,B}(x, y) = \int dz \, \rho_{A,B}(x, y, z).
 \end{equation}
-The construction of the thickness functions will be addressed in the following subsections; first, we
-postulate the following:
+The construction of the thickness functions will be addressed shortly; first, we postulate the following:
 \begin{enumerate}
   \item The eikonal approximation is valid:  entropy is produced if $T_A$ and $T_B$ eikonally overlap.
   \item There exists a scalar field $f(T_A, T_B)$ which converts projectile thicknesses into entropy
@@ -85,7 +75,7 @@ time:
 \begin{equation}
   f \propto dS/dy \, |_{\tau = \tau_0}.
 \end{equation}
-It should provide an \emph{effective} description of early collision dynamics:  it need not arise from a
+It should provide an effective description of early collision dynamics:  it need not arise from a
 first-principles calculation, but it must obey basic physical constraints.
 
 With this in mind, we introduce for $f$ the \emph{reduced thickness}
@@ -95,7 +85,7 @@ With this in mind, we introduce for $f$ the \emph{reduced thickness}
 \end{equation}
 so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
 reduced mass.  The dimensionless parameter $p$ may take any real value in $(-\infty, \infty)$ and is to be
-determined by experiment.  This functional form --- known as the generalized mean --- simplifies to arithmetic,
+determined by experiment.  This functional form---known as the generalized mean---simplifies to arithmetic,
 geometric, and harmonic means for certain values of $p$, i.e.
 \begin{equation}
   T_R(p; T_A, T_B) =
@@ -108,25 +98,24 @@ geometric, and harmonic means for certain values of $p$, i.e.
 More generally, $p$ quantifies the attenuation of entropy production in asymmetric ($T_A \neq T_B$) regions of
 the collision, as demonstrated in FIG.~\ref{fig:saturation}.  As $p$ \emph{decreases}, the degree of
 attenuation \emph{increases}.  This significantly impacts the behavior of the model, for instance $p=1$ is
-precisely a wounded nucleon model, while $-1 \lesssim p \lesssim 0$ mimics features of CGC saturation based models.
+precisely a participant nucleon model, while $-1 \lesssim p \lesssim 0$ mimics saturation in CGC-based models.
 
 The reduced thickness possesses several other key properties.  It is
-\renewcommand{\labelenumi}{(\alph{enumi})}
 \begin{enumerate*}
-  \item continuous and monotonically increasing, \\ if $T_A \leq T_A'$ and $T_B \leq T_B'$, then $T_R \leq T_R'$;
-  \item symmetric in the projectile thicknesses, \\ $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$;
-  \item independent of $p$ when the thicknesses are equal, \\ $T_R(p; T, T) = T$ and hence
-  \item vanishes when $T_A$ and $T_B$ vanish $T_R(p; 0, 0) = 0$. \\ In fact, for $p \leq 0$, $T_R$ vanishes
-     if \emph{either} $T_A$ or $T_B$ do.  On the other hand, positive values of $p$ introduce small violations
-    of the eikonal entropy production postulate, similar to a traditional wounded nucleon model.
+  \renewcommand{\labelenumi}{(\alph{enumi})}
+  \item continuous and monotonically increasing: \\
+    if $T_A \leq T_A'$ and $T_B \leq T_B'$, then $T_R \leq T_R'$;
+  \item symmetric in the projectile thicknesses: \\
+    $T_R(p; T_A, T_B) = T_R(p; T_B, T_A)$;
+  \item independent of $p$ when the thicknesses are equal: \\
+    $T_R(p; T, T) = T$; and
+  \item vanishes when $T_A$ and $T_B$ vanish: $T_R(p; 0, 0) = 0$. \\
+    In fact, for $p \leq 0$, $T_R$ vanishes if \emph{either} $T_A$ or $T_B$ do.
+    On the other hand, positive values of $p$ introduce small violations of the eikonal entropy production postulate, similar to a Glauber model.
 \end{enumerate*}
 
 Finally, the reduced thickness provides the basis of the model name:
 \trento, for Thickness-Reduced Event-by-event Nuclear Topology.
-
-We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
-of the reduced thickness completes the specification of the model.  The procedure is constructed from the
-ground up to handle a variety of collision systems; we begin with the simplest case.
 
 \begin{figure}[t]
   \includegraphics{saturation}
@@ -136,6 +125,44 @@ ground up to handle a variety of collision systems; we begin with the simplest c
     varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (green, blue, and red).
   }
 \end{figure}
+
+We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which combined with the definition
+of the reduced thickness completes the specification of the model.  The procedure is constructed from the
+ground up to handle a variety of collision systems; we begin with the simplest case.
+
+%\subsection{Proton-proton collisions}
+
+Consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction and nuclear densities
+\begin{equation}
+  \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
+\end{equation}
+and assume that the integral $\int dz \, \rho_\text{proton}$ either has a closed form or may be evaluated numerically, so that the proton thickness functions can be calculated.
+The protons collide with probability \cite{dEnterria:2010hd}
+\begin{equation}
+  P_\text{coll} = 1 - \exp\biggl[ -\sigma_{gg} \int dx \, dy \int dz \, \rho_A \int dz \, \rho_B \biggr],
+  \label{eq:pcoll}
+\end{equation}
+where the integral in the exponential is the overlap integral of the proton thickness functions and
+$\sigma_{gg}$ is an effective parton-parton cross-section tuned so that the total proton-proton
+cross-section equals the experimental inelastic nucleon-nucleon cross-section $\sigma_{NN}$.
+
+$P_\text{coll}$ is sampled once to determine if the protons collide; assuming they do, each is assigned a \emph{fluctuated} thickness
+\begin{equation}
+  T_{A,B}(x, y) = \gamma_{A,B} \int dz \, \rho_{A,B}(x, y),
+\end{equation}
+where $\gamma_{A,B}$ are independent random numbers sampled from a gamma distribution with unit mean,
+\begin{equation}
+  P(\gamma; k) \propto \gamma^{k-1} e^{-\gamma/k},
+\end{equation}
+with the shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
+flexibility---it is exponential for $k = 1$ and becomes Gaussian for large $k$---and because it is the
+continuous analog of the negative binomial distribution, which has historically been used to fit proton-proton
+multiplicity fluctuations.
+
+With the projectile thickness functions in hand, the reduced thickness is calculated to furnish the initial transverse entropy profile up to an overall normalization factor,
+\begin{equation}
+dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
+\end{equation}
 
 \begin{figure*}[t]
   \includegraphics{multdist}
@@ -149,58 +176,19 @@ ground up to handle a variety of collision systems; we begin with the simplest c
   }
 \end{figure*}
 
-%\subsection{Proton-proton collisions}
-
-Let us consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction.
-We denote their nuclear densities by
-\begin{equation}
-  \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
-\end{equation}
-and assume that the integral $\int dz \, \rho_\text{proton}$ either has a closed form or may be
-evaluated numerically, so that the proton thickness functions can be calculated.
-
-We now randomly sample the collision probability of the protons according to \cite{dEnterria:2010hd},
-\begin{equation}
-  P_\text{coll} = 1 - \exp\biggl[ -\sigma_{\mathrm{partonic}} \int dx \, dy \int dz \, \rho_A \int dz \, \rho_B \biggr],
-  \label{eq:pcoll}
-\end{equation}
-where the integral in the exponential is the overlap integral of the proton thickness functions and
-$\sigma_{\mathrm{partonic}}$ is a parton-parton cross-section which is tuned such that the total proton-proton
-cross-section in our model equals the experimentally measured inelastic nucleon nucleon cross-section $\sigma_{NN}$.
-
-Assuming the protons collide, each is assigned a \emph{fluctuated} thickness
-\begin{equation}
-  T_{A,B}(x, y) = \gamma_{A,B} \int dz \, \rho_{A,B}(x, y),
-\end{equation}
-where $\gamma_{A,B}$ are independent random numbers sampled from a gamma distribution with unit mean,
-\begin{equation}
-  P(\gamma; k) \propto \gamma^{k-1} e^{-\gamma/k},
-\end{equation}
-with the shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
-flexibility -- it is exponential for $k = 1$ and becomes Gaussian for large $k$ -- and because it is the
-continuous analog of the negative binomial distribution, which has historically been used to fit proton-proton
-multiplicity fluctuations.
-
-The reduced thickness is then calculated from the projectile thickness functions; this furnishes the initial
-transverse entropy profile up to an overall normalization factor,
-\begin{equation}
-dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
-\end{equation}
-
 %\subsection{Larger systems p+A and A+A}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
-superpositions of proton-proton collisions.  A set of nucleon positions is sampled for each
-projectile $A$, $B$, utilizing either an uncorrelated Woods-Saxon distribution or correlated nuclear configurations
-when available \cite{Alvioli:2009ab}. Subsequently the collision probability \eqref{eq:pcoll} is sampled for each
-pairwise interaction. Those nucleons that collide with at least one partner are labeled ``participants'' and the
-rest are discarded. The fluctuated thickness function of nucleus $A$ then reads
+superpositions of proton-proton collisions.
+A set of nucleon positions is chosen for each projectile $A$, $B$, typically by sampling an uncorrelated Woods-Saxon distribution or from more realistic correlated nuclear configurations when available \cite{Alvioli:2009ab}.
+The collision probability \eqref{eq:pcoll} is sampled for each pairwise interaction and those nucleons that collide with at least one partner are labeled ``participants'' while the rest are discarded.
+The fluctuated thickness function of nucleus $A$ then reads
 \begin{equation}
   T_A = \sum_i \gamma_i \int dz \, \rho_\text{proton}(x - x_i, y - y_i, z - z_i),
   \label{nuclear thickness}
 \end{equation}
-where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of
-participant $i$ in nucleus $A$. Fluctuated thickness function $T_B$ follows analygously.
+where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of participant $i$ in nucleus $A$.
+$T_B$ follows analogously.
 
 At this point, it's useful to enumerate the parameters of the model and summarize its construction.
 The inputs to the model are the Monte-Carlo nucleon coordinates $\{\vec{x}_1,\vec{x}_2,...,\vec{x}_{A,B}\}$, a randomly sampled
