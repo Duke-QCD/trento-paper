@@ -151,13 +151,16 @@ def multdist():
                         label=label
                         )
 
-            norm = (np.inner(x, y) / y.sum()) / mult.mean()
-            mult_rescaled = norm*mult
+            norm = 19.7
+            mult_rescaled = (mult*norm)[(mult*norm)[:] > 0.5]
+            print("TRENTO norm:",mult_rescaled.mean())
+            print("ALICE norm:",(np.inner(x, y) / y.sum()))
             counts, edges = np.histogram(
                 mult_rescaled,
-                bins=np.arange(np.max(mult_rescaled)+1),
+                bins=np.linspace(0.5,50.5,51),
                 density=True
             )
+            counts = counts*np.sum(y)
             ax.step(edges[:-1], counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
@@ -178,7 +181,6 @@ def multdist():
                         fmt='o', markersize=2, markeredgewidth=0,
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
-
             norm = (27.5 if system == 'pPb' else 700.) / mult.mean()
             mult_rescaled = norm*mult
             counts, edges = np.histogram(
@@ -187,7 +189,6 @@ def multdist():
             )
             ax.step(edges[:-1], 1.22*counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
-
             if system == 'pPb':
                 ax.set_xlim(0, 200)
             else:
@@ -195,9 +196,8 @@ def multdist():
                 ax.set_ylim(ymin=.5*z.min())
 
             ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
-                        (.145, .035), xycoords='axes fraction',
-                        ha='left', va='bottom')
-
+                            (.145, .035), xycoords='axes fraction',
+                            ha='left', va='bottom')
         ax.xaxis.set_major_locator(tick.MaxNLocator(4))
         ax.yaxis.set_major_locator(
             tick.LogLocator(base=10 if system == 'pp' else 100)
@@ -212,7 +212,6 @@ def multdist():
         ax.legend(loc=(.02, .12), handlelength=1)
 
     plt.tight_layout(pad=0, w_pad=.1)
-
 
 @plotfn
 def uranium():
@@ -356,7 +355,7 @@ def eccentricity():
 
 
 if __name__ == "__main__":
-    saturation()
+#    saturation()
     multdist()
-    uranium()
-    eccentricity()
+#    uranium()
+#    eccentricity()
