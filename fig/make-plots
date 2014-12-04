@@ -168,6 +168,8 @@ def multdist():
                         (.145, .035), xycoords='axes fraction',
                         ha='left', va='bottom')
         else:
+            pPb = system == 'pPb'
+
             xmin, xmax, nch, pdf, ccdf = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
                 unpack=True
@@ -180,15 +182,17 @@ def multdist():
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
 
-            norm = np.sum(nch*pdf) / mult[:pdf.sum()*mult.size].mean()
+            ptotal = pdf.sum()
+            mult = mult[:ptotal*mult.size]
+            norm = np.inner(nch, pdf) / ptotal / mult.mean()
             counts, edges = np.histogram(
-                norm*mult, bins=40 if system == 'pPb' else 100,
+                norm*mult, bins=50 if pPb else 100,
                 density=True
             )
-            ax.step(edges[:-1], counts/pdf.sum(), where='post', color=color,
+            ax.step(edges[:-1], counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
-            if system == 'pPb':
+            if pPb:
                 ax.set_xlim(0, 200)
             else:
                 ax.set_xlim(0, 3600)
