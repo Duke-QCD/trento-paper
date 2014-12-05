@@ -55,7 +55,6 @@ However, it is computationally complex and its applicability to smaller collisio
 
 In this work we present \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
 It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming a specific physical mechanism for entropy production or thermalization.
-We now begin to detail the construction of the model.
 
 %\section{The Model}
 
@@ -171,8 +170,8 @@ dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
     Multiplicity distributions for proton-proton, proton-lead, and lead-lead collisions.  The blue histograms
     are \protect\trento\ results from $10^6$ minimum-bias events for each collision system, all with reduced
     thickness parameter $p = 0$ (geometric mean) and gamma fluctuation parameter $k = 0.8$.  The normalization
-    constants indicated in the legends are set so that the model and experimental distributions (points with
-    error bars) have the same mean.  Experimental data are from ALICE \needcite.
+    constants indicated in the legends are tuned to match the experimental distributions
+    (points with error bars) from ALICE \needcite.
   }
 \end{figure*}
 
@@ -190,20 +189,14 @@ The fluctuated thickness function of nucleus $A$ then reads
 where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of participant $i$ in nucleus $A$.
 $T_B$ follows analogously.
 
-At this point, it's useful to enumerate the parameters of the model and summarize its construction.
-The inputs to the model are the Monte-Carlo nucleon coordinates $\{\vec{x}_1,\vec{x}_2,...,\vec{x}_{A,B}\}$, a randomly sampled
-nucleus-nucleus impact parameter $b$, the nucleon-nucleon cross section $\sigma_{NN}$, the nucleon density profile
-$\rho_{\mathrm{proton}}$, the Gamma fluctuation shape parameter $k$ in the fluctuated nuclear thickness function, the generalized
-mean exponent $p$ in the definition of the \emph{reduced} thickness function, and an overall normalization factor denoted simply as ``norm''.
-
-The output of the model is the transverse entropy density in an interval about mid-rapidity constructed from the reduced thickness function
-$dS/dy \propto T_R(p;T_A,T_B)$ using expression \eqref{eq:tr}. We now proceed to demonstrate the effectiveness of the model in
-describing a wide range of collision systems.
+This completes the construction of \trento.
+In summary, the model creates fluctuated nuclear thickness functions $T_A$, $T_B$ from a set of nucleon coordinates, a nucleon density profile $\rho_\text{proton}$, and gamma fluctuation parameter $k$.
+Then, the initial entropy profile is calculated using the reduced thickness \eqref{eq:tr} with attenuation parameter $p$.
 
 %\section{Model Applications}
 
-\trento\ simulations are designed with an inherent freedom in the choice of several parameters such as the nucleon density profile $\rho_\mathrm{proton}$, Gamma fluctuation parameter $k$,
-and generalized mean exponent $p$. Rigorously constraining these parameters would require a systematic model-to-data comparison which is beyond the scope of this work.
+We now demonstrate \trento's ability to simultaneously describe a wide range of collision systems.
+Note that the reduced thickness parameter $p$, gamma fluctuation parameter $k$, and nucleon profile $\rho_\text{proton}$ are not rigorously contsrained---to do so would require a systematic model-to-data comparison which is beyond the scope of this work.
 Therefore, the following results do not necessarily represent the best-fit of the model to data.
 
 \begin{figure*}[t]
@@ -219,13 +212,11 @@ Therefore, the following results do not necessarily represent the best-fit of th
 
 %\subsection{Multiplicity distributions}
 
-The experimentally observed charged-particle multiplicity $\nch$ is to a very good approximation proportional to the total initial
-entropy \needcite, and hence proportional to the integrated reduced thickness in our model:
+The experimentally observed charged-particle multiplicity $\nch$ is to a very good approximation proportional to the total initial entropy \needcite, and hence proportional to the integrated reduced thickness:
 \begin{equation}
   \nch \propto \int dx \, dy \, T_R.
 \end{equation}
-To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$
-profiles, and determine a multiplicative normalization constant in order to rescale the distribution to the experimental mean.
+To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$ profiles, and multiply by an overall normalization constant to rescale the distribution to the experimental mean.
 
 The left panel of FIG.~\ref{fig:multdist} shows the $\nch$ distribution from $10^6$ proton-proton simulations
 using reduced thickness parameter $p = 0$ (geometric mean), gamma fluctuation parameter $k = 0.8$, and
@@ -233,33 +224,27 @@ Gaussian beam-integrated proton density
 \begin{equation}
   \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
 \end{equation}
-with an effective area of $B = (0.6\;\text{fm})^2$.  The results compare favorably with the experimental distribution
-measured by ALICE \needcite.
+with effective area $B = (0.6\;\text{fm})^2$.
+Proton-lead and lead-lead distributions (middle and right panels) use identical model parameters, except for the overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with the differences in experimental beam energy and kinematic cuts annotated in the figure.
 
-Proton-lead and lead-lead distributions are presented in the middle and right panels of
-FIG.~\ref{fig:multdist}. The Model parameters are  identical to proton-proton, except for the overall normalization factor, which depends on the beam energy and kinematic cuts, both of which vary across the data analyzed in this figure.
-Overall, the model is able to reproduce the shapes of all three distributions using a single set of parameters, and only allowing for a change in the normalization, whose $\sim$20\% variation across collision systems is consistent with differences in experimental beam energy and kinematic cuts.
+The $\nch$ distributions compare favorably with the corresponding experimental measurements by ALICE \needcite.
+\trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the PHENIX quark participant model fits the transverse-energy distributions of several collision systems at RHIC.
 
 %\subsection{Eccentricity harmonics}
 
-Eccentricity harmonics $\varepsilon_n$ can be calculated using the definition
+Eccentricity harmonics $\varepsilon_n$ are calculated using the definition
 \begin{equation}
   \varepsilon_n e^{i n\phi} = -\frac{\int dx \, dy\, r^n e^{i n \phi} \, T_R}{\int dx \, dy \, r^n \, T_R}.
 \end{equation}
-Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ for Pb+Pb collisions as a function of
-centrality for reduced thickness $p = 1$,~0,~$-1$.  There is a clear trend of increasing eccentricity
+Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ for lead-lead collisions as a function of centrality for reduced thickness $p = 1$,~0,~$-1$.  There is a clear trend of increasing eccentricity
 (particularly $\varepsilon_2$) with decreasing $p$.  This may be understood by the attenuation property of the
 reduced thickness:  as $p$ decreases, asymmetric regions of the collision produce less entropy, which
 accentuates the elliptical overlap shape in non-central collisions and enhances their eccentricity.
 
-In addition, we perform the test described in \cite{Retinskaya:2013gca} and calculate the ratio of root-mean-square eccentricities
-$\eccratio$.  In \cite{Retinskaya:2013gca}, the authors have used experimental flow data
-and hydrodynamics to construct an experimentally allowed band of the ratio of root-mean-square eccentricities
-as a function of centrality.  They compare a number of common initial condition models to that band and find that
-currently only the IP-Glasma model consistently falls within the allowed region.  As can be seen in the bottom panel of FIG.~\ref{fig:eccen} our model yields excellent agreement with the allowed band for
-the geometric mean ($p = 0$).
-
-{\bf need transition}
+In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, in which the authors used experimental flow data
+and hydrodynamics to construct an experimentally allowed band of the ratio of root-mean-square eccentricities $\eccratio$
+as a function of centrality.  They compare a number of common initial condition models and find that only the IP-Glasma model consistently falls within the allowed region.
+As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for reduced thickness $p = 0$ (geometric mean).
 
 %\subsection{Ultracentral U+U collisions}
 
@@ -269,7 +254,7 @@ the geometric mean ($p = 0$).
   \caption{
     \label{fig:uranium}
     Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity
-    $\nch/\langle\nch\rangle$ in ultracentral uranium-uranium and gold-gold collisions at RHIC.  The top and
+    $\nch/\langle\nch\rangle$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.  The top and
     bottom plots show the top 0.1\% and 1\% (respectively) of collisions selected by number of spectators to
     mimic STAR's experimental ZDC selection \cite{FortheSTAR:2013bza}.  Blue points with error bars are binned
     \protect\trento\ results from $10^6$ events with reduced thickness parameter $p = 0$ (geometric mean) and
@@ -279,44 +264,41 @@ the geometric mean ($p = 0$).
   }
 \end{figure}
 
-Uranium nuclei have a prolate, spheroidal shape which can be exploited to achieve a larger variance in the anisotropy of thermalized QGP matter.
-These deformed nuclear collisions achieve maximal overlap via two distinct orientations: ``tip-tip'' collisions, in which the long axes of the spheroids are
-aligned with the beam axis and the overlap area is circular; or ``side-side'' collisions, where the long axes are perpendicular to the beam axis and the overlap area is elliptical.
+As a final novel application, we test the performance of \trento\ in ultra-central uranium-uranium collisions, where typical Glauber models are notably inconsistent with experimental data.
+Uranium nuclei have a deformed prolate spheroid shape, which causes a larger variance in the anisotropy of thermalized QGP matter than with more symmetrical nuclei such as gold and lead.
+A uranium-uranium collision may achieve maximal overlap via two distinct orientations:
+``tip-tip'', in which the long axes of the spheroids are aligned with the beam axis and the overlap area is circular;
+or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical.
+Hence side-side collisions will in general have larger initial-state ellipticity $\varepsilon_2$ and final-state elliptic flow $v_2$ than tip-tip.
 
-In the two-component Glauber model, tip-tip collisions have the same number of wounded nucleons as side-side collisions while generating more binary collisions and hence more charged particles.
-Consequently, Glauber models predict an excess of tip-tip collisions in ultra-central event classes where binary collision scaling dominates. These tip-tip collisions
-are characterized by highly circular overlap regions and thus are expected to produce very little elliptic flow. This predicted drop in the uranium-uranium elliptic flow harmonic is known as the ``knee'' \needcite.
+In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions would have larger charged-particle multiplicity.
+Therefore, the most central uranium-uranium events are dominated by tip-tip collisions with small $v_2$, while side-side collisions are less central and have somewhat larger $v_2$.
+This predicted drop in elliptic flow is known as the ``knee'' \needcite.
 
-The STAR experiment at RHIC recently performed uranium-uranium collisions and found no evidence that tip-tip collisions produce more charged particle than side-side collisions and no evidence of the
-a knee-like structure in the measured flow harmonics \cite{FortheSTAR:2013bza}.  It has been proposed that fluctuations could wash out the knee \needcite, but a recent
-comprehensive flow analysis showed that the knee would still be visible \cite{osu}.
+The STAR experiment at RHIC recently performed uranium-uranium collisions and found no evidence of a knee \cite{FortheSTAR:2013bza}, apparently at odds Glauber model predictions.
+It has been proposed that fluctuations could wash out the knee \needcite, but a recent comprehensive flow analysis showed that it would still be visible \cite{osu}.
 
-The reduced thickness ansatz in our model \eqref{eq:tr}, however, does not exhibit binary collision scaling and hence predicts similar slopes for ultra-central
-gold-gold and uranium-uranium collisions as shown in FIG.~\ref{fig:uranium}. Short of conducting a full hydrodynamic analysis, our model results therefore appear to be more consistent
-with STAR data than Glauber, and are similar to calculations by the IP-Glasma model \needcite.
+The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in FIG.~\ref{fig:uranium}.
+The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
+Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to the IP-Glasma model \needcite.
 
 % \section{Summary}
 
-We introduce \trento, a new unified initial condition model for high-energy nuclear collisions based on
+In summary, we introduce \trento, a new model for the initial state of high-energy nuclear collisions based on
 eikonal entropy creation via a ``reduced thickness'' function.  The model is able to simultaneously fit
 proton-proton, proton-lead, and lead-lead multiplicity distributions along with lead-lead eccentricity
-harmonics, and provides a possible resolution to the ``knee'' problem in ultracentral uranium-uranium
+harmonics, and provides a possible resolution to the ``knee'' problem in ultra-central uranium-uranium
 collisions.
 
-The model is flexible by design and able to mimic the behavior of other initial condition models. Preliminary results
-indicate that
+As an effective model, \trento\ does not invoke first-principles derivations or assume particular physical mechanisms for entropy production or thermalization.
+It is computationally cheap, flexible by design, and able to mimic the behavior of other initial condition models:
+for example its multiplicity distributions are similar to the quark participant model,
+and eccentricity harmonics resemble those of the IP-Glasma model.
 
-%The fundamental premise motivating \trento\ is that variations in the choice of projectile and target nuclei
-%should not constitute disjoint physical models, but should be describable within a single theoretical framework
-%with well defined bounds that
+Future work will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions.
+This will form the basis of a modern framework for extracting fundamental sQGP properties via model-to-data comparison.
 
-This is an intentionally \emph{effective} model.  A first-principles derivation would be ideal, but such
-models are usually complex and require significant computation time.  So in practical terms, effective models
-are often preferable for empirical modeling.
-
-Future work will couple the initial condition generator to a full hydrodynamical simulation and constrain the
-various model parameters.  We plan to publicly release \trento\ in the coming weeks, and the community is
-encouraged to use, test, and contribute to the source code. \\
+We plan to publicly release \trento\ in the coming weeks, and the community is encouraged to use, test, and contribute to the source code. \\
 
 % \section*{Acknowledgements}
 
