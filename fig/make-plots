@@ -141,8 +141,8 @@ def multdist():
         label = '{} {} TeV'.format(experiment, energy)
 
         if system == 'pp':
-            x, y, stat, sys = load_from_cache(
-                'data/exp/{}-{}-multdist'.format(experiment, system),
+            x, y, stat, sys = np.loadtxt(
+                'data/exp/{}-{}-multdist.dat'.format(experiment, system),
                 usecols=(0, 3, 4, 6))[1:].T
 
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
@@ -187,8 +187,8 @@ def multdist():
         else:
             pPb = system == 'pPb'
 
-            xmin, xmax, nch, pdf, ccdf = load_from_cache(
-                'data/exp/{}-{}-multdist'.format(experiment, system),
+            xmin, xmax, nch, pdf, ccdf = np.loadtxt(
+                'data/exp/{}-{}-multdist.dat'.format(experiment, system),
                 unpack=True
             )
 
@@ -356,8 +356,8 @@ def eccentricity():
         ecc_rms = np.sqrt(np.mean(np.square(eccentricity), axis=-1))
         ratio_ax.plot(cent_mid, ecc_rms[0]/ecc_rms[1]**0.6, color=color)
 
-    ratio_data = load_from_cache('data/exp/eccentricity_ratio',
-                                 usecols=(0, 1, 2, 3)).T
+    ratio_data = np.loadtxt('data/exp/eccentricity_ratio.dat',
+                            usecols=range(4), unpack=True)
     cent_mid = ratio_data[:2].mean(axis=0)
     ratio_min, ratio_max = ratio_data[2:]
 
