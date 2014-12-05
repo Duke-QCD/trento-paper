@@ -149,14 +149,13 @@ def multdist():
                         markeredgewidth=0, capsize=0, elinewidth=.4,
                         color='.3', label=label)
 
-            # Interpret trento mult as <Nch>.
-            # Let x be a positive half-integer, then if
-            #   x <= mult < x+1,
-            # assume Nch = x + 1/2, so e.g.
-            #  0.5 <= mult < 1.5  -->  Nch = 1
+            # Interpret trento mult as <Nch>.  If
+            #   (N - 1/2) <= mult < (N + 1/2),
+            # then Nch = N, so e.g.
+            #  0.5 <= mult < 1.5  -->  Nch = 1.
             # Now rescale trento mult so that events with 0.5 < mult < 50.5
-            # (1 <= Nch <= 50) has the same mean as the exp data, which covers
-            # the same Nch  range.
+            # (1 <= Nch <= 50) have the same mean as the exp data, which covers
+            # the same Nch range.
 
             exp_mean = np.inner(x, y) / y.sum()
             _trento_mean = lambda: mult[(mult > .5) & (mult < 50.5)].mean()
@@ -201,6 +200,7 @@ def multdist():
                         label=label)
 
             ptotal = pdf.sum()
+            # Cut trento multiplicity to match the exp centrality range.
             mult = mult[:ptotal*mult.size]
             norm = np.inner(nch, pdf) / ptotal / mult.mean()
             counts, edges = np.histogram(
