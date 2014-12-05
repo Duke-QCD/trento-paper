@@ -250,7 +250,7 @@ def uranium():
     glb_slopes = (-0.526065, -0.263391), (0.064156, 0.039964)
 
     fig, axes = plt.subplots(nrows=2, sharex='col',
-                             figsize=(columnwidth, columnwidth*aspect*1.5))
+                             figsize=(columnwidth, columnwidth*aspect*1.75))
 
     for system, cent_range, gslopes in zip(
             systems, system_cent_range, glb_slopes):
@@ -319,7 +319,7 @@ def uranium():
 @plotfn
 def eccentricity():
     fig, axes = plt.subplots(ncols=3,
-                             figsize=(textwidth, .36*aspect*textwidth))
+                             figsize=(textwidth, .40*aspect*textwidth))
 
     e2_ax, e3_ax, ratio_ax = axes
 
