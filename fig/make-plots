@@ -186,27 +186,31 @@ def multdist():
                         (.145, .035), xycoords='axes fraction',
                         ha='left', va='bottom')
         else:
-            xmin, xmax, x, y = load_from_cache(
+            pPb = system == 'pPb'
+
+            xmin, xmax, nch, pdf, ccdf = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
-                usecols=range(4), unpack=True
+                unpack=True
             )
+
             w = xmax - xmin
-            z = y/w
-            ax.errorbar(x, z, xerr=.06*x, yerr=.035*z,
+            z = pdf/w
+            ax.errorbar(nch, z, xerr=.06*nch, yerr=.035*z,
                         fmt='o', markersize=2, markeredgewidth=0,
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
 
-            norm = (27.5 if system == 'pPb' else 700.) / mult.mean()
-            mult_rescaled = norm*mult
+            ptotal = pdf.sum()
+            mult = mult[:ptotal*mult.size]
+            norm = np.inner(nch, pdf) / ptotal / mult.mean()
             counts, edges = np.histogram(
-                mult_rescaled, bins=40 if system == 'pPb' else 100,
+                norm*mult, bins=50 if pPb else 100,
                 density=True
             )
-            ax.step(edges[:-1], 1.22*counts, where='post', color=color,
+            ax.step(edges[:-1], counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
-            if system == 'pPb':
+            if pPb:
                 ax.set_xlim(0, 200)
             else:
                 ax.set_xlim(0, 3600)
