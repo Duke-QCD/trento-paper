@@ -185,8 +185,6 @@ def multdist():
                         (.145, .035), xycoords='axes fraction',
                         ha='left', va='bottom')
         else:
-            pPb = system == 'pPb'
-
             xmin, xmax, nch, pdf, ccdf = np.loadtxt(
                 'data/exp/{}-{}-multdist.dat'.format(experiment, system),
                 unpack=True
@@ -199,22 +197,23 @@ def multdist():
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
 
-            ptotal = pdf.sum()
-            # Cut trento multiplicity to match the exp centrality range.
-            mult = mult[:ptotal*mult.size]
-            norm = np.inner(nch, pdf) / ptotal / mult.mean()
-            counts, edges = np.histogram(
-                norm*mult, bins=50 if pPb else 100,
-                density=True
-            )
-            ax.step(edges[:-1], counts, where='post', color=color,
+            if system == 'pPb':
+                norm = 18.2
+                pnorm = 1.23
+                bins = 60
+                xmax = 200
+            else:
+                norm = 16.3
+                pnorm = 1.31
+                bins = 100
+                xmax = 3600
+
+            counts, edges = np.histogram(norm*mult, bins=bins, density=True)
+            ax.step(edges[:-1], pnorm*counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
-            if pPb:
-                ax.set_xlim(0, 200)
-            else:
-                ax.set_xlim(0, 3600)
-                ax.set_ylim(ymin=.5*z.min())
+            ax.set_xlim(0, xmax)
+            ax.set_ylim(ymin=.5*z.min())
 
             ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
                         (.145, .035), xycoords='axes fraction',
