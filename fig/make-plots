@@ -134,8 +134,7 @@ def multdist():
         ax.set_yscale('log')
 
         mult = load_from_cache(
-            #'data/trento/multdist/{}-m0-k0.8-w0.6'.format(system),
-            'data/trento/multdist/{}-m0-k0.6-w0.5'.format(system),
+            'data/trento/multdist/{}-m0-k0.8-w0.6'.format(system),
             usecols=(3,)
         )
 
@@ -144,25 +143,40 @@ def multdist():
         if system == 'pp':
             x, y, stat, sys = load_from_cache(
                 'data/exp/{}-{}-multdist'.format(experiment, system),
-                usecols=(0, 3, 4, 6)
-            )[1:].T
+                usecols=(0, 3, 4, 6))[1:].T
+
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
                         markeredgewidth=0, capsize=0, elinewidth=.4,
-                        color='.3',
-                        label=label
-                        )
+                        color='.3', label=label)
 
-            norm = 20.5
-            mult_rescaled = (mult*norm)[(mult*norm)[:] > 0.5]
-            print("TRENTO norm:",mult_rescaled.mean())
-            print("ALICE norm:",(np.inner(x, y) / y.sum()))
-            counts, edges = np.histogram(
-                mult_rescaled,
-                bins=np.linspace(0.5,50.5,51),
-                density=True
-            )
-            counts = counts*np.sum(y)
-            ax.step(edges[:-1], counts, where='post', color=color,
+            # Interpret trento mult as <Nch>.
+            # Let x be a positive half-integer, then if
+            #   x <= mult < x+1,
+            # assume Nch = x + 1/2, so e.g.
+            #  0.5 <= mult < 1.5  -->  Nch = 1
+            # Now rescale trento mult so that events with 0.5 < mult < 50.5
+            # (1 <= Nch <= 50) has the same mean as the exp data, which covers
+            # the same Nch  range.
+
+            exp_mean = np.inner(x, y) / y.sum()
+            _trento_mean = lambda: mult[(mult > .5) & (mult < 50.5)].mean()
+            trento_mean = _trento_mean()
+            norm = 1.
+            while abs(trento_mean - exp_mean) > 1e-6:
+                _norm = exp_mean / trento_mean
+                norm *= _norm
+                mult *= _norm
+                trento_mean = _trento_mean()
+
+            # match bins to experiment
+            bins = np.concatenate((
+                np.arange(.5, 41.), np.arange(42.5, 51., 2.)
+            ))
+            counts = np.histogram(mult, bins=bins, density=True)[0]
+            # repeat the first bin count just so the step plot looks right
+            # (not actually changing the data)
+            counts = np.insert(counts, 0, counts[0])
+            ax.step(bins, counts*y.sum(), where='pre', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
 
             ax.set_xlim(xmax=52)
@@ -182,6 +196,7 @@ def multdist():
                         fmt='o', markersize=2, markeredgewidth=0,
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
+
             norm = (27.5 if system == 'pPb' else 700.) / mult.mean()
             mult_rescaled = norm*mult
             counts, edges = np.histogram(
@@ -190,6 +205,7 @@ def multdist():
             )
             ax.step(edges[:-1], 1.22*counts, where='post', color=color,
                     label=r'$T_R$, norm = {:.1f}'.format(norm))
+
             if system == 'pPb':
                 ax.set_xlim(0, 200)
             else:
@@ -197,8 +213,9 @@ def multdist():
                 ax.set_ylim(ymin=.5*z.min())
 
             ax.annotate(r'$|\eta| < 1$, $0.2 < p_T < 3.0$ GeV',
-                            (.145, .035), xycoords='axes fraction',
-                            ha='left', va='bottom')
+                        (.145, .035), xycoords='axes fraction',
+                        ha='left', va='bottom')
+
         ax.xaxis.set_major_locator(tick.MaxNLocator(4))
         ax.yaxis.set_major_locator(
             tick.LogLocator(base=10 if system == 'pp' else 100)
@@ -213,6 +230,7 @@ def multdist():
         ax.legend(loc=(.02, .12), handlelength=1)
 
     plt.tight_layout(pad=0, w_pad=.1)
+
 
 @plotfn
 def uranium():
@@ -230,9 +248,6 @@ def uranium():
 
     fig, axes = plt.subplots(nrows=2, sharex='col',
                              figsize=(columnwidth, columnwidth*aspect*1.5))
-
-    #fig, axes = plt.subplots(ncols=2, sharex='row',
-    #                         figsize=(2*columnwidth, columnwidth*aspect))
 
     for system, cent_range, gslopes in zip(
             systems, system_cent_range, glb_slopes):
@@ -359,7 +374,7 @@ def eccentricity():
 
 
 if __name__ == "__main__":
-#    saturation()
+    saturation()
     multdist()
-#    uranium()
-#    eccentricity()
+    uranium()
+    eccentricity()
