@@ -2,7 +2,6 @@
 
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{afterpage}
 \graphicspath{{fig/}}
 
 \usepackage{mdwlist}
@@ -11,7 +10,6 @@
 \newcommand{\trento}{T\raisebox{-.5ex}{R}ENTo}
 \newcommand{\nch}{N_\text{ch}}
 \newcommand{\eccratio}{\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}}
-\newcommand{\needcite}{\textbf{[???]}}
 
 \begin{document}
 
@@ -272,7 +270,7 @@ Hence side-side collisions will in general have larger initial-state ellipticity
 
 In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions yield a larger charged-particle multiplicity $\nch$.
 Therefore, the most central uranium-uranium events are dominated by tip-tip collisions with maximal $\nch$ and small $v_2$, while side-side collisions have a smaller $\nch$ and somewhat larger $v_2$.
-This predicted drop in elliptic flow vs. $N_{ch}$ is known as the ``knee'' \cite{Voloshin:2010ut}.
+This predicted drop in elliptic flow vs.~$\nch$ is known as the ``knee'' \cite{Voloshin:2010ut}.
 
 Recent data by STAR on uranium-uranium collisions has found no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds Glauber model predictions.
 It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent comprehensive flow analysis showed that it would still be visible \cite{}.
@@ -288,21 +286,21 @@ proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions al
 collisions.
 
  \trento\ is purely phenomenological and does not assume any particular physical mechanism for entropy production or thermalization.
-It is computationally cheap to implement\footnote{\trento\ will be publicly released in early 2015 and will be available at \url{https://github.com/Duke-QCD}. The community is encouraged to use, test, and contribute to the source code}, flexible by design, and able to mimic the characteristics of various dynamical initial condition models:
-e.g. its multiplicity distributions are similar to those in the participant quark model, and eccentricity harmonics resemble those of the IP-Glasma model.
+It is computationally cheap\footnote{\trento\ will be publicly released in early 2015 and will be available at \url{github.com/Duke-QCD/trento}. The community is encouraged to use, test, and contribute to the source code.}, flexible by design, and able to mimic the characteristics of various dynamical initial condition models:
+e.g.~its multiplicity distributions are similar to those in the participant quark model, and eccentricity harmonics resemble those of the IP-Glasma model.
 
 As a next step, we intend to utilize our model as initial condition generator for a viscous relativistic fluid dynamic calculation that is part of a fully dynamical model for evolution and decay of a sQGP \cite{Shen:2014vra}.
 This will form the basis of a modern framework for determination of fundamental sQGP properties through a systematic model-to-data comparison.
 
 % \section*{Acknowledgements}
 
-We would like to thank Ulrich Heinz, Scott Pratt and Berndt M\"uller for many helpful discussions and valuable feedback.
+\medskip\noindent
+We would like to thank Ulrich Heinz, Scott Pratt, and Berndt M\"uller for many helpful discussions and valuable feedback.
 SAB is being supported by the U.S. Department of Energy Grant no.~DE-FG02-05ER41367,
-JEB is supported through the NSF grant no.~PHY-0941373,
+JEB is supported through NSF grant no.~PHY-0941373,
 and JSM acknowledges support by the DOE/NNSA Stockpile Stewardship Graduate Fellowship under grant no.~DE-FC52-08NA28752.
 
 \bibliography{trento,duke-qcd-refs/Duke_QCD_refs}
-%\bibliography{/Users/bass/Dropbox/tex/Bibliography/Duke_QCD_refs}
 
 
 \end{document}
