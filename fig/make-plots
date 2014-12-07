@@ -124,7 +124,7 @@ experiment = 'ALICE'
 
 @plotfn
 def multdist():
-    systems = 'pp', 'pPb', 'PbPb'
+    systems = ('p', 'p'), ('p', 'Pb'), ('Pb', 'Pb')
     energies = 2.36, 5.02, 2.76
     color = pmean_colors[0]
     fig, axes = plt.subplots(ncols=len(systems),
@@ -134,15 +134,15 @@ def multdist():
         ax.set_yscale('log')
 
         mult = load_from_cache(
-            'data/trento/multdist/{}-m0-k0.8-w0.6'.format(system),
+            'data/trento/multdist/{}{}-m0-k0.8-w0.6'.format(*system),
             usecols=(3,)
         )
 
         label = '{} {} TeV'.format(experiment, energy)
 
-        if system == 'pp':
+        if system == ('p', 'p'):
             x, y, stat, sys = np.loadtxt(
-                'data/exp/{}-{}-multdist.dat'.format(experiment, system),
+                'data/exp/{}-{}{}-multdist.dat'.format(experiment, *system),
                 usecols=(0, 3, 4, 6))[1:].T
 
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
@@ -186,7 +186,7 @@ def multdist():
                         ha='left', va='bottom')
         else:
             xmin, xmax, nch, pdf, ccdf = np.loadtxt(
-                'data/exp/{}-{}-multdist.dat'.format(experiment, system),
+                'data/exp/{}-{}{}-multdist.dat'.format(experiment, *system),
                 unpack=True
             )
 
@@ -197,7 +197,7 @@ def multdist():
                         capsize=0, elinewidth=.4, color='.3',
                         label=label)
 
-            if system == 'pPb':
+            if system == ('p', 'Pb'):
                 norm = 18.2
                 pnorm = 1.23
                 bins = 60
@@ -221,12 +221,12 @@ def multdist():
 
         ax.xaxis.set_major_locator(tick.MaxNLocator(4))
         ax.yaxis.set_major_locator(
-            tick.LogLocator(base=10 if system == 'pp' else 100)
+            tick.LogLocator(base=10 if system == ('p', 'p') else 100)
         )
         ax.set_xlabel(r'$N_\mathrm{ch}$')
         if ax.is_first_col():
             ax.set_ylabel(r'$P(N_\mathrm{ch})$')
-        ax.set_title(system, x=.5, y=.9)
+        ax.set_title('+'.join(system), x=.5, y=.9)
 
         despine(ax)
         ax.minorticks_off()
