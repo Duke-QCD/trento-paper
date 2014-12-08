@@ -36,22 +36,23 @@
 
 Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider (LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly-interacting Quark-Gluon Plasma (sQGP)
 \cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}.
-A major goal of current research is the quantification of fundamental sQGP properties, typically accomplished by matching experimental measurements to computational models for the full spacetime evolution of heavy-ion collisions \cite{Petersen:2010zt,Novak:2013bqa}. The sQGP properties can then be related to the extracted model parameters that provide the optimum description of the data.
+A major goal of current research is the quantification of fundamental sQGP properties, typically accomplished by matching experimental measurements to computational models for the full spacetime evolution of heavy-ion collisions \cite{Petersen:2010zt,Novak:2013bqa}.
+While viscous relativistic fluid dynamics provides a stable, well-tested description of the thermalized sQGP medium \cite{Baier:2006gy,Song:2007ux,Luzum:2008cw,Schenke:2010rr,Shen:2011eg,Shen:2014vra}, the initial state of the collision lacks a standard description and is modeled by numerous approaches in both strong and weak coupling limits \cite{Schenke:2012wb,vanderSchee:2013pia,Berges:2014yta,Kurkela:2014tea}.
 
-While viscous relativistic fluid dynamics provides a stable, well-tested description of the evolution and subsequent decay of the thermalized sQGP medium \cite{Baier:2006gy,Song:2007ux,Luzum:2008cw,Schenke:2010rr,Shen:2011eg,Shen:2014vra}, there exist multiple different approaches for the description of the initial state of the collision and its pre-equilibrium evolution, ranging from models in the strong coupling limit to the weak coupling limit \cite{Schenke:2012wb,vanderSchee:2013pia,Berges:2014yta,Kurkela:2014tea}. Since the outcome of these dynamical pre-evolution model calculations provides the initial condition of the subsequent hydrodynamical calculation, they currently constitute the biggest source of uncertainty  \cite{Luzum:2008cw,Song:2010mg,Shen:2014vra} of modern dynamical models, which leads to a significant loss of precision for the extraction of sQGP properties.
+Initial condition models generate profiles of energy or entropy at the sQGP thermalization time which are then evolved by fluid dynamics.
+The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision \cite{Miller:2007ri}.
+Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{}.
 
-The currently most successful initial state and dynamical pre-equilibrium evolution model is the IP-Glasma model \cite{Schenke:2012wb}, which is based on the color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm}.
+Recently, a new constituent-quark participant model described the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
+This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for quark participant scaling in nucleus-nucleus collisions.
+
+The state-of-the-art model is IP-Glasma \cite{Schenke:2012wb}.
+It uses color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to create a \emph{dynamical} description of the pre-equilibrium stage of the collision---unlike the Glauber model and its relatives, which ignore pre-equilibrium dynamics and skip directly to sQGP thermalization.
 IP-Glasma quantitatively describes the latest event-by-event data on higher order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
-Unfortunately, the model is computationally rather complex, limiting its applicability to large-scale systematic model-to-data comparisons.
+However, the explicit treatment of pre-sQGP time-evolution comes at a significant computational cost.
 
-Phenomenological initial condition models avoid the complex non-equilibrium dynamics of the dynamical models and instead provide profiles of energy or entropy produced at the sQGP thermalization time which are then evolved by fluid dynamics. Thus, while they cannot address the question on how the system attained the sQGP state, they do provide the fluid dynamical model with the required initial condition that can be constrained to a high level of precision using experimental measurements, enabling a precision extraction of sQGP properties. In addition, these empirically determined initial conditions may provide significant guidance to the ab-initio dynamical model calculations of the early non-equilibrium collision stage on the characteristics of the equilibrated state these need to converge on.
-
-The most widely-used phenomenological approach is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision \cite{Miller:2007ri}.
-Recently, a new participant quark model was introduced to fit  transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC \cite{Adler:2013aqf}.
-Such a model may become a natural successor to the Glauber model, although it is has yet to predict flow harmonics or LHC data, where gluon occupation dominates.
-
-In this work we introduce a new phenomenological initial condition model, \trento, for the description of the initial entropy deposition high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions that overcomes a number of shortcomings of current models in that category and is designed to facilitate the extraction of sQGP properties via systematic model to data comparisons.
-
+In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
+It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming specific physical mechanisms for entropy production, pre-equilibrium dynamics, or thermalization.
 
 %\section{The Model}
 
