@@ -4,6 +4,9 @@
 \usepackage{graphicx}
 \graphicspath{{fig/}}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc,matrix}
+
 \usepackage{mdwlist}
 \renewcommand\labelitemi{\raisebox{.3ex}{\tiny$\bullet$}}
 
@@ -247,6 +250,44 @@ As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent a
 %\subsection{Ultracentral U+U collisions}
 
 \begin{figure}[b]
+  \begin{tikzpicture}[
+    uranium/.style={draw, semithick, ellipse, anchor=center},
+    small width/.style={minimum width=17},
+    large width/.style={minimum width=35},
+    small height/.style={minimum height=17},
+    large height/.style={minimum height=35}
+  ]
+    \matrix (m) [matrix of nodes] {
+      &[-5mm] Side view &[-5mm] & \node[align=center] {Beam-axis \\ view}; & $\varepsilon_2$ & $N_\text{part}$ & $N_\text{coll}$ \\[1ex]
+      & tip-tip & & & & & \\
+      |[uranium, large width, small height] (ttl)| U & &
+      |[uranium, large width, small height] (ttr)| U &
+      \node[draw, circle, small height, small width, xshift=1mm] {};
+      \node[uranium, circle, small width, small height, fill=white] {U}; &
+      smaller & equal & larger \\[2ex]
+      & side-side & & & & & \\
+      |[uranium, large height, small width] (ssl)| U & &
+      |[uranium, large height, small width] (ssr)| U &
+      \node[draw, ellipse, large height, small width, xshift=1mm] {};
+      \node[uranium, large height, small width, fill=white] {U}; &
+      larger & equal & smaller \\
+    };
+    \begin{scope}[->]
+      \draw (ttl) -- ($(ttl)!.48!(ttr)$);
+      \draw (ttr) -- ($(ttr)!.48!(ttl)$);
+      \draw (ssl) -- ($(ssl)!.48!(ssr)$);
+      \draw (ssr) -- ($(ssr)!.48!(ssl)$);
+    \end{scope}
+  \end{tikzpicture}
+  \caption{
+    \label{fig:uu-schematic}
+    Comparison of tip-tip and side-side uranium-uranium collisions.
+    Schematics are shown from a side view and looking down the beam axis, and the following quantities are compared:
+    ellipticity $\varepsilon_2$, number of participating nucleons $N_\text{part}$, and number of binary nucleon-nucleon collisions $N_\text{coll}$.
+  }
+\end{figure}
+
+\begin{figure}[b]
   \centering
   \includegraphics{uranium}
   \caption{
@@ -265,7 +306,7 @@ As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent a
 As a final novel application, we test the performance of \trento\ in ultra-central uranium-uranium collisions, where typical Glauber models are notably inconsistent with experimental data.
 Unlike e.g.~gold and lead, uranium nuclei have a highly deformed prolate spheroidal shape, so uranium-uranium collisions may achieve maximal overlap via two distinct orientations:
 ``tip-tip'', in which the long axes of the spheroids are aligned with the beam axis and the overlap area is circular;
-or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical.
+or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical, as shown in FIG.~\ref{fig:uu-schematic}.
 Hence side-side collisions will in general have larger initial-state ellipticity $\varepsilon_2$ and final-state elliptic flow $v_2$ than tip-tip.
 
 In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions have larger charged-particle multiplicity $\nch$.
