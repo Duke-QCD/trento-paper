@@ -150,6 +150,7 @@ $P_\text{coll}$ is sampled once to determine if the protons collide; assuming th
 where $\gamma_{A,B}$ are independent random numbers sampled from a gamma distribution with unit mean,
 \begin{equation}
   P(\gamma; k) \propto \gamma^{k-1} e^{-\gamma/k},
+  \label{eq:gamma}
 \end{equation}
 with the shape parameter $k > 0$ to be fixed by experiment.  The gamma distribution is chosen for its
 flexibility---it is exponential for $k = 1$ and becomes Gaussian for large $k$---and because it is the
@@ -182,14 +183,14 @@ The collision probability \eqref{eq:pcoll} is sampled for each pairwise interact
 The fluctuated thickness function of nucleus $A$ then reads
 \begin{equation}
   T_A = \sum_i \gamma_i \int dz \, \rho_\text{proton}(x - x_i, y - y_i, z - z_i),
-  \label{nuclear thickness}
+  \label{eq:nuc-thickness}
 \end{equation}
 where $\gamma_i$ and $(x_i, y_i, z_i)$ are the random fluctuation factor and position, respectively, of participant $i$ in nucleus $A$.
 $T_B$ follows analogously.
 
 This completes the construction of \trento.
-In summary, the model creates fluctuated nuclear thickness functions $T_A$, $T_B$ from a set of nucleon coordinates, a nucleon density profile $\rho_\text{proton}$, and gamma fluctuation parameter $k$.
-Then, the initial entropy profile is calculated using the reduced thickness \eqref{eq:tr} with attenuation parameter $p$.
+In summary, the model deposits entropy proportional to the reduced thickness function \eqref{eq:tr}.
+The reduced thickness is defined as the generalized mean of fluctuated projectile thickness functions \eqref{eq:nuc-thickness}, where the projectile thicknesses consist of \emph{only} participant nucleons, each independently fluctuated by a gamma random number \eqref{eq:gamma}.
 
 %\section{Model Applications}
 
@@ -214,7 +215,7 @@ The experimentally observed charged-particle multiplicity $\nch$ is to a very go
 \begin{equation}
   \nch \propto \int dx \, dy \, T_R.
 \end{equation}
-To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$ profiles, and multiply by an overall normalization constant to rescale the distribution to the experimental mean.
+To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$ profiles, and rescale by an overall normalization constant.
 
 The left panel of FIG.~\ref{fig:multdist} shows the $\nch$ distribution from $10^6$ proton-proton simulations
 using reduced thickness parameter $p = 0$ (geometric mean), gamma fluctuation parameter $k = 0.8$, and
@@ -223,10 +224,10 @@ Gaussian beam-integrated proton density
   \int dz \, \rho_\text{proton} = \frac{1}{2\pi B} \exp\biggr( -\frac{x^2 + y^2}{2B} \biggr)
 \end{equation}
 with effective area $B = (0.6\;\text{fm})^2$.
-Proton-lead and lead-lead distributions (middle and right panels) use identical model parameters, except for the overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with the differences in experimental beam energy and kinematic cuts annotated in the figure.
+Proton-lead and lead-lead distributions (middle and right panels) use identical model parameters, except for the overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with differences in experimental beam energy and kinematic cuts (annotated in the figure).
 
 The $\nch$ distributions compare favorably with the corresponding experimental measurements by ALICE \cite{}.
-\trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the participant quark model fits the transverse-energy distributions of several collision systems at RHIC \cite{Adler:2013aqf}.
+\trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the constituent-quark participant model fits the transverse-energy distributions of several collision systems at RHIC \cite{Adler:2013aqf}.
 
 %\subsection{Eccentricity harmonics}
 
@@ -239,9 +240,9 @@ Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\var
 reduced thickness:  as $p$ decreases, asymmetric regions of the collision produce less entropy, which
 accentuates the elliptical overlap shape in non-central collisions and enhances their eccentricity.
 
-In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, in which  flow data in combination with a hydrodynamic calculation was used to determine an experimentally allowed band of the ratio of root-mean-square eccentricities $\eccratio$
-as a function of centrality.  Among the currently available initial condition models only the IP-Glasma model consistently falls within the allowed region.
-As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean) as well.
+In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, which uses flow data and hydrodynamic calculations to determine an experimentally allowed band for the ratio of root-mean-square eccentricities $\eccratio$ as a function of centrality.
+Among available initial condition models only IP-Glasma consistently falls within the allowed region.
+As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean).
 
 %\subsection{Ultracentral U+U collisions}
 
@@ -261,22 +262,22 @@ As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent a
   }
 \end{figure}
 
-Finally, we apply \trento\ to ultra-central uranium-uranium collisions, where typical Glauber models are notably inconsistent with experimental data.
-Uranium nuclei have a deformed prolate spheroid shape, which causes a larger variance in the anisotropy of thermalized QGP matter than with more symmetrical nuclei such as gold and lead.
-A uranium-uranium collision may achieve maximal overlap via two distinct orientations:
+As a final novel application, we test the performance of \trento\ in ultra-central uranium-uranium collisions, where typical Glauber models are notably inconsistent with experimental data.
+Unlike e.g.~gold and lead, uranium nuclei have a highly deformed prolate spheroidal shape, so uranium-uranium collisions may achieve maximal overlap via two distinct orientations:
 ``tip-tip'', in which the long axes of the spheroids are aligned with the beam axis and the overlap area is circular;
 or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical.
 Hence side-side collisions will in general have larger initial-state ellipticity $\varepsilon_2$ and final-state elliptic flow $v_2$ than tip-tip.
 
-In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions yield a larger charged-particle multiplicity $\nch$.
+In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions have larger charged-particle multiplicity $\nch$.
 Therefore, the most central uranium-uranium events are dominated by tip-tip collisions with maximal $\nch$ and small $v_2$, while side-side collisions have a smaller $\nch$ and somewhat larger $v_2$.
-This predicted drop in elliptic flow vs.~$\nch$ is known as the ``knee'' \cite{Voloshin:2010ut}.
+This predicted drop in elliptic flow as a function of $\nch$ is known as the ``knee'' \cite{Voloshin:2010ut}.
 
-Recent data by STAR on uranium-uranium collisions has found no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds Glauber model predictions.
-It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent comprehensive flow analysis showed that it would still be visible \cite{}.
+Recent data by STAR on uranium-uranium collisions exhibits no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds with Glauber model predictions.
+It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent comprehensive flow analysis showed that it would still be visible \cite{osu}.
 
 The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts a roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in FIG.~\ref{fig:uranium}.
-The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium. We find  \trento\ to be consistent with STAR data, yielding a similar outcome like the IP-Glasma model \cite{Wang:2014qxa}.
+The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
+Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Wang:2014qxa}.
 
 % \section{Summary}
 
