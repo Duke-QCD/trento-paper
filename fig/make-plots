@@ -147,7 +147,7 @@ def multdist():
 
             ax.errorbar(x, y, yerr=stat, fmt='o', markersize=2,
                         markeredgewidth=0, capsize=0, elinewidth=.4,
-                        color='.3', label=label)
+                        color='.3', label=label+' NSD')
 
             # Interpret trento mult as <Nch>.  If
             #   (N - 1/2) <= mult < (N + 1/2),
