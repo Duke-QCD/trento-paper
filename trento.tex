@@ -40,19 +40,21 @@
 Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider (LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly-interacting Quark-Gluon Plasma (sQGP)
 \cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}.
 A major goal of current research is the quantification of fundamental sQGP properties, typically accomplished by matching experimental measurements to computational models for the full spacetime evolution of heavy-ion collisions \cite{Petersen:2010zt,Novak:2013bqa}.
-While viscous relativistic fluid dynamics provides a stable, well-tested description of the thermalized sQGP medium \cite{Baier:2006gy,Song:2007ux,Luzum:2008cw,Schenke:2010rr,Shen:2011eg,Shen:2014vra}, the initial state of the collision lacks a standard description and is modeled by numerous approaches in both strong and weak coupling limits \cite{Schenke:2012wb,vanderSchee:2013pia,Berges:2014yta,Kurkela:2014tea}.
+While viscous relativistic fluid dynamics provides a stable, well-tested description of the thermalized sQGP medium \cite{Baier:2006gy,Song:2007ux,Luzum:2008cw,Schenke:2010rr,Shen:2011eg,Shen:2014vra}, the initial state of the collision remains poorly constrained and constitutes the largest source of uncertainty in modern computational models.
 
 Initial condition models generate profiles of energy or entropy at the sQGP thermalization time which are then evolved by fluid dynamics.
+The state-of-the-art model is IP-Glasma \cite{Schenke:2012wb,Berges:2014yta}, which uses weakly-coupled color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to create a \emph{dynamical} description of the pre-equilibrium stage of the collision.
+IP-Glasma quantitatively describes the latest event-by-event data on higher order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
+Recently, the AdS/CFT correspondence was used to create a strongly-coupled, naturally thermalizing dynamical model \cite{vanderSchee:2013pia}.
+% weak coupling limits \cite{Kurkela:2014tea}.
+%---unlike the Glauber model and its relatives, which ignore pre-equilibrium dynamics and skip directly to sQGP thermalization.
+
+Dynamical models explicitly treat pre-equilibrium time-evolution, but this comes at a significant computational cost.
 The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision.
 Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{Miller:2007ri}.
 
 Recently, a new constituent-quark participant model described the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
 This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for quark participant scaling in nucleus-nucleus collisions.
-
-The state-of-the-art model is IP-Glasma \cite{Schenke:2012wb}.
-It uses color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to create a \emph{dynamical} description of the pre-equilibrium stage of the collision---unlike the Glauber model and its relatives, which ignore pre-equilibrium dynamics and skip directly to sQGP thermalization.
-IP-Glasma quantitatively describes the latest event-by-event data on higher order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
-However, the explicit treatment of pre-sQGP time-evolution comes at a significant computational cost.
 
 In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
 It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming specific physical mechanisms for entropy production, pre-equilibrium dynamics, or thermalization.
