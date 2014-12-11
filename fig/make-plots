@@ -239,15 +239,16 @@ def multdist():
 def uranium():
     color = pmean_colors[0]
     linecolor = tuple(.6*i for i in color)
-    plot_cents = 0.001, 0.01
+    plot_cents = 0.00125, 0.01
     bins = 20
     bin_range = .85, 1.15
 
     systems = 'UU', 'AuAu'
-    system_cent_range = 0.037854, 0.039909
+    system_cent_range = 0.034264, 0.039465
 
     glb_color = '.6'
-    glb_slopes = (-0.526065, -0.263391), (0.064156, 0.039964)
+    #              UU 0.125% 1%     AuAu 0.125% 1%
+    glb_slopes = (-0.270, -0.145), (0.0296, 0.0106)
 
     fig, axes = plt.subplots(nrows=2, sharex='col',
                              figsize=(columnwidth, columnwidth*aspect*1.75))
@@ -256,7 +257,7 @@ def uranium():
             systems, system_cent_range, glb_slopes):
 
         data = load_from_cache(
-            'data/trento/uranium/{}_p=0_k=0.7_w=0.5_bcut=3'.format(system),
+            'data/trento/uranium/{}_p=0_k=0.8_w=0.6_bcut=3'.format(system),
             usecols=(2, 3, 4)
         )
         data = data[data[:, 0].argsort()][::-1]
@@ -294,24 +295,16 @@ def uranium():
         ax.set_ylim([0.04, 0.20])
         ax.set_yticks((.06, .12, .18))
         ax.set_ylabel(r'$\varepsilon_2$')
+        ax.text(.9, .13, 'U+U', ha='left', va='top')
+        ax.text(.9, .09, 'Au+Au', ha='left', va='bottom')
+        ax.annotate('0–{:g}% spectators'.format(round(100*cent_max, 1)),
+                    (.5, .05), xycoords='axes fraction',
+                    ha='center', va='bottom')
         despine(ax)
 
     axes[0].legend((trentoline, glbline), ('TRENTO', 'Glauber+NBD'),
                    loc='upper right', ncol=1,
                    handlelength=1.3, columnspacing=1.2)
-    # top.legend(loc='best', ncol=3, handlelength=1.3, columnspacing=1.2)
-
-    ax = axes[0]
-    ax.annotate('0–0.1% spectators', (.5, .05), xycoords='axes fraction',
-                ha='center', va='bottom')
-    ax.text(.9, .138, 'U+U', ha='left', va='top')
-    ax.text(.9, .088, 'Au+Au', ha='left', va='bottom')
-
-    ax = axes[1]
-    ax.annotate('0–1% spectators', (.5, .05), xycoords='axes fraction',
-                ha='center', va='bottom')
-    ax.text(.9, .136, 'U+U', ha='left', va='top')
-    ax.text(.9, .090, 'Au+Au', ha='left', va='bottom')
 
     plt.tight_layout(pad=0)
 
