@@ -43,18 +43,20 @@ Over the last decade, the ultra-relativistic heavy-ion collision programs at the
 A major goal of current research is the quantification of fundamental sQGP properties, typically accomplished by matching experimental measurements to computational models for the full spacetime evolution of heavy-ion collisions \cite{Petersen:2010zt,Novak:2013bqa}.
 While viscous relativistic fluid dynamics provides a stable, well-tested description of the thermalized sQGP medium \cite{Baier:2006gy,Song:2007ux,Luzum:2008cw,Schenke:2010rr,Shen:2011eg,Shen:2014vra}, the initial state of the collision remains poorly constrained and constitutes the largest source of uncertainty in modern computational models.
 
-Initial condition models generate profiles of energy or entropy at the sQGP thermalization time which are then evolved by fluid dynamics.
-The state-of-the-art model is IP-Glasma \cite{Schenke:2012wb,Berges:2014yta}, which uses weakly-coupled color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to create a \emph{dynamical} description of the pre-equilibrium stage of the collision.
-IP-Glasma quantitatively describes the latest event-by-event data on higher order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
-Recently, the AdS/CFT correspondence was used to create a strongly-coupled, naturally thermalizing dynamical model \cite{vanderSchee:2013pia}.
-% weak coupling limits \cite{Kurkela:2014tea}.
-%---unlike the Glauber model and its relatives, which ignore pre-equilibrium dynamics and skip directly to sQGP thermalization.
+Initial condition models generate profiles of energy or entropy at the sQGP thermalization time to be evolved by fluid dynamics.
+This is accomplished by two general approaches:
+dynamical models, which explicitly simulate the initial state and pre-equilibrium evolution of the collision \cite{Schenke:2012wb,vanderSchee:2013pia,Berges:2014yta,Kurkela:2014tea};
+and simpler non-dynamical models, which neglect pre-equilibrium evolution and construct static profiles at the thermalization time.
 
-Dynamical models explicitly treat pre-equilibrium time-evolution, but this comes at a significant computational cost.
+The most successful dynamical model is IP-Glasma \cite{Schenke:2012wb}.
+IP-Glasma uses weakly-coupled color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to quantitatively describe the latest event-by-event data on higher-order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
+More recently, strongly-coupled AdS/CFT holography was applied to create a dynamical simulation of central nuclear collisions at the LHC \cite{vanderSchee:2013pia}.
+While these models each arise from a rigorous treatment of sQGP formation, their present applicability to the full range of collision systems is limited \cite{Schenke:2013dpa,Schenke:2014zha,vanderSchee:2013pia}, and explicit treatment of pre-equilibrium dynamics comes at significant computational cost.
+
+Non-dynamical models generate initial conditions directly at the thermalization time by asserting an ansatz for entropy deposition; although they cannot explain sQGP formation, they provide the necessary input for fluid dynamical models.
 The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision.
-Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{Miller:2007ri}.
-
-Recently, a new constituent-quark participant model described the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
+Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{Miller:2007ri} and inspired a number of similar models.
+Notably, a participant quark model was proposed to describe the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
 This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for quark participant scaling in nucleus-nucleus collisions.
 
 In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
@@ -227,7 +229,7 @@ with effective area $B = (0.6\;\text{fm})^2$.
 Proton-lead and lead-lead distributions (middle and right panels) use identical model parameters, except for the overall normalization factor, whose $\sim$20\% variation across collision systems is consistent with differences in experimental beam energy and kinematic cuts (annotated in the figure).
 
 The $\nch$ distributions compare favorably with the corresponding experimental measurements by ALICE \cite{Aamodt:2010ft,Abelev:2014mda}.
-\trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the constituent-quark participant model fits the transverse-energy distributions of several collision systems at RHIC \cite{Adler:2013aqf}.
+\trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the participant quark model fits the transverse-energy distributions of several collision systems at RHIC \cite{Adler:2013aqf}.
 
 Eccentricity harmonics $\varepsilon_n$ are calculated using the definition
 \begin{equation}
@@ -315,11 +317,11 @@ Short of conducting a full hydrodynamic analysis, \trento\ appears to be more co
 
 \psec{Conclusion}
 
-In summary, we have developed \trento, a new model for the initial state of high-energy nuclear collisions based on eikonal deposition via a ``reduced thickness'' function.
+In summary, we have developed \trento, a new initial condition model for high-energy nuclear collisions based on eikonal entropy deposition via a ``reduced thickness'' function.
 The model simultaneously fits proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions along with lead-lead eccentricity harmonics, and provides a possible resolution to the ``knee'' puzzle in ultra-central uranium-uranium collisions.
 
 \trento\ is an effective model.
-While it does not assume a particular physical mechanism for entropy production or include pre-equilibrium dynamics, it is computationally cheap, flexible by design, and mimics the characteristics of other initial condition models, e.g.~its multiplicity distributions are similar to constituent-quark participant model predictions, and eccentricity harmonics resemble those of IP-Glasma.
+While it does not assume a particular physical mechanism for entropy production or include pre-equilibrium dynamics, it is computationally cheap, flexible by design, and mimics the characteristics of other initial condition models, e.g.~its multiplicity distributions are similar to participant quark model predictions, and eccentricity harmonics resemble those of IP-Glasma.
 
 As a next step, we will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions \cite{Shen:2014vra}.
 This will form the basis of a modern framework for extracting fundamental sQGP properties through systematic model-to-data comparison.
