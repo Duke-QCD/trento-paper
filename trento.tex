@@ -10,6 +10,7 @@
 \usepackage{mdwlist}
 \renewcommand\labelitemi{\raisebox{.3ex}{\tiny$\bullet$}}
 
+\newcommand{\psec}[1]{\phantomsection\addcontentsline{toc}{section}{#1}}
 \newcommand{\trento}{T\raisebox{-.5ex}{R}ENTo}
 \newcommand{\nch}{N_\text{ch}}
 \newcommand{\eccratio}{\sqrt{\langle \varepsilon_2^2 \rangle}/\sqrt{\langle \varepsilon_3^2 \rangle}^{\,0.6}}
@@ -35,7 +36,7 @@
 
 \maketitle
 
-%\section{Introduction}
+\psec{Introduction}
 
 Over the last decade, the ultra-relativistic heavy-ion collision programs at the Relativistic Heavy Ion Collider (RHIC) and the Large Hadron Collider (LHC) have succeeded in producing and exploring a novel, highly excited phase of QCD matter dubbed the strongly-interacting Quark-Gluon Plasma (sQGP)
 \cite{Arsene:2004fa,Adcox:2004mh,Back:2004je,Adams:2005dq,Gyulassy:2004zy,Muller:2006ee,Muller:2012zq}.
@@ -59,7 +60,7 @@ This may suggest that the two-component wounded nucleon and binary collision ans
 In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
 It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming specific physical mechanisms for entropy production, pre-equilibrium dynamics, or thermalization.
 
-%\section{The Model}
+\psec{Model}
 
 Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$.  Each projectile is represented by
 the beam-integrated density of its nuclear matter, typically called a nuclear thickness:
@@ -132,8 +133,6 @@ We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which
 of the reduced thickness completes the specification of the model.  The procedure is constructed from the
 ground up to handle a variety of collision systems; we begin with the simplest case.
 
-%\subsection{Proton-proton collisions}
-
 Consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction and nuclear densities
 \begin{equation}
   \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
@@ -179,8 +178,6 @@ dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
   }
 \end{figure*}
 
-%\subsection{Larger systems p+A and A+A}
-
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
 superpositions of proton-proton collisions.
 A set of nucleon positions is chosen for each projectile $A$, $B$, typically by sampling an uncorrelated Woods-Saxon distribution or from more realistic correlated nuclear configurations when available \cite{Alvioli:2009ab}.
@@ -197,7 +194,7 @@ This completes the construction of \trento.
 In summary, the model deposits entropy proportional to the reduced thickness function \eqref{eq:tr}.
 The reduced thickness is defined as the generalized mean of fluctuated projectile thickness functions \eqref{eq:nuc-thickness}, where the projectile thicknesses consist of \emph{only} participant nucleons, each independently fluctuated by a gamma random number \eqref{eq:gamma}.
 
-%\section{Model Applications}
+\psec{Applications}
 
 We now demonstrate \trento's ability to simultaneously describe a wide range of collision systems.
 Note that the reduced thickness parameter $p$, gamma fluctuation parameter $k$, and nucleon profile $\rho_\text{proton}$ are not rigorously constrained---to do so would require a systematic model-to-data comparison which is beyond the scope of this work.
@@ -213,8 +210,6 @@ Therefore, the following results do not necessarily represent the best-fit of th
     axis has a different range in the ratio plot.
   }
 \end{figure*}
-
-%\subsection{Multiplicity distributions}
 
 The experimentally observed charged-particle multiplicity $\nch$ is to a very good approximation proportional to the total initial entropy \cite{Song:2008si}, and hence proportional to the integrated reduced thickness:
 \begin{equation}
@@ -234,8 +229,6 @@ Proton-lead and lead-lead distributions (middle and right panels) use identical 
 The $\nch$ distributions compare favorably with the corresponding experimental measurements by ALICE \cite{Aamodt:2010ft,Abelev:2014mda}.
 \trento\ simultaneously reproduces the shapes of all three distributions, similarly to how the constituent-quark participant model fits the transverse-energy distributions of several collision systems at RHIC \cite{Adler:2013aqf}.
 
-%\subsection{Eccentricity harmonics}
-
 Eccentricity harmonics $\varepsilon_n$ are calculated using the definition
 \begin{equation}
   \varepsilon_n e^{i n\phi} = -\frac{\int dx \, dy\, r^n e^{i n \phi} \, T_R}{\int dx \, dy \, r^n \, T_R}.
@@ -248,8 +241,6 @@ accentuates the elliptical overlap shape in non-central collisions and enhances 
 In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, which uses flow data and hydrodynamic calculations to determine an experimentally allowed band for the ratio of root-mean-square eccentricities $\eccratio$ as a function of centrality.
 Among available initial condition models only IP-Glasma consistently falls within the allowed region.
 As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean).
-
-%\subsection{Ultracentral U+U collisions}
 
 \begin{figure}[b]
   \begin{tikzpicture}[
@@ -322,7 +313,7 @@ The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision sca
 The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
 Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Wang:2014qxa}.
 
-% \section{Summary}
+\psec{Conclusion}
 
 In summary, we have developed \trento, a new model for the initial state of high-energy nuclear collisions based on eikonal deposition via a ``reduced thickness'' function.
 The model simultaneously fits proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions along with lead-lead eccentricity harmonics, and provides a possible resolution to the ``knee'' puzzle in ultra-central uranium-uranium collisions.
@@ -337,7 +328,7 @@ This will form the basis of a modern framework for extracting fundamental sQGP p
 \trento\ will be publicly released in early 2015 and made available at \url{github.com/Duke-QCD/trento}.
 The community is encouraged to use, test, and contribute to the source code.
 
-% \section*{Acknowledgements}
+\psec{Acknowledgements}
 
 \medskip
 We would like to thank Ulrich Heinz, Scott Pratt, Ron Soltz, and Berndt M\"uller for many helpful discussions and valuable feedback.
