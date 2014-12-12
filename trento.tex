@@ -51,13 +51,14 @@ and simpler non-dynamical models, which neglect pre-equilibrium evolution and co
 The most successful dynamical model is IP-Glasma \cite{Schenke:2012wb}.
 IP-Glasma uses weakly-coupled color-glass condensate (CGC) effective field theory \cite{McLerran:1993ni,McLerran:1993ka,Gelis:2010nm} and classical Yang-Mills evolution to quantitatively describe the latest event-by-event data on higher-order flow harmonics and a variety of other observables \cite{Schenke:2014zha}.
 More recently, strongly-coupled AdS/CFT holography was applied to create a dynamical simulation of central nuclear collisions at the LHC \cite{vanderSchee:2013pia}.
-While these models each arise from a rigorous treatment of sQGP formation, their present applicability to the full range of collision systems is limited \cite{Schenke:2013dpa,Schenke:2014zha,vanderSchee:2013pia}, and explicit treatment of pre-equilibrium dynamics comes at significant computational cost.
+While these models are all based on approximations of QCD or related quantum field theories, they encounter limits in their application to the full range of collision systems \cite{Schenke:2013dpa,vanderSchee:2013pia}, and their explicit treatment of pre-equilibrium dynamics comes at a significant computational cost.
 
-Non-dynamical models generate initial conditions directly at the thermalization time by asserting an ansatz for entropy deposition; although they cannot explain sQGP formation, they provide the necessary input for fluid dynamical models.
+Non-dynamical models generate initial conditions directly at the thermalization time by asserting an ansatz for entropy deposition.
+Although they cannot explain sQGP formation, they provide the necessary input for fluid dynamics and can constrain the outcome of ab-initio initial condition calculations.
 The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision.
 Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{Miller:2007ri} and inspired a number of similar models.
 Notably, a participant quark model was proposed to describe the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
-This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for quark participant scaling in nucleus-nucleus collisions.
+This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for participant quark scaling in nucleus-nucleus collisions.
 
 In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
 It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming specific physical mechanisms for entropy production, pre-equilibrium dynamics, or thermalization.
