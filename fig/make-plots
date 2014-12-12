@@ -50,6 +50,12 @@ pmean_colors = {
     -1: (0.7686274509803922, 0.3058823529411765, 0.3215686274509804)
 }
 
+pmean_dashes = {
+    1: (5., 1.),
+    0: (None, None),
+    -1: (5., 1., 1., 1.)
+}
+
 pmean_labels = {
     p: '{}: $p = {}$'.format(name, p) for (p, name) in (
         (1, 'Arithmetic'),
@@ -96,7 +102,8 @@ def saturation():
     )
 
     for M, p in means:
-        plt.plot(A, M, color=pmean_colors[p], label=pmean_labels[p])
+        plt.plot(A, M, color=pmean_colors[p],
+                 dashes=pmean_dashes[p], label=pmean_labels[p])
 
     plt.xlabel('$T_A$')
     plt.ylabel('$T_R(T_A, 1)$')
@@ -104,7 +111,7 @@ def saturation():
     plt.yticks(range(4))
     plt.gca().set_aspect('equal')
     plt.ylim(0, 2.5)
-    plt.legend(loc='best')
+    plt.legend(loc='best', handlelength=2.5)
 
     despine(remove_ticks=True)
     plt.tight_layout(pad=0)
@@ -284,7 +291,8 @@ def uranium():
             trentoline = ax.plot(X, slope*X + intercept, color=linecolor)[0]
 
             gintercept = slope*1 + intercept - gslope
-            glbline = ax.plot(X, gslope*X + gintercept, color=glb_color)[0]
+            glbline = ax.plot(X, gslope*X + gintercept,
+                              color=glb_color, dashes=(5, 1))[0]
 
     for ax, cent_max in zip(axes, plot_cents):
         ax.set_xlim(bin_range)
@@ -322,6 +330,7 @@ def eccentricity():
     for p in 1, 0, -1:
         color = pmean_colors[p]
         label = pmean_labels[p]
+        dashes = pmean_dashes[p]
 
         eccentricity = load_from_cache(
             'data/trento/eccentricity/PbPb_m={}_k=0.8_w=0.6'.format(p),
@@ -329,7 +338,8 @@ def eccentricity():
         ).T.reshape(2, bins, -1)
 
         for n, (ax, ecc) in enumerate(zip(axes, eccentricity), start=2):
-            ax.plot(cent_mid, ecc.mean(axis=1), color=color, label=label)
+            ax.plot(cent_mid, ecc.mean(axis=1),
+                    color=color, dashes=dashes, label=label)
             ax.set_ylim(0, .62)
             if n == 2:
                 ymax = .6
@@ -339,14 +349,15 @@ def eccentricity():
                 ymax = .6
                 label_pos = .08, .52
                 ax.legend(loc='upper left', bbox_to_anchor=(.03, 1.1),
-                          fontsize=8, labelspacing=.33)
+                          fontsize=8, labelspacing=.33, handlelength=2.5)
             ax.set_yticks(np.arange(0, ymax+.01, .2))
             ax.spines['left'].set_bounds(0, ymax)
             ax.annotate(r'$\varepsilon_{}$'.format(n), label_pos, size=10,
                         xycoords='axes fraction', ha='left', va='top')
 
         ecc_rms = np.sqrt(np.mean(np.square(eccentricity), axis=-1))
-        ratio_ax.plot(cent_mid, ecc_rms[0]/ecc_rms[1]**0.6, color=color)
+        ratio_ax.plot(cent_mid, ecc_rms[0]/ecc_rms[1]**0.6,
+                      color=color, dashes=dashes)
 
     ratio_data = np.loadtxt('data/exp/eccentricity_ratio.dat',
                             usecols=range(4), unpack=True)
