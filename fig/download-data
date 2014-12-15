@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+filename='trento-fig-data.tar.gz'
+
+[[ -f $filename ]] || wget "http://phy.duke.edu/~jeb65/$filename"
+sha1sum -c <<< "a46de169d05c812f33e5df4e3fdd6c6b7a9b95b0 $filename" && tar xvkf $filename

@@ -10,5 +10,6 @@
 make-plots_keynote
 *~
 *.npy
+*.tar.gz
 build/
 fig/data
