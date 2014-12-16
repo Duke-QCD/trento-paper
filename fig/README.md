@@ -1,5 +1,8 @@
 # Figures
 
+The Python script `make-plots` generates all figures.
+Relatively recent versions of numpy and matplotlib are required.
+
 The data files for the figures are too large to be tracked in git (total compressed size ~310 MiB).
 Instead, an archive containing the data is publicly available at http://phy.duke.edu/~jeb65/trento-fig-data.tar.gz.
 Run the included script `./download-data` to download the archive, verify its integrity, and extract it.
