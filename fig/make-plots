@@ -246,33 +246,43 @@ def multdist():
 def uranium():
     color = pmean_colors[0]
     linecolor = tuple(.6*i for i in color)
-    plot_cents = 0.00125, 0.01
+    plot_cents = 0.001, 0.01
     bins = 20
     bin_range = .85, 1.15
 
     systems = 'UU', 'AuAu'
-    system_cent_range = 0.035440, 0.040343
 
-    glb_color = '.6'
     #              UU 0.125% 1%     AuAu 0.125% 1%
     glb_slopes = (-0.270, -0.145), (0.0296, 0.0106)
+    glb_color = '.6'
 
     fig, axes = plt.subplots(nrows=2, sharex='col',
                              figsize=(columnwidth, columnwidth*aspect*1.75))
 
-    for system, cent_range, gslopes in zip(
-            systems, system_cent_range, glb_slopes):
-
-        data = load_from_cache(
-            'data/trento/uranium/{}_p=0_k=0.625_w=0.5_bcut=3'.format(system),
-            usecols=(2, 3, 4)
+    for system, gslopes in zip(systems, glb_slopes):
+        # load data for mininum bias and impact parameter cut
+        # columns: impact npart mult e2
+        minbias, bcut = (
+            load_from_cache(
+                'data/trento/uranium/'
+                '{}_p=0_k=0.625_w=0.5_{}'.format(system, suffix),
+                usecols=(1, 2, 3, 4))
+            for suffix in ('minbias', 'bcut=3')
         )
-        data = data[data[:, 0].argsort()][::-1]
 
-        for ax, desired_cent_max, gslope in zip(axes, plot_cents, gslopes):
-            N = int(data.shape[0] * desired_cent_max/cent_range)
-            mult, e2 = data[:N].T[1:]
-            mult = mult/mult.mean()
+        # find centrality cut for b < 3.
+        impact = minbias[:, 0]
+        cent_cut = np.count_nonzero(impact < 3.) / impact.size
+
+        # sort by npart and select mult, e2 columns
+        minbias = minbias[minbias[:, 1].argsort()][::-1, 2:]
+        bcut = bcut[bcut[:, 1].argsort()][::-1, 2:]
+
+        for ax, cent, gslope in zip(axes, plot_cents, gslopes):
+            Nminbias = int(minbias.shape[0] * cent)
+            Nbcut = int(bcut.shape[0] * cent / cent_cut)
+            mult, e2 = np.concatenate((minbias[:Nminbias], bcut[:Nbcut])).T
+            mult /= mult.mean()
 
             counts, edges = np.histogram(mult, bins, range=bin_range)
             counts[counts == 0] = 1
