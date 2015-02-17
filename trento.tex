@@ -30,7 +30,7 @@
 \begin{abstract}
   We introduce \trento, a new initial condition model for high-energy nuclear collisions based on eikonal entropy deposition via a ``reduced thickness'' function.
   The model simultaneously predicts the shapes of experimental proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions, and generates nucleus-nucleus eccentricity harmonics consistent with experimental flow constraints.
-  In addition, the model provides a possible resolution to the ``knee'' puzzle in ultra-central uranium-uranium collisions.
+  In addition, the model is compatible with ultra-central uranium-uranium data unlike existing models that include binary collision terms.
 \end{abstract}
 
 
@@ -232,7 +232,7 @@ The reduced thickness is defined as the generalized mean of fluctuated projectil
 \psec{Applications}
 
 We now demonstrate \trento's ability to simultaneously describe a wide range of collision systems.
-Note that the reduced thickness parameter $p$, gamma fluctuation parameter $k$, and nucleon profile $\rho_\text{proton}$ are not rigorously constrained---to do so would require a systematic model-to-data comparison which is beyond the scope of this work.
+Note that the reduced thickness parameter $p$, gamma fluctuation parameter $k$, and nucleon profile $\rho_\text{proton}$ are not rigorously constrained---to do so would require a systematic model-to-data comparison \cite{Bernhard:2015hxa} which is beyond the scope of this work.
 Therefore, the following results do not necessarily represent the best-fit of the model to data.
 
 \begin{figure*}[t]
@@ -341,7 +341,7 @@ Therefore, the most central uranium-uranium events are dominated by tip-tip coll
 This predicted drop in elliptic flow as a function of $\nch$ is known as the ``knee'' \cite{Voloshin:2010ut}.
 
 Recent data by STAR on uranium-uranium collisions exhibits no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds with Glauber model predictions.
-It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent flow analysis suggests that it would still be visible \cite{osu}.
+It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent flow analysis showed that it would still be visible \cite{Goldschmidt:2015qya}.
 
 The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts a roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in Fig.~\ref{fig:uranium}.
 The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
@@ -350,13 +350,13 @@ Short of conducting a full hydrodynamic analysis, \trento\ appears to be more co
 \psec{Conclusion}
 
 In summary, we have developed \trento, a new initial condition model for high-energy nuclear collisions based on eikonal entropy deposition via a ``reduced thickness'' function.
-The model simultaneously fits proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions along with lead-lead eccentricity harmonics, and provides a possible resolution to the ``knee'' puzzle in ultra-central uranium-uranium collisions.
+The model simultaneously fits proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions along with lead-lead eccentricity harmonics, and is compatible with ultra-central uranium-uranium data unlike existing models that include a binary collision term.
 
 \trento\ is an effective model.
 While it does not assume a particular physical mechanism for entropy production or include pre-equilibrium dynamics, it is computationally cheap, flexible by design, and mimics the characteristics of other initial condition models, e.g.~its multiplicity distributions are similar to participant quark model predictions, and eccentricity harmonics resemble those of IP-Glasma.
 
-As a next step, we will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions \cite{Shen:2014vra}.
-This will form the basis of a modern framework for extracting fundamental sQGP properties through systematic model-to-data comparison.
+As a next step, we will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions \cite{Shen:2014vra} and embed the evolution model in a systematic model-to-data comparison framework \cite{Bernhard:2015hxa}.
+This will enable simultaneous extraction of initial condition parameters and sQGP medium properties with quantitative uncertainties.
 Additionally, we plan to implement sub-nucleonic structure and generalize the model to three dimensions, enabling study of collective behavior in proton-proton and proton-nucleus collisions.
 
 \medskip
