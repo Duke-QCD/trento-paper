@@ -97,13 +97,15 @@ geometric, and harmonic means for certain values of $p$, i.e.
 \begin{equation}
   T_R(p; T_A, T_B) =
   \begin{cases}
-    \dfrac{T_A + T_B}{2} & p = 1 \text{ (arithmetic)}, \\[2ex]
-    \sqrt{T_A T_B} & p = 0 \text{ (geometric)}, \\[2ex]
-    \dfrac{2\, T_A T_B}{T_A + T_B} & p = -1 \text{ (harmonic)}. \\
+    \max(T_A, T_B) & p = +\infty \hfill \text{ (maximum)}, \\[2ex]
+    \dfrac{T_A + T_B}{2} & p = +1 \hfill \text{ (arithmetic)}, \\[2ex]
+    \sqrt{T_A T_B} & p = 0 \hfill \text{ (geometric)}, \\[2ex]
+    \dfrac{2\, T_A T_B}{T_A + T_B} & p = -1 \hfill \text{ (harmonic)}, \\[2ex]
+    \min(T_A, T_B) & p = -\infty \hfill \text{ (minimum)}.
   \end{cases}
 \end{equation}
 More generally, $p$ quantifies the attenuation of entropy production in asymmetric ($T_A \neq T_B$) regions of
-the collision, as demonstrated in FIG.~\ref{fig:saturation}.  As $p$ \emph{decreases}, the degree of
+the collision, as demonstrated in Fig.~\ref{fig:TR}.  As $p$ \emph{decreases}, the degree of
 attenuation \emph{increases}.  This significantly impacts the behavior of the model, for instance $p=1$ is
 precisely a participant nucleon model, while $-1 \lesssim p \lesssim 0$ mimics saturation in CGC-based models.
 
@@ -125,11 +127,26 @@ Finally, the reduced thickness provides the basis of the model name:
 \trento, for Thickness-Reduced Event-by-event Nuclear Topology.
 
 \begin{figure}[t]
-  \includegraphics{saturation}
+  \definecolor{offblack}{HTML}{262626}
+  \begin{tikzpicture}[
+      scale=.5,
+      color=offblack,
+      greydash/.style={line width=0.6, dash pattern=on 5pt off 3pt, color=black!60!white}
+    ]
+    \def\r{1.5};
+    \node (fig) {\includegraphics{reduced_thickness}};
+    \coordinate (a) at (5.2, 3.0);
+    \coordinate (b) at ($(a) + (\r, 0)$);
+    \node at ($(a)!0.5!(b) + (0, 1.4*\r)$) {\small Beam view};
+    \draw[greydash] (a) circle (\r);
+    \draw[greydash] (b) circle (\r);
+    \draw[->, semithick] (a) -- node[above] {$\small x$} (b);
+  \end{tikzpicture}
   \caption{
-    \label{fig:saturation}
-    Attenuation of the reduced thickness.  Thickness $T_B$ is fixed to one (in arbitrary units) while $T_A$ is
-    varied.  The corresponding $T_R$ are shown for $p = 1$, 0, $-1$ (green, blue, and red).
+    \label{fig:TR}
+    Reduced thickness of a pair of nucleon participants.
+    The nucleons collide with a nonzero impact parameter along the $x$-direction as shown in the upper right.
+    The grey dashed lines are one-dimensional cross sections of the participant nucleon thickness functions $T_A$, $T_B$, and the colored lines are the reduced thickness $T_R$ for $p = 1$, 0, $-1$ (green, blue, red).
   }
 \end{figure}
 
@@ -171,16 +188,30 @@ dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
 \end{equation}
 
 \begin{figure*}[t]
-  \includegraphics{multdist}
+  \includegraphics{nch}
   \caption{
-    \label{fig:multdist}
-    Multiplicity distributions for proton-proton, proton-lead, and lead-lead collisions.  The blue histograms
-    are \protect\trento\ results from $10^6$ minimum-bias events for each collision system, all with reduced
-    thickness parameter $p = 0$ (geometric mean) and gamma fluctuation parameter $k = 1.25$.  The normalization
-    constants indicated in the legends are tuned to match the experimental distributions
-    (points with error bars) from ALICE \cite{Aamodt:2010ft,Abelev:2014mda}.
+    \label{fig:nch}
+    Multiplicity distributions for proton-proton, proton-lead, and lead-lead collisions.
+    The histograms are \protect\trento\ results for reduced thickness parameter $p = -1$ (top, orange), $p = 0$ (middle, blue), and $p = 1$ (bottom, green), with approximate best-fit fluctuation parameters $k$ and normalizations given in table~\ref{tab:nch}.
+    The shaded bands show the sensitivity from varying $k$ by $\pm30\%$.
+    Data points (triangles, squares, circles) are experimental distributions from ALICE \cite{Aamodt:2010ft,Abelev:2014mda} offset by powers of ten for comparison with the model.
   }
 \end{figure*}
+
+\begin{table}
+  \caption{
+    \label{tab:nch}
+    Approximate best-fit fluctuation parameters $k$ and normalizations for each $p$ value and collision system in Fig.~\ref{fig:nch}.
+  }
+  \begin{ruledtabular}
+  \begin{tabular}{rcccc}
+    $p\;$  & $k$ & p+p norm & p+Pb norm & Pb+Pb norm \\
+    $+1$   & 0.8 & 9.7      & 7.0       & 13.        \\
+    $ 0$   & 1.4 & 19.      & 17.       & 16.        \\
+    $-1$   & 2.2 & 24.      & 26.       & 18.        \\
+  \end{tabular}
+  \end{ruledtabular}
+\end{table}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
 superpositions of proton-proton collisions.
@@ -208,10 +239,12 @@ Therefore, the following results do not necessarily represent the best-fit of th
   \includegraphics{eccentricity}
   \caption{
     \label{fig:eccen}
-    Left and middle plots:  Eccentricity harmonics $\varepsilon_2$ and $\varepsilon_3$ as a function of centrality
-    for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, and red).  Right plot:  Ratio of the rms eccentricities
-    $\eccratio$ against the experimentally allowed region (grey band) from \cite{Retinskaya:2013gca}.  Note that the centrality
-    axis has a different range in the ratio plot.
+    Left and middle plots:
+    Eccentricity harmonics $\varepsilon_2$ and $\varepsilon_3$ as a function of centrality for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, orange).
+    The shaded bands show the sensitivity from varying $k$ by $\pm30\%$ from the values in table~\ref{tab:nch}.
+    Right plot:
+    Ratio of the rms eccentricities $\eccratio$ against the allowed region (grey band) from \cite{Retinskaya:2013gca}.
+    Note that the centrality axis has a different range in the ratio plot.
   }
 \end{figure*}
 
@@ -221,7 +254,7 @@ The experimentally observed charged-particle multiplicity $\nch$ is to a very go
 \end{equation}
 To compare with experiment, we generate a large ensemble of minimum-bias events, integrate their $T_R$ profiles, and rescale by an overall normalization constant.
 
-The left panel of FIG.~\ref{fig:multdist} shows the $\nch$ distribution from $10^6$ proton-proton simulations
+The left panel of Fig.~\ref{fig:nch} shows the $\nch$ distribution from $10^6$ proton-proton simulations
 using reduced thickness parameter $p = 0$ (geometric mean), gamma fluctuation parameter $k = 1.25$, and
 Gaussian beam-integrated proton density
 \begin{equation}
@@ -244,7 +277,7 @@ accentuates the elliptical overlap shape in non-central collisions and enhances 
 
 In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, which uses flow data and hydrodynamic calculations to determine an experimentally allowed band for the ratio of root-mean-square eccentricities $\eccratio$ as a function of centrality.
 Among available initial condition models only IP-Glasma consistently falls within the allowed region.
-As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean).
+As shown in the right panel of Fig.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean).
 
 \begin{figure}[b]
   \begin{tikzpicture}[
@@ -289,22 +322,18 @@ As shown in the right panel of FIG.~\ref{fig:eccen}, \trento\ yields excellent a
   \includegraphics{uranium}
   \caption{
     \label{fig:uranium}
-    Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity
-    $\nch/\langle\nch\rangle$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.  The top and
-    bottom plots show the top 0.1\% and 1\% (respectively) of collisions selected by number of spectators to
-    mimic STAR's experimental ZDC selection \cite{FortheSTAR:2013bza}.  Blue points with error bars are binned
-    \protect\trento\ results from $10^6$ events with reduced thickness parameter $p = 0$ (geometric mean),
-    gamma fluctuation parameter $k = 1.6$, and nucleon area $B = (0.5\;\text{fm})^2$ (note that $k$ and $B$ are slightly different for RHIC and LHC).
-    Blue lines are linear fits within
-    $0.9~<~\nch/\langle\nch\rangle~<~1.1$.  Grey lines represent the analogous Glauber+NBD slopes calculated
-    in \cite{FortheSTAR:2013bza}.
+    Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity $\nch/\langle\nch\rangle$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.
+    The top and bottom plots show the top 0.1\% and 1\% of collisions selected by number of spectators to mimic STAR's experimental ZDC selection \cite{FortheSTAR:2013bza}.
+    Blue points with error bars are binned \protect\trento\ results with reduced thickness parameter $p = 0$ and fluctuation parameter $k = 1.4$.
+    Blue lines are linear fits within $0.9~<~\nch/\langle\nch\rangle~<~1.1$.
+    Grey lines represent the analogous Glauber+NBD slopes calculated in \cite{FortheSTAR:2013bza}.
   }
 \end{figure}
 
 As a final novel application, we test the performance of \trento\ in ultra-central uranium-uranium collisions, where typical Glauber models are notably inconsistent with experimental data.
 Unlike e.g.~gold and lead, uranium nuclei have a highly deformed prolate spheroidal shape, so uranium-uranium collisions may achieve maximal overlap via two distinct orientations:
 ``tip-tip'', in which the long axes of the spheroids are aligned with the beam axis and the overlap area is circular;
-or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical, as shown in FIG.~\ref{fig:uu-schematic}.
+or ``side-side'', where the long axes are perpendicular to the beam axis and the overlap area is elliptical, as shown in Fig.~\ref{fig:uu-schematic}.
 Hence side-side collisions will in general have larger initial-state ellipticity $\varepsilon_2$ and final-state elliptic flow $v_2$ than tip-tip.
 
 In the two-component Glauber model, tip-tip collisions produce more binary nucleon-nucleon collisions than side-side, so tip-tip collisions have larger charged-particle multiplicity $\nch$.
@@ -314,7 +343,7 @@ This predicted drop in elliptic flow as a function of $\nch$ is known as the ``k
 Recent data by STAR on uranium-uranium collisions exhibits no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds with Glauber model predictions.
 It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent flow analysis suggests that it would still be visible \cite{osu}.
 
-The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts a roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in FIG.~\ref{fig:uranium}.
+The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts a roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in Fig.~\ref{fig:uranium}.
 The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
 Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Wang:2014qxa}.
 

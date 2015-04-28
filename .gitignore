@@ -4,7 +4,6 @@
 *.out
 *.log
 *.blg
-*.dat
 *.backup
 *Notes.bib
 make-plots_keynote
@@ -12,4 +11,3 @@ make-plots_keynote
 *.npy
 *.tar.gz
 build/
-fig/data

@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+import itertools
+import multiprocessing.dummy
+import subprocess
+
+import numpy as np
+
+
+number_events = int(1e6)
+
+default_args = '--nucleon-width 0.6'
+
+lhc_systems = {
+    ('p',  'p'):  '--cross-section 6.3 --grid-width  6 --grid-steps 30',
+    ('p',  'Pb'): '--cross-section 7.1 --grid-width  6 --grid-steps 30',
+    ('Pb', 'Pb'): '--cross-section 6.4 --grid-width 18 --grid-steps 90',
+}
+
+pk_values = [(p, round(factor*k, 2))
+             for p, k in ((1, 0.8), (0, 1.4), (-1, 2.2))
+             for factor in (0.7, 1, 1.3)]
+
+
+def run_trento(system, pk):
+    projectiles, args = system
+    p, k = pk
+
+    command = list(itertools.chain(
+        ['trento'], projectiles, [str(number_events)],
+        default_args.split(), args.split(),
+        ['--reduced-thickness', str(p)],
+        ['--fluctuation', str(k)]
+    ))
+    filename = '{}_p{}_k{}'.format(''.join(projectiles), p, k)
+
+    print(*command)
+
+    with subprocess.Popen(command, stdout=subprocess.PIPE) as proc:
+        arr = np.array([l.split()[1:] for l in proc.stdout], dtype=float)
+
+    np.save(filename, arr)
+
+
+def main():
+    with multiprocessing.dummy.Pool() as pool:
+        pool.starmap(
+            run_trento,
+            itertools.product(lhc_systems.items(), pk_values)
+        )
+
+
+if __name__ == "__main__":
+    main()
