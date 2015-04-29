@@ -454,18 +454,24 @@ def eccentricity():
             cent_mid, ecc_ratio(ecc_low), ecc_ratio(ecc_high),
             lw=0, color=color, alpha=alpha)
 
-    ratio_data = np.loadtxt('data/exp/eccentricity_ratio.dat',
-                            usecols=range(4), unpack=True)
+    ratio_data = np.loadtxt('data/exp/eccentricity_ratio.dat').T
     cent_mid = ratio_data[:2].mean(axis=0)
-    ratio_min, ratio_max = ratio_data[2:]
+    ratio_min, ratio_max = ratio_data[2:4]
 
     ratio_ax.fill_between(cent_mid, ratio_min, ratio_max,
                           color='.5', lw=0, alpha=0.3, zorder=-1)
+
+    glasma = ratio_data[9]
+    glasma_line,  = ratio_ax.plot(cent_mid, glasma, 'o',
+                                mew=lw, mec=offblack, mfc='none', ms=4)
+
     ratio_ax.set_xlim(0, 40)
     ratio_ax.set_ylim(.3, 1.2)
     ratio_ax.set_yticks((.3, .6, .9, 1.2))
     ratio_ax.annotate('Ratio', (.08, .87), xycoords='axes fraction',
                       ha='left', va='top')
+    ratio_ax.legend([glasma_line], ['IP-Glasma'], loc='lower right',
+                    handletextpad=.1)
 
     for ax in axes:
         ax.xaxis.set_major_locator(tick.MaxNLocator(4))
