@@ -463,7 +463,7 @@ def eccentricity():
 
     glasma = ratio_data[9]
     glasma_line,  = ratio_ax.plot(cent_mid, glasma, 'o',
-                                mew=lw, mec=offblack, mfc='none', ms=4)
+                                  mew=lw, mec=offblack, mfc='none', ms=4)
 
     ratio_ax.set_xlim(0, 40)
     ratio_ax.set_ylim(.3, 1.2)

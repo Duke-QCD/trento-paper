@@ -1,4 +1,4 @@
-\documentclass[aps,prc,reprint,amsmath,nofootinbib]{revtex4-1}
+\documentclass[aps,prc,reprint,amsmath]{revtex4-1}
 
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -15,7 +15,7 @@
 
 \begin{document}
 
-\title{An effective model for entropy deposition in high-energy pp, pA, and AA collisions}
+\title{Effective model for entropy deposition in high-energy pp, pA, and AA collisions}
 
 \author{J.\ Scott Moreland}
 \author{Jonah E.\ Bernhard}
@@ -55,13 +55,15 @@ Non-dynamical models generate initial conditions directly at the thermalization 
 Although they cannot explain sQGP formation, they provide the necessary input for fluid dynamics and can constrain the outcome of ab-initio initial condition calculations.
 The most widely-used prescription is the two-component Monte Carlo Glauber model, which determines participating nucleons via optical overlap and deposits energy or entropy for each participant and binary nucleon-nucleon collision.
 Despite its simplicity, the Glauber model has qualitatively fit many experimental measurements \cite{Miller:2007ri} and inspired a number of similar models.
+Notably, a participant quark model was proposed to describe the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
+This may suggest that the two-component wounded nucleon and binary collision ansatz is merely a proxy for participant quark scaling in nucleus-nucleus collisions.
 
 In this work we introduce \trento, a new initial condition model for high-energy proton-proton, proton-nucleus, and nucleus-nucleus collisions.
 It is an \emph{effective} model, intended to generate realistic Monte Carlo initial entropy profiles without assuming specific physical mechanisms for entropy production, pre-equilibrium dynamics, or thermalization.
 
 \psec{Model}
 
-Suppose a pair of projectiles labeled $A$, $B$ collide along beam axis $z$, and let $\rho^\text{part}_{A,B}$ be the density of nuclear matter that participates in inelastic collisions.
+Suppose a pair of projectiles labeled $A, B$ collide along beam axis $z$, and let $\rho^\text{part}_{A,B}$ be the density of nuclear matter that participates in inelastic collisions.
 Each projectile may then be represented by its \emph{participant} thickness
 \begin{equation}
   T_{A,B}(x, y) = \int dz \, \rho^\text{part}_{A,B}(x, y, z).
@@ -80,28 +82,28 @@ time:
 \end{equation}
 It should provide an effective description of early collision dynamics:
 it need not arise from a first-principles calculation, but it must obey basic physical constraints.
-Perhaps the simplest such function is a sum, $f \sim T_A + T_B$, in fact this is equivalent to a wounded nucleon model since the present thickness functions \eqref{eq:thickness} only include participant matter.
+
+Perhaps the simplest such function is a sum, $f~\sim~T_A~+~T_B$, in fact this is equivalent to a wounded nucleon model since the present thickness functions \eqref{eq:thickness} only include participant matter.
 The two-component Glauber ansatz adds a quadratic term to account for binary collisions, i.e.\ $f \sim (T_A + T_B) + \alpha \, T_A T_B$.
 
-However, recent results from ultra-central uranium-uranium collisions at RHIC \cite{FortheSTAR:2013bza,Wang:2014qxa} show that particle production does not scale with the number of nucleon-nucleon collisions, excluding even a small contribution to entropy production from binary collisions \cite{Goldschmidt:2015qya}.
-We therefore additionally postulate that the function $f$ must be scale-invariant:
+However, recent results from ultra-central uranium-uranium collisions at RHIC \cite{FortheSTAR:2013bza,Wang:2014qxa} show that particle production does not scale with the number of binary collisions, excluding the two-component Glauber ansatz \cite{Goldschmidt:2015qya}.
+Therefore $N$ one-on-one nucleon collisions should produce the same amount of entropy as a single $N$-on-$N$ collision, which is mathematically equivalent to the function $f$ being scale-invariant:
 \begin{equation}
   f(c \, T_A, c \, T_B) = c \, f(T_A, T_B)
   \label{eq:scale-inv}
 \end{equation}
 for any nonzero constant $c$.
-The binary collision term $(\alpha \, T_A T_B)$ clearly does not satisfy this constraint.
-On the other hand, a new participant quark model was able to fit the transverse-energy distributions of proton-proton, deuteron-gold, and gold-gold collisions at RHIC without invoking binary collision scaling \cite{PhysRevC.89.044905}.
-This suggests that binary collisions are not necessary to describe the data, and in fact may only be a proxy for a different physical process.
+Note, this is clearly broken by the binary collision term $(\alpha \, T_A T_B)$.
+We will justify this constraint later in the text; for the moment we take it as a postulate.
 
 With these constraints in mind, we propose for $f$ the \emph{reduced thickness}
 \begin{equation}
   f = T_R(p; T_A, T_B) \equiv \biggl( \frac{T_A^p + T_B^p}{2} \biggr)^{1/p},
   \label{eq:tr}
 \end{equation}
-so named because it takes two thicknesses $T_A$, $T_B$ and ``reduces'' them to a third thickness, similar to a
+so named because it takes two thicknesses $T_A, T_B$ and ``reduces'' them to a third thickness, similar to a
 reduced mass.
-This functional form---known as the generalized mean---interpolates between the minimum and maximum of $T_A$, $T_B$ depending on the value of the dimensionless parameter $p$, and simplifies to the arithmetic, geometric, and harmonic means for certain values:
+This functional form---known as the generalized mean---interpolates between the minimum and maximum of $T_A, T_B$ depending on the value of the dimensionless parameter $p$, and simplifies to the arithmetic, geometric, and harmonic means for certain values:
 \begin{equation}
   \newlength{\extraspace}
   \setlength{\extraspace}{0.5ex}
@@ -119,7 +121,7 @@ To see this, consider a pair of nucleon participants colliding with some nonzero
 For $p = 1$, the reduced thickness becomes a wounded nucleon model and deposits a blob of entropy for each nucleon,
 while for $p = 0$, the model deposits a single roughly symmetric blob at the midpoint of the collision,
 and as $p$ becomes negative, it suppresses entropy deposition along the direction of the impact parameter.
-Note that the values $-1, 0, +1$ are only special cases---$p$ is a continuous parameter---and the scale-invariant constraint \eqref{eq:scale-inv} is always satisfied.
+Note that the values $1, 0, -1$ are only special cases---$p$ is a continuous parameter---and the scale-invariant constraint \eqref{eq:scale-inv} is always satisfied.
 
 \begin{figure}[t]
   \definecolor{offblack}{HTML}{262626}
@@ -141,7 +143,7 @@ Note that the values $-1, 0, +1$ are only special cases---$p$ is a continuous pa
     \label{fig:TR}
     Reduced thickness of a pair of nucleon participants.
     The nucleons collide with a nonzero impact parameter along the $x$-direction as shown in the upper right.
-    The grey dashed lines are one-dimensional cross sections of the participant nucleon thickness functions $T_A$, $T_B$, and the colored lines are the reduced thickness $T_R$ for $p = 1$, 0, $-1$ (green, blue, red).
+    The grey dashed lines are one-dimensional cross sections of the participant nucleon thickness functions $T_A, T_B$, and the colored lines are the reduced thickness $T_R$ for $p = 1, 0, -1$ (green, blue, red).
   }
 \end{figure}
 
@@ -149,7 +151,7 @@ We now detail the construction of the thickness functions $T_{A,B}(x, y)$, which
 of the reduced thickness completes the specification of the model.  The procedure is constructed from the
 ground up to handle a variety of collision systems; we begin with the simplest case.
 
-Consider a collision of two protons $A$, $B$ with impact parameter $b$ along the $x$-direction and nuclear densities
+Consider a collision of two protons $A, B$ with impact parameter $b$ along the $x$-direction and nuclear densities
 \begin{equation}
   \rho_{A,B} = \rho_\text{proton}(x \pm b/2, y, z),
 \end{equation}
@@ -187,6 +189,12 @@ These gamma weights introduce additional multiplicity fluctuations in order to r
 The shape parameter $k$ may be tuned to optimally fit the data:
 small values ($0 < k < 1$) correspond to large multiplicity fluctuations, while large values ($k \gg 1$) suppress fluctuations.
 
+With the projectile thickness functions in hand, the reduced thickness is calculated to furnish the initial transverse entropy profile up to an overall normalization factor,
+\begin{equation}
+  dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
+  \label{eq:dSdy}
+\end{equation}
+
 \begin{table}[t]
   \caption{
     \label{tab:nch}
@@ -201,12 +209,6 @@ small values ($0 < k < 1$) correspond to large multiplicity fluctuations, while 
   \end{tabular}
   \end{ruledtabular}
 \end{table}
-
-With the projectile thickness functions in hand, the reduced thickness is calculated to furnish the initial transverse entropy profile up to an overall normalization factor,
-\begin{equation}
-  dS/dy \, |_{\tau = \tau_0} \propto T_R(p; T_A, T_B).
-  \label{eq:dSdy}
-\end{equation}
 
 Composite collision systems such as proton-nucleus and nucleus-nucleus are essentially treated as
 superpositions of proton-proton collisions.
@@ -273,7 +275,7 @@ Eccentricity harmonics $\varepsilon_n$ are calculated using the definition
 Figure~\ref{fig:eccen} shows ellipticity $\varepsilon_2$ and triangularity $\varepsilon_3$ as a function of centrality using the same lead-lead data as in Fig.~\ref{fig:nch}.
 There is a clear trend of increasing eccentricity (particularly $\varepsilon_2$) with decreasing $p$.
 This is a larger-scale manifestation of the behavior in Fig.~\ref{fig:TR}:
-as $p$ decreases, asymmetric regions of the collision produce less entropy, which accentuates the elliptical overlap shape in non-central collisions and enhances their eccentricity.
+as $p$ decreases, the generalized mean \eqref{eq:tr} attenuates entropy production in asymmetric regions of the collision, accentuating the elliptical overlap shape in non-central collisions and enhancing their eccentricity.
 Meanwhile, varying the fluctuation parameter $k$ has limited effect.
 
 In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, which uses flow data and hydrodynamic calculations to determine an experimentally allowed band for the ratio of root-mean-square eccentricities $\eccratio$ as a function of centrality.
@@ -284,20 +286,20 @@ As shown in the right panel of Fig.~\ref{fig:eccen}, \trento\ yields excellent a
   \begin{tikzpicture}[
     uranium/.style={draw, semithick, ellipse, anchor=center},
     small width/.style={minimum width=17},
-    large width/.style={minimum width=35},
+    large width/.style={minimum width=31},
     small height/.style={minimum height=17},
-    large height/.style={minimum height=35}
+    large height/.style={minimum height=31}
   ]
     \matrix (m) [matrix of nodes] {
-      &[-5mm] Side view &[-5mm] & Beam view & $\varepsilon_2$ & $N_\text{part}$ & $N_\text{coll}$ \\[1ex]
-      & tip-tip & & & & & \\
-      |[uranium, large width, small height] (ttl)| U & &
+      &[-2.1ex] Side view &[-2.1ex] & Beam view & $\varepsilon_2$ & $N_\text{part}$ & $N_\text{coll}$ \\[.7ex]
+      |[uranium, large width, small height] (ttl)| U &
+      |[above]| tip-tip &
       |[uranium, large width, small height] (ttr)| U &
       \node[draw, circle, small height, small width, xshift=1mm] {};
       \node[uranium, circle, small width, small height, fill=white] {U}; &
-      smaller & equal & larger \\[2ex]
-      & side-side & & & & & \\
-      |[uranium, large height, small width] (ssl)| U & &
+      smaller & equal & larger \\[1.7ex]
+      |[uranium, large height, small width] (ssl)| U &
+      |[above]| side-side &
       |[uranium, large height, small width] (ssr)| U &
       \node[draw, ellipse, large height, small width, xshift=1mm] {};
       \node[uranium, large height, small width, fill=white] {U}; &
@@ -333,10 +335,10 @@ This predicted drop in elliptic flow as a function of $\nch$ is known as the ``k
   \includegraphics{uranium}
   \caption{
     \label{fig:uranium}
-    Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity $\nch/\langle\nch\rangle$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.
+    Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity $\nch/\avg\nch$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.
     The top and bottom plots show the top 0.1\% and 1\% of collisions selected by number of spectators to mimic STAR's experimental ZDC selection \cite{FortheSTAR:2013bza}.
     Blue points with error bars are binned \protect\trento\ results with reduced thickness parameter $p = 0$ and best-fit fluctuation parameter $k = 1.4$.
-    Blue lines are linear fits within $0.9~<~\nch/\langle\nch\rangle~<~1.1$.
+    Blue lines are linear fits within $0.9~<~\nch/\avg\nch~<~1.1$.
     Grey lines represent the analogous Glauber+NBD slopes calculated in \cite{FortheSTAR:2013bza}.
   }
 \end{figure}
@@ -344,8 +346,9 @@ This predicted drop in elliptic flow as a function of $\nch$ is known as the ``k
 Recent data by STAR on uranium-uranium collisions exhibits no evidence of a knee \cite{FortheSTAR:2013bza,Wang:2014qxa}, at odds with Glauber model predictions.
 It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent flow analysis showed that it would still be visible \cite{Goldschmidt:2015qya}.
 
-The reduced thickness ansatz \eqref{eq:tr} does not exhibit binary collision scaling and hence predicts a roughly constant ellipticity $\varepsilon_2$ in ultra-central uranium-uranium events, as shown in Fig.~\ref{fig:uranium}.
-The slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
+The data therefore imply that multiplicity is independent of the number of binary collisions, justifying the scale-invariant condition \eqref{eq:scale-inv} postulated during the construction of the reduced thickness ansatz \eqref{eq:tr}.
+Consequently, \trento\ predicts roughly the same number of charged particles multiplicity in tip-tip and side-side uranium-uranium collisions.
+As shown in Fig.~\ref{fig:uranium}, the slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
 Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Wang:2014qxa}.
 
 \psec{Conclusion}
