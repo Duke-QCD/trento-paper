@@ -87,7 +87,7 @@ Perhaps the simplest such function is a sum, $f~\sim~T_A~+~T_B$, in fact this is
 The two-component Glauber ansatz adds a quadratic term to account for binary collisions, i.e.\ $f \sim (T_A + T_B) + \alpha \, T_A T_B$.
 
 However, recent results from ultra-central uranium-uranium collisions at RHIC \cite{FortheSTAR:2013bza,Wang:2014qxa} show that particle production does not scale with the number of binary collisions, excluding the two-component Glauber ansatz \cite{Goldschmidt:2015qya}.
-Therefore $N$ one-on-one nucleon collisions should produce the same amount of entropy as a single $N$-on-$N$ collision, which is mathematically equivalent to the function $f$ being scale-invariant:
+Therefore $N$ \mbox{one-on-one} nucleon collisions should produce the same amount of entropy as a single \mbox{$N$-on-$N$} collision, which is mathematically equivalent to the function $f$ being scale-invariant:
 \begin{equation}
   f(c \, T_A, c \, T_B) = c \, f(T_A, T_B)
   \label{eq:scale-inv}
@@ -121,6 +121,7 @@ To see this, consider a pair of nucleon participants colliding with some nonzero
 For $p = 1$, the reduced thickness becomes a wounded nucleon model and deposits a blob of entropy for each nucleon,
 while for $p = 0$, the model deposits a single roughly symmetric blob at the midpoint of the collision,
 and as $p$ becomes negative, it suppresses entropy deposition along the direction of the impact parameter.
+Similar behavior was discussed in the context of small collision systems in \cite{Bzdak:2013zma}.
 Note that the values $1, 0, -1$ are only special cases---$p$ is a continuous parameter---and the scale-invariant constraint \eqref{eq:scale-inv} is always satisfied.
 
 \begin{figure}[t]
@@ -280,7 +281,7 @@ Meanwhile, varying the fluctuation parameter $k$ has limited effect.
 
 In addition, we perform the test proposed by \cite{Retinskaya:2013gca}, which uses flow data and hydrodynamic calculations to determine an experimentally allowed band for the ratio of root-mean-square eccentricities $\eccratio$ as a function of centrality.
 Among available initial condition models only IP-Glasma consistently falls within the allowed region.
-As shown in the right panel of Fig.~\ref{fig:eccen}, \trento\ yields excellent agreement with the allowed band for $p = 0$ (geometric mean).
+As shown in the right panel of Fig.~\ref{fig:eccen}, \trento\ with $p = 0$ (geometric mean) yields excellent agreement with the allowed band and is similar to IP-Glasma.
 
 \begin{figure}[b]
   \begin{tikzpicture}[
@@ -347,22 +348,20 @@ Recent data by STAR on uranium-uranium collisions exhibits no evidence of a knee
 It has been proposed that fluctuations could wash out the knee \cite{Rybczynski:2012av}, but a recent flow analysis showed that it would still be visible \cite{Goldschmidt:2015qya}.
 
 The data therefore imply that multiplicity is independent of the number of binary collisions, justifying the scale-invariant condition \eqref{eq:scale-inv} postulated during the construction of the reduced thickness ansatz \eqref{eq:tr}.
-Consequently, \trento\ predicts roughly the same number of charged particles multiplicity in tip-tip and side-side uranium-uranium collisions.
+Consequently, \trento\ predicts roughly the same number of charged particles in tip-tip and side-side uranium-uranium collisions.
 As shown in Fig.~\ref{fig:uranium}, the slope of $\varepsilon_2$ as a function of $\nch$ is approximately equal for uranium-uranium and gold-gold, in contrast to the Glauber model which predicts a much steeper slope for uranium.
-Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Wang:2014qxa}.
+Short of conducting a full hydrodynamic analysis, \trento\ appears to be more consistent with STAR data than the Glauber model, and behaves similarly to IP-Glasma \cite{Schenke:2014tga}.
 
 \psec{Conclusion}
 
-In summary, we have developed \trento, a new effective initial condition model for high-energy nuclear collisions based on eikonal entropy deposition via a ``reduced thickness'' function.
-The model simultaneously fits proton-proton, proton-nucleus, and nucleus-nucleus multiplicity distributions along with lead-lead eccentricity harmonics, and is compatible with ultra-central uranium-uranium data unlike existing models that include a binary collision term.
+In summary, we have developed \trento, a new initial condition model for high-energy nuclear collisions based on a flexible ansatz that deposits entropy proportional to the generalized mean of nuclear overlap density.
+This functional form smoothly interpolates among a family of physically reasonable models, facilitating unbiased, empirical constraints on the nature of the initial condition through model-to-data comparison.
 
-\trento\ introduces a new ansatz for entropy production, distinct from the two-component wounded nucleon and binary collision ansatz.
-It smoothly interpolates entropy deposition models ranging from a traditional wounded nucleon prescription to models that only deposit entropy in regions of nucleon-nucleon overlap.
-A preliminary comparison of multiplicity distributions and eccentricity harmonics to LHC data prefers an overlap-type mechanism.
+We explored several discrete combinations of model parameters and found that entropy deposition functionally equivalent to the geometric mean simultaneously and self-consistently fits LHC multiplicity and flow data, including proton-proton, proton-lead, and lead-lead multiplicity distributions as well as experimental flow constraints on lead-lead eccentricity harmonics.
+In addition, we showed that the model is qualitatively compatible with ultra-central uranium-uranium data, unlike the two-component Monte Carlo Glauber model with a binary collision term.
 
 As a next step, we will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions \cite{Shen:2014vra} and embed the evolution model in a systematic model-to-data comparison framework \cite{Bernhard:2015hxa}.
 This will enable simultaneous extraction of initial condition parameters and sQGP medium properties with quantitative uncertainties.
-Additionally, we plan to implement sub-nucleonic structure and generalize the model to three dimensions, enabling study of collective behavior in proton-proton and proton-nucleus collisions.
 
 \medskip
 \trento\ will be publicly released in early 2015 and made available at \url{github.com/Duke-QCD/trento}.
