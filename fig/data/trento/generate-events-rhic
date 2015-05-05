@@ -7,9 +7,11 @@ import subprocess
 import numpy as np
 
 
+number_events = 1e6
 p, k = 0, 1.4
 
 default_args = [
+    str(int(number_events)),
     '--reduced-thickness={}'.format(p),
     '--fluctuation={}'.format(k),
     '--nucleon-width=0.6',
@@ -18,23 +20,17 @@ default_args = [
     '--grid-steps=90'
 ]
 
-rhic_systems = ('Au', 'Au'), ('U',  'U')
+rhic_systems = ('Au2', 'Au2'), ('U',  'U')
 
 
 def run_trento(projectiles, bmax=None):
+    command = ['trento'] + list(projectiles) + default_args
+
     if bmax is None:
-        number_events = 1e5
-        args = []
         suffix = 'minbias'
     else:
-        number_events = 1e6
-        args = ['--b-max={}'.format(bmax)]
+        command += ['--b-max={}'.format(bmax)]
         suffix = 'bmax{}'.format(bmax)
-
-    command = list(itertools.chain(
-        ['trento'], projectiles, [str(int(number_events))],
-        args, default_args
-    ))
 
     print(*command)
 

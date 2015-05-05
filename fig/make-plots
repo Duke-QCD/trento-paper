@@ -309,7 +309,7 @@ def uranium():
     bins = 20
     bin_range = .85, 1.15
 
-    projectiles = ('U', 'U'), ('Au', 'Au')
+    projectiles = ('U', 'U'), ('Au2', 'Au2')
     p, k = 0, 1.4
 
     #              UU 0.125% 1%     AuAu 0.125% 1%
@@ -368,25 +368,18 @@ def uranium():
             ax.set_xticks(np.r_[.9:1.1:3j])
             ax.set_xlabel(r'$N_\mathrm{ch}/\langle N_\mathrm{ch} \rangle$')
 
-        ax.set_ylim([0.04, 0.20])
+        ax.set_ylim([0.06, 0.20])
         ax.set_yticks((.06, .12, .18))
         ax.set_ylabel(r'$\varepsilon_2$')
-        if ax.is_first_row():
-            UU_text_y = .135
-            AuAu_text_y = .085
-        else:
-            UU_text_y = .134
-            AuAu_text_y = .088
-        ax.text(.9, UU_text_y, 'U+U', ha='left', va='top')
-        ax.text(.9, AuAu_text_y, 'Au+Au', ha='left', va='bottom')
+        ax.text(.9, .134, 'U+U', ha='left', va='top')
+        ax.text(.9, .102, 'Au+Au', ha='left', va='bottom')
         ax.annotate('0–{:g}% spectators'.format(round(100*cent_max, 1)),
                     (.5, .05), xycoords='axes fraction',
                     ha='center', va='bottom')
         despine(ax)
 
-    axes[0].legend((trentoline, glbline), ('TRENTO', 'Glauber+NBD'),
-                   loc=(.50, .75), ncol=1,
-                   handlelength=1.3, columnspacing=1.2)
+    axes[1].legend((trentoline, glbline), ('TRENTO', 'Glauber+NBD'),
+                   loc='upper center', ncol=2, handlelength=2)
 
     plt.tight_layout(pad=0)
 
