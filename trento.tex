@@ -1,4 +1,4 @@
-\documentclass[aps,prc,reprint,amsmath]{revtex4-1}
+\documentclass[aps,prc,reprint,amsmath,noeprint]{revtex4-1}
 
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -129,7 +129,7 @@ Note that the values $1, 0, -1$ are only special cases---$p$ is a continuous par
   \begin{tikzpicture}[
       scale=.5,
       color=offblack,
-      greydash/.style={line width=0.6, dash pattern=on 5pt off 3pt, color=black!60!white}
+      greydash/.style={line width=0.6, dash pattern=on 2pt off 1pt, color=black!60!white}
     ]
     \def\r{1.5};
     \node (fig) {\includegraphics{reduced_thickness}};
@@ -142,9 +142,10 @@ Note that the values $1, 0, -1$ are only special cases---$p$ is a continuous par
   \end{tikzpicture}
   \caption{
     \label{fig:TR}
+    (Color online)
     Reduced thickness of a pair of nucleon participants.
     The nucleons collide with a nonzero impact parameter along the $x$-direction as shown in the upper right.
-    The grey dashed lines are one-dimensional cross sections of the participant nucleon thickness functions $T_A, T_B$, and the colored lines are the reduced thickness $T_R$ for $p = 1, 0, -1$ (green, blue, orange).
+    The grey short-dashed lines are one-dimensional cross sections of the participant nucleon thickness functions $T_A, T_B$, and the colored lines are the reduced thickness $T_R$ for $p = 1, 0, -1$ (green dashed, blue solid, orange dash-dotted).
   }
 \end{figure}
 
@@ -170,6 +171,7 @@ cross-section equals the experimental inelastic nucleon-nucleon cross-section $\
   \includegraphics{nch}
   \caption{
     \label{fig:nch}
+    (Color online)
     Multiplicity distributions for proton-proton, proton-lead, and lead-lead collisions.
     The histograms are \protect\trento\ results for reduced thickness parameter $p = -1$ (top, orange), $p = 0$ (middle, blue), and $p = 1$ (bottom, green), with approximate best-fit fluctuation parameters $k$ and normalizations given in table~\ref{tab:nch}.
     The shaded bands show the sensitivity from varying $k$ by $\pm30\%$.
@@ -237,8 +239,9 @@ Therefore, the following results do not necessarily represent the best-fit of th
   \includegraphics{eccentricity}
   \caption{
     \label{fig:eccen}
+    (Color online)
     Left and middle plots:
-    Eccentricity harmonics $\varepsilon_2$ and $\varepsilon_3$ as a function of centrality for reduced thickness parameters $p = 1$, 0, $-1$ (green, blue, orange).
+    Eccentricity harmonics $\varepsilon_2$ and $\varepsilon_3$ as a function of centrality for reduced thickness parameters $p = 1$, 0, $-1$ (green dashed, blue solid, orange dash-dotted).
     The shaded bands show the sensitivity from varying $k$ by $\pm30\%$ from the values in table~\ref{tab:nch}.
     Right plot:
     Ratio of the rms eccentricities $\eccratio$ against the allowed region (grey band) and the ratio computed by IP-Glasma (circles) \cite{Retinskaya:2013gca}.
@@ -337,11 +340,12 @@ This predicted drop in elliptic flow as a function of $\nch$ is known as the ``k
   \includegraphics{uranium}
   \caption{
     \label{fig:uranium}
+    (Color online)
     Ellipticity $\varepsilon_2$ as a function of normalized charged-particle multiplicity $\nch/\avg\nch$ in ultra-central uranium-uranium and gold-gold collisions at RHIC.
     The top and bottom plots show the top 0.1\% and 1\% of collisions selected by number of spectators to mimic STAR's experimental ZDC selection \cite{FortheSTAR:2013bza}.
     Blue points with error bars are binned \protect\trento\ results with reduced thickness parameter $p = 0$ and best-fit fluctuation parameter $k = 1.4$.
     Blue lines are linear fits within $0.9~<~\nch/\avg\nch~<~1.1$.
-    Grey lines represent the analogous Glauber+NBD slopes calculated in \cite{FortheSTAR:2013bza}.
+    Grey dashed lines represent the analogous Glauber+NBD slopes calculated in \cite{FortheSTAR:2013bza}.
   }
 \end{figure}
 
@@ -363,10 +367,6 @@ In addition, we showed that the model is qualitatively compatible with ultra-cen
 
 As a next step, we will couple the initial condition generator to viscous relativistic fluid dynamics as part of a complete simulation of the spacetime evolution of relativistic heavy-ion collisions \cite{Shen:2014vra} and embed the evolution model in a systematic model-to-data comparison framework \cite{Bernhard:2015hxa}.
 This will enable simultaneous extraction of initial condition parameters and sQGP medium properties with quantitative uncertainties.
-
-\medskip
-\trento\ will be publicly released in early 2015 and made available at \url{github.com/Duke-QCD/trento}.
-The community is encouraged to use, test, and contribute to the source code.
 
 \psec{Acknowledgements}
 

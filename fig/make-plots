@@ -4,6 +4,7 @@
 from __future__ import division, print_function, unicode_literals
 
 import functools
+import string
 import sys
 
 import numpy as np
@@ -54,6 +55,14 @@ pmean_labels = {
         (-1, 'Harmonic')
     )
 }
+
+pmean_dashes = {
+    1: (5., 1.),
+    0: (None, None),
+    -1: (5., 1., 1., 1.)
+}
+
+sublabels = ['({})'.format(letter) for letter in string.ascii_letters]
 
 plotfns = {}
 
@@ -106,10 +115,11 @@ def reduced_thickness():
     )
 
     for M, p in means:
-        plt.plot(X, M, color=pmean_cmaps[p](0.7), label=pmean_labels[p])
+        plt.plot(X, M, color=pmean_cmaps[p](0.7), dashes=pmean_dashes[p],
+                 label=pmean_labels[p])
 
     norm = 0.3
-    kwargs = dict(lw=.6, dashes=(5, 3), color='.4', zorder=-1)
+    kwargs = dict(lw=.6, dashes=(2, 1), color='.4', zorder=-1)
     ax.plot(X, norm*A, **kwargs)
     ax.plot(X, norm*B, label=r'Participant$\times$ {}'.format(norm), **kwargs)
 
@@ -119,7 +129,7 @@ def reduced_thickness():
     ax.set_xlabel('$x$ [fm]')
     ax.set_ylabel('Thickness [fm$^{-2}$]')
 
-    plt.legend(loc=(.02, .60), handlelength=1.5)
+    plt.legend(loc=(.02, .60), handlelength=1.4)
 
     despine(ax, remove_ticks=True)
     plt.tight_layout(pad=0)
@@ -205,7 +215,8 @@ def nch():
     fig, axes = plt.subplots(ncols=len(systems),
                              figsize=(textwidth, .5*aspect*textwidth))
 
-    for ax, (projectiles, xmax, mean_factor, label) in zip(axes, systems):
+    for ax, sl, (projectiles, xmax, mean_factor, label) in zip(
+            axes, sublabels, systems):
         pp = (projectiles == ('p', 'p'))
         pPb = (projectiles == ('p', 'Pb'))
         PbPb = (projectiles == ('Pb', 'Pb'))
@@ -275,7 +286,7 @@ def nch():
         ax.set_xlabel(r'$N_\mathrm{ch}$')
         if ax.is_first_col():
             ax.set_ylabel(r'$P(N_\mathrm{ch})$')
-        ax.set_title('+'.join(projectiles), x=.5, y=.9)
+        ax.set_title(sl + ' ' + '+'.join(projectiles), x=.5, y=.9)
 
         if pp:
             ax.set_xticks(np.arange(0, 51, 10))
@@ -360,9 +371,10 @@ def uranium():
                                  color=pmean_cmaps[p](0.7))[0]
 
             gintercept = slope*1 + intercept - gslope
-            glbline = ax.plot(X, gslope*X + gintercept, color=glb_color)[0]
+            glbline = ax.plot(X, gslope*X + gintercept, color=glb_color,
+                              dashes=(5, 1))[0]
 
-    for ax, cent_max in zip(axes, plot_cents):
+    for ax, sl, cent_max in zip(axes, sublabels, plot_cents):
         ax.set_xlim(bin_range)
         if ax.is_last_row():
             ax.set_xticks(np.r_[.9:1.1:3j])
@@ -373,7 +385,7 @@ def uranium():
         ax.set_ylabel(r'$\varepsilon_2$')
         ax.text(.9, .134, 'U+U', ha='left', va='top')
         ax.text(.9, .102, 'Au+Au', ha='left', va='bottom')
-        ax.annotate('0–{:g}% spectators'.format(round(100*cent_max, 1)),
+        ax.annotate('{} 0–{:g}% spectators'.format(sl, round(100*cent_max, 1)),
                     (.5, .05), xycoords='axes fraction',
                     ha='center', va='bottom')
         despine(ax)
@@ -415,6 +427,7 @@ def eccentricity():
     for p, k in (1, 0.8), (0, 1.4), (-1, 2.2):
         color = pmean_cmaps[p](.7)
         label = pmean_labels[p]
+        dashes = pmean_dashes[p]
 
         ecc_mid = _load_ecc(p, k, bins)
         ecc_low = _load_ecc(p, round(1.3*k, 2), bins)
@@ -422,13 +435,14 @@ def eccentricity():
 
         for ax, ecc_m, ecc_l, ecc_h in zip(axes, ecc_mid, ecc_low, ecc_high):
             ax.plot(cent_mid, ecc_m.mean(axis=1), color=color, label=label,
-                    lw=lw)
+                    lw=lw, dashes=dashes)
             ax.fill_between(cent_mid, ecc_l.mean(axis=1), ecc_h.mean(axis=1),
                             lw=0, color=color, alpha=alpha)
             ax.set_ylim(0, .61)
             ax.set_yticks(np.arange(0, .61, .2))
 
-        ratio_ax.plot(cent_mid, ecc_ratio(ecc_mid), color=color, lw=lw)
+        ratio_ax.plot(cent_mid, ecc_ratio(ecc_mid), color=color, lw=lw,
+                      dashes=dashes)
 
         ratio_ax.fill_between(
             cent_mid, ecc_ratio(ecc_low), ecc_ratio(ecc_high),
@@ -447,13 +461,12 @@ def eccentricity():
 
     e2_ax.set_ylabel(r'$\varepsilon_n$', size=texnormal)
     e3_ax.legend(loc='upper right', bbox_to_anchor=(1.05, 1.08),
-                    labelspacing=.4, handlelength=1.5)
+                 labelspacing=.4, handlelength=1.5)
 
     labels = [r'$\varepsilon_{}$'.format(n) for n in (2, 3)] + ['Ratio']
-    for ax, label in zip(axes, labels):
-        ax.annotate(label, (.06, .94), ha='left', va='top',
-                    xycoords='axes fraction',
-                    size=texsmall if label == 'Ratio' else texnormal)
+    for ax, sl, label in zip(axes, sublabels, labels):
+        ax.annotate(sl + ' ' + label, (.06, .94), ha='left', va='top',
+                    xycoords='axes fraction')
 
     ratio_ax.set_xlim(0, 40)
     ratio_ax.set_ylim(.3, 1.2)
@@ -463,7 +476,7 @@ def eccentricity():
 
     for ax in axes:
         ax.xaxis.set_major_locator(tick.MaxNLocator(4))
-        ax.set_xlabel('Centrality %')
+        ax.set_xlabel('Centrality (%)')
         despine(ax)
 
     plt.tight_layout(pad=.01, w_pad=.5)
