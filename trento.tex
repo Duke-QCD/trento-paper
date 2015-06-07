@@ -5,7 +5,8 @@
 \graphicspath{{fig/}}
 
 \usepackage{tikz}
-\usetikzlibrary{shapes,calc,matrix}
+\usetikzlibrary{shapes,calc,matrix,external}
+\tikzexternalize[prefix=fig/]
 
 \newcommand{\psec}[1]{\phantomsection\addcontentsline{toc}{section}{#1}}
 \newcommand{\trento}{T\raisebox{-.5ex}{R}ENTo}
@@ -126,6 +127,7 @@ Note that the values $1, 0, -1$ are only special cases---$p$ is a continuous par
 
 \begin{figure}[t]
   \definecolor{offblack}{HTML}{262626}
+  \tikzsetnextfilename{reduced_thickness_final}
   \begin{tikzpicture}[
       scale=.5,
       color=offblack,
@@ -285,6 +287,7 @@ Among available initial condition models only IP-Glasma consistently falls withi
 As shown in the right panel of Fig.~\ref{fig:eccen}, \trento\ with $p = 0$ (geometric mean) yields excellent agreement with the allowed band and is similar to IP-Glasma.
 
 \begin{figure}[b]
+  \tikzsetnextfilename{uranium_diagram}
   \begin{tikzpicture}[
     uranium/.style={draw, semithick, ellipse, anchor=center},
     small width/.style={minimum width=17},
